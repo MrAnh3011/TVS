@@ -1,0 +1,168 @@
+@media only screen and (max-width: 991px) {
+  .content-deital {
+    padding: 20px 0px !important;
+  }
+  .content-deital .container .row.flex-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .content-deital .container .row .content-left .ct-left .row .col .btn-ungtuyen button {
+    float: left !important;
+  }
+  .content-deital .container .row .content-right {
+    padding-bottom: 20px;
+  }
+  .new-job-deital {
+    padding: 20px 20px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .title-2 h5,
+  .title-1 h5 {
+    font-size: 18px !important;
+    line-height: 27px;
+  }
+  .job .container.search {
+    padding: 24px 30px 8px !important;
+  }
+  .img-td {
+    padding-bottom: 100px !important;
+  }
+  .about-us {
+    padding: 30px 0px !important;
+  }
+  .form-recruiment {
+    padding: 30px 0px !important;
+  }
+  .form-ut .note {
+    padding: 10px 0px 30px !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .contact-address .content-address {
+    padding: 20px 0px 180px !important;
+  }
+  .contact-address .content-address::before {
+    display: none;
+  }
+  .contact-address .content-address::after {
+    display: none;
+  }
+  .contact-address .content-address .container .row .col:last-child {
+    padding-top: 37px;
+  }
+  .form-contact {
+    height: 880px !important;
+  }
+  .form-contact .container .bg-form {
+    padding: 20px 16px !important;
+  }
+  .banner img {
+    height: 125px;
+  }
+  .form-recruiment::after {
+    display: none;
+  }
+  .form-recruiment::before {
+    display: none;
+  }
+  .job .container.search {
+    padding: 16px 10px 16px !important;
+  }
+  .new-job {
+    padding: 240px 20px 30px !important;
+  }
+  .new-job-deital {
+    padding: 0px 20px !important;
+  }
+  .content-job .row {
+    padding: 16px 0px;
+  }
+  .content-job .row .col {
+    padding: 16px 0px !important;
+  }
+  .content-job .row .col .flex-job {
+    -webkit-box-pack: justify !important;
+        -ms-flex-pack: justify !important;
+            justify-content: space-between !important;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  .content-job .row .col .flex-job p:last-child {
+    margin-right: 85px;
+  }
+  .content-job .row .col .btn-ungtuyen button {
+    width: 50% !important;
+    background: #0f4e91;
+  }
+  .content-job .row .col .btn-ungtuyen button a {
+    color: #fff;
+    font-weight: normal;
+  }
+  .form-ut .row {
+    padding-bottom: 0 !important;
+  }
+  .form-ut .row .btn-contact {
+    padding: 10px 0px 19px !important;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .form-contact .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .img-td .container .row .col-7 {
+    padding: 0;
+  }
+  .img-td .container .row .col-7 .row .col {
+    padding-right: 5px !important;
+  }
+  .img-td .container .row .col-7 .row .col.pd {
+    padding-bottom: 5px !important;
+  }
+  .banner .content-banner {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
+  }
+  .banner .content-banner .text-lh {
+    margin: 0;
+    font-size: 24px !important;
+    line-height: 36px !important;
+    padding: 20px 0px 16px;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .job .container.search {
+    width: 90% !important;
+    padding: 16px 10px 16px !important;
+    margin: 0 auto;
+  }
+  .form-recruiment {
+    padding: 22px 0px !important;
+  }
+  .form-recruiment .container {
+    width: unset !important;
+  }
+  .img-td {
+    padding-bottom: 80px !important;
+  }
+  .about-us {
+    padding: 20px 0px !important;
+  }
+}
+/*# sourceMappingURL=contact-responsive.css.map */

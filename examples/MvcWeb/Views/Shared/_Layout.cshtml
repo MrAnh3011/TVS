@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
+@inject IWebHostEnvironment Env
+
+<!doctype html>
+<html lang="en">
+<head>
+    @if (!User.Identity.IsAuthenticated && !Env.IsDevelopment())
+    {
+        <!-- Insert Google Analytics here -->
+    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/css/slick.css">
+    <link rel="stylesheet" href="~/assets/css/responsive-menu.css">
+    <link rel="stylesheet" href="~/assets/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="assets/css/contact.css">
+    <link rel="stylesheet" href="assets/css/contact-responsive.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <title>@ViewBag.Title</title>
+
+    @if (Model is Piranha.Models.IMeta)
+    {
+        <partial name="Partial/_Meta.cshtml" />
+    }
+
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header">
+            <partial name="Partial/_Menu.cshtml" />
+        </header>
+
+        <section id="content">
+            @RenderBody()
+        </section>
+
+        <footer id="footer" class="fw">
+            <div class="container">
+                <div class="row mar0">
+                    <div class="col-12 col-lg-4">
+                        <p>GP hoạt động kinh doanh chứng khoán số 36/UBCK-GPHĐKD do UBCK cấp ngày 25/12/2006</p>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <h5>Hà nội</h5>
+                        <p><i class="fas fa-phone-alt"></i> +84 24 3248 4820</p>
+                        <p><i class="fas fa-fax"></i> +84 24 3248 4821</p>
+                        <p>
+                            <i class="fas fa-map-marker"></i> Phòng 402, Tòa nhà TĐL, 22 Láng Hạ, Quận Đống Đa, Hà Nội
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <h5>Hồ Chí Minh</h5>
+                        <p><i class="fas fa-phone-alt"></i> +84 24 3248 4820</p>
+                        <p><i class="fas fa-fax"></i> +84 24 3248 4821</p>
+                        <p>
+                            <i class="fas fa-map-marker"></i> Lầu 9, Tòa nhà Bitexco Nam Long, 63A Võ Văn Tần, Quận 3, Hồ
+                            Chí Minh
+                        </p>
+                    </div>
+                </div>
+                <div class="row mar0 copyright">
+                    <div class="container">
+                        <p>Copyright 2013. All rights reserved. Powered by TVS@2013</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    @RenderSection("script", required: false)
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/all.min.js"></script>
+    <script src="~/assets/js/slick.min.js"></script>
+    <script src="~/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/js/responsive-menu.js"></script>
+    <script src="~/assets/js/js.js"></script>
+</body>
+</html>

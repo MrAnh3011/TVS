@@ -1,0 +1,247 @@
+﻿@model MvcWeb.Models.RelationPage
+@{
+    ViewData["Title"] = "RelationPage";
+}
+
+<section id="page">
+    <section id="page_bg" class="fw">
+        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <div class="page_breadcrumb">
+            <h3>@Model.Banner.Title</h3>
+            <div>
+                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Quan hệ cổ đông</a>
+            </div>
+        </div>
+    </section>
+    <section id="paradigm" class="fw">
+        <div class="container">
+            <div class="col-lg-12 paradigm">
+                <h2>@Model.ManagementModel.Title</h2>
+                <img class="img-fluid" src="@(Model.ManagementModel.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+            </div>
+        </div>
+    </section>
+    <div id="shareholder" class="fw">
+        <!-- Note: Remember set id for class shareholder_report to scroll to this section -->
+        <div class="row shareholder_report" id="shareholder_report_1">
+            <div class="container">
+                <div class="title_row">
+                    <h2 class="title">@ViewBag.PublishInfo</h2>
+                    <p class="title_line">
+                        <span class="title_line_mb"></span>
+                    </p>
+                </div>
+                <div class="shareholder_report_table">
+                    <table class="table table-striped" id="tblPublish">
+                        <thead>
+                            <tr>
+                                <th>Tài liệu</th>
+                                <th>Thời gian đăng</th>
+                                <th>Tải về</th>
+                                <th>Năm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.lstPublish.OrderByDescending(x => x.uploadTime.Value).ToList())
+                            {
+                                <tr>
+                                    <td>@item.docName</td>
+                                    <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td>@item.uploadTime.Value?.ToString("yyyy")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row shareholder_report" id="shareholder_report_2">
+            <div class="container">
+                <div class="title_row">
+                    <h2 class="title">Báo cáo quản trị</h2>
+                    <p class="title_line">
+                        <span class="title_line_mb"></span>
+                    </p>
+                </div>
+                <div class="shareholder_report_table">
+                    <table class="table table-striped" id="tblAdmin">
+                        <thead>
+                            <tr>
+                                <th>Tài liệu</th>
+                                <th>Thời gian đăng</th>
+                                <th>Tải về</th>
+                                <th>Năm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.lstAdminReport.OrderByDescending(x => x.uploadTime.Value).ToList())
+                            {
+                                <tr>
+                                    <td>@item.docName</td>
+                                    <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td>@item.uploadTime.Value?.ToString("yyyy")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row shareholder_report" id="shareholder_report_3">
+            <div class="container">
+                <div class="title_row">
+                    <h2 class="title">Báo cáo tài chính quý</h2>
+                    <p class="title_line">
+                        <span class="title_line_mb"></span>
+                    </p>
+                </div>
+                <div class="shareholder_report_table">
+                    <table class="table table-striped" id="tblFinance">
+                        <thead>
+                            <tr>
+                                <th>Tài liệu</th>
+                                <th>Thời gian đăng</th>
+                                <th>Tải về</th>
+                                <th>Năm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.lstFinancialReport.OrderByDescending(x => x.uploadTime.Value).ToList())
+                            {
+                                <tr>
+                                    <td>@item.docName</td>
+                                    <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td>@item.uploadTime.Value?.ToString("yyyy")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row shareholder_report" id="shareholder_report_4">
+            <div class="container">
+                <div class="title_row">
+                    <h2 class="title">Báo cáo tài chính giữa năm</h2>
+                    <p class="title_line">
+                        <span class="title_line_mb"></span>
+                    </p>
+                </div>
+                <div class="shareholder_report_table">
+                    <table class="table table-striped" id="tblMidYear">
+                        <thead>
+                            <tr>
+                                <th>Tài liệu</th>
+                                <th>Thời gian đăng</th>
+                                <th>Tải về</th>
+                                <th>Năm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.lstMiddleReport.OrderByDescending(x => x.uploadTime.Value).ToList())
+                            {
+                                <tr>
+                                    <td>@item.docName</td>
+                                    <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td>@item.uploadTime.Value?.ToString("yyyy")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row shareholder_report" id="shareholder_report_5">
+            <div class="container">
+                <div class="title_row">
+                    <h2 class="title">Báo cáo tài chính năm</h2>
+                    <p class="title_line">
+                        <span class="title_line_mb"></span>
+                    </p>
+                </div>
+                <div class="shareholder_report_table">
+                    <table class="table table-striped" id="tblYearly">
+                        <thead>
+                            <tr>
+                                <th>Tài liệu</th>
+                                <th>Thời gian đăng</th>
+                                <th>Tải về</th>
+                                <th>Năm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.lstYearlyReport.OrderByDescending(x => x.uploadTime.Value).ToList())
+                            {
+                            <tr>
+                                <td>@item.docName</td>
+                                <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
+                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                <td>@item.uploadTime.Value?.ToString("yyyy")</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row shareholder_report" id="shareholder_report_6">
+            <div class="container">
+                <div class="title_row">
+                    <h2 class="title">Báo cáo chỉ tiêu an toàn tài chính</h2>
+                    <p class="title_line">
+                        <span class="title_line_mb"></span>
+                    </p>
+                </div>
+                <div class="shareholder_report_table">
+                    <table class="table table-striped" id="tblIndicator">
+                        <thead>
+                            <tr>
+                                <th>Tài liệu</th>
+                                <th>Thời gian đăng</th>
+                                <th>Tải về</th>
+                                <th>Năm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.lstIndicatorReport.OrderByDescending(x => x.uploadTime.Value).ToList())
+                            {
+                            <tr>
+                                <td>@item.docName</td>
+                                <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
+                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                <td>@item.uploadTime.Value?.ToString("yyyy")</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="section_menu">
+        <div class="title_row">
+            <h2 class="title">Danh mục</h2>
+            <p class="title_line"></p>
+        </div>
+        <div class="row_category">
+            <!-- set data-id = id of shareholder_report class seted before -->
+            <div class="row_category_div" data-id="paradigm">@Model.ManagementModel.Title</div>
+            <div class="row_category_div" data-id="shareholder_report_1">@ViewBag.PublishInfo</div>
+            <div class="row_category_div" data-id="shareholder_report_2">@ViewBag.AdminReport</div>
+            <div class="row_category_div" data-id="shareholder_report_3">@ViewBag.FinancialReport</div>
+            <div class="row_category_div" data-id="shareholder_report_4">@ViewBag.MiddleReport</div>
+            <div class="row_category_div" data-id="shareholder_report_5">@ViewBag.YearlyReport</div>
+            <div class="row_category_div" data-id="shareholder_report_6">@ViewBag.IndicatorReport</div>
+        </div>
+    </section>
+</section>

@@ -1,0 +1,121 @@
+﻿@model MvcWeb.Models.TeaserPage
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<section id="image_bg" class="fw">
+    <img class="img-fluid" src="@(Model.indexPicture.Media.PublicUrl.Substring(1)??"")" alt="">
+</section>
+<section id="services" class="fw">
+    <div class="container">
+        <div class="image_info">
+            <div class="image_row">
+                @foreach (var item in Model.lstShortcut)
+                {
+                    <div class="col-6 col-lg-2 image_div">
+                        <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                        <h6>@item.Title</h6>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row mar0">
+            <div class="col-12 col-lg-4 w30 services_div_title title_row">
+                <h2 class="title">Dịch vụ cung cấp và thông tin</h2>
+                <p class="title_line">
+                    <span class="title_line_mb"></span>
+                </p>
+            </div>
+            @foreach (var item in Model.lstServices)
+            {
+                <div class="col-12 col-lg-4 w30 services_div">
+                    <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                    <h6>@item.Title</h6>
+                    <span class="services_div_line"></span>
+                    <p>
+                        @item.SubTitle
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section id="news" class="fw">
+    <div class="container">
+        <div class="title_row">
+            <h2 class="title">Tin tức</h2>
+            <p class="title_line">
+                <span class="title_line_mb"></span>
+            </p>
+        </div>
+        <div class="row mar0">
+            <div class="col-12 col-lg-8 big_news">
+                <img class="img-fluid" src="assets/images/big_news.jpg" alt="">
+                <div class="news_title">
+                    <a href="#">
+                        Tình hình tài chính các công ty lao đao trước biến động khó lường dịch
+                        Covid-19
+                    </a>
+                    <p> <i class="fas fa-clock"></i> 10 giờ trước</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-12 small_news">
+                    <img class="img-fluid" src="assets/images/small_news.jpg" alt="">
+                    <div class="news_title">
+                        <a href="#">
+                            Tình hình tài chính các công ty lao đao trước biến động khó lường dịch
+                            Covid-19
+                        </a>
+                        <p> <i class="fas fa-clock"></i> 10 giờ trước</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-12 small_news">
+                    <img class="img-fluid" src="assets/images/small_news.jpg" alt="">
+                    <div class="news_title">
+                        <a href="#">
+                            Tình hình tài chính các công ty lao đao trước biến động khó lường dịch
+                            Covid-19
+                        </a>
+                        <p> <i class="fas fa-clock"></i> 10 giờ trước</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mar0">
+            <div class="viewmore">
+                <a href="#" class="link">Xem thêm</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="index" class="fw">
+    <div class="container">
+        <div class="row mar0 index_bg">
+            <div class="col-12 col-lg-4 index_div">
+                <h5>hnx</h5>
+                <div class="index_number">
+                    <p>835,32</p>
+                    <p>0,00 (0%)</p>
+                    <p><i class="fas fa-minus"></i></p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 index_div">
+                <h5>hsx</h5>
+                <div class="index_number">
+                    <p>835,32</p>
+                    <p>0,00 (0%)</p>
+                    <p><i class="fas fa-minus"></i></p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 index_div">
+                <h5>upcom</h5>
+                <div class="index_number">
+                    <p>835,32</p>
+                    <p>0,00 (0%)</p>
+                    <p><i class="fas fa-minus"></i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
