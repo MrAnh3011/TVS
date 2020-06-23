@@ -118,11 +118,12 @@ namespace MvcWeb.Controllers
         [Route("intropage")]
         public async Task<IActionResult> IntroPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.ContactPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<Models.IntroPage>(id, HttpContext.User, draft);
 
 
             return View(model);
         }
+
 
         private string GetLangByPage(Guid id)
         {

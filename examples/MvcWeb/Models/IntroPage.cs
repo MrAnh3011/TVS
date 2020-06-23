@@ -26,6 +26,6 @@ namespace MvcWeb.Models
 
 
         [Region(Display = RegionDisplayMode.Full, Title = "Ban điều hành", ListTitle = "Ban điều hành", ListPlaceholder = "Ban điều hành")]
-        public IList<TextTitleHtml> lstExecutive { get; set; }
+        public IList<Management> lstExecutive { get; set; }
     }
 }

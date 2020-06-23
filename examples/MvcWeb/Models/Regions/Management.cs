@@ -26,7 +26,7 @@ namespace MvcWeb.Models.Regions
         public StringField Position { get; set; }
 
 
-        [Field(Options = FieldOption.HalfWidth)]
+        [Field]
         public TextField Description { get; set; }
     }
 }

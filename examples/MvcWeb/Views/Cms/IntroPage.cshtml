@@ -29,121 +29,70 @@
                                 <p class="title_line"></p>
                             </div>
                             <div class="row mar0 row_content">
-                                @foreach (var item in Model.Directory)
+                                @for (int i = 0; i < Model.Directory.Count; i++)
                                 {
+                                    var item = Model.Directory[i];
                                     <div class="col-12 col-lg-4 member_div">
-                                        <a data-toggle="modal" data-target="#member_modal">
-                                            <img class="img-fluid" src="assets/images/ceo.jpg" alt="">
-                                            <h5>Ông Nguyễn Trung Hà</h5>
-                                            <p>Chủ tịch HĐQT</p>
+                                        <a data-toggle="modal" data-target="#member_modal@(i+1)">
+                                            <img class="img-fluid" src="@(item.SmallImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            <h5>@item.Name</h5>
+                                            <p>@item.Position</p>
                                         </a>
                                     </div>
                                 }
                             </div>
-                            <div id="member_modal" class="modal fade" tabindex="-1" role="dialog"
-                                 aria-labelledby="my-modal-title" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <img class="img-fluid" src="assets/images/seo_image.jpg" alt="">
-                                        </div>
-                                        <div class="modal-body">
-                                            <h5 class="member_name">Ông Nguyễn Trung Hà</h5>
-                                            <p class="member_position">Chủ tịch HĐQT</p>
-                                            <p class="member_excerpt">
-                                                Là doanh nhân thành công, nổi bật với kiến thức kinh doanh và
-                                                các mối quan hệ rộng trên trường quốc tế của mình. Là sáng lập
-                                                viên và Chủ tịch HĐQT tập đoàn Galaxy. Bà là người phụ nữ đầu
-                                                tiên của Việt Nam nhận bằng MBA từ trường Harvard.
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary close_btn"
-                                                    data-dismiss="modal">
-                                                Đóng
-                                            </button>
+                            @for (int i = 0; i < Model.Directory.Count; i++)
+                            {
+                                var item = Model.Directory[i];
+                                <div id="member_modal@(i+1)" class="modal fade member_modal" tabindex="-1" role="dialog"
+                                     aria-labelledby="my-modal-title" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <img class="img-fluid" id="modalImg" src="@(item.BigImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5 class="member_name">@item.Name</h5>
+                                                <p class="member_position">@item.Position</p>
+                                                <p class="member_excerpt">
+                                                    @item.Description
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary close_btn"
+                                                        data-dismiss="modal">
+                                                    Đóng
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         </div>
+                        <script>
+                                                    //Will add later
+                        </script>
                         <div class="tab-pane fade leader" id="nav-contact" role="tabpanel"
                              aria-labelledby="nav-contact-tab">
                             <div class="title_row">
                                 <h2 class="title">Ban điều hành</h2>
                                 <p class="title_line"></p>
                             </div>
-                            <div class="row mar0 leader_div">
-                                <div class="col-12 col-lg-4">
-                                    <img class="img-fluid" src="assets/images/ceo2.jpg" alt="">
+                            @foreach (var item in Model.lstExecutive)
+                            {
+                                <div class="row mar0 leader_div">
+                                    <div class="col-12 col-lg-4">
+                                        <img class="img-fluid" src="@(item.SmallImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                    </div>
+                                    <div class="col-12 col-lg-8">
+                                        <h5 class="text_bold">@item.Name</h5>
+                                        <p>@item.Position</p>
+                                        <p>
+                                            @item.Description
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-lg-8">
-                                    <h5 class="text_bold">Bà Nguyễn Thanh Thảo</h5>
-                                    <p>Tổng giám đốc</p>
-                                    <p>
-                                        Bà là Giám đốc điều hành Văn phòng công ty TVS tại TP Hồ Chí Minh từ
-                                        tháng 09/2008 trước khi trở thành Tổng Giám đốc Công ty TVS vào tháng
-                                        03/2013 . Bà từng là Trưởng phòng nghiên cứu và phân tích của Công ty cổ
-                                        phần chứng khoán Thiên Việt khi gia nhập TVS vào năm 2007 . Bà đã có
-                                        trên 7 năm kinh nghiệm trong lĩnh vực phân tích Tài chính tại Ameriquest
-                                        Capital Holdings - một trong những nhà cho vay thế chấp lớn nhất ở Mỹ,
-                                        và các tổ chức tài chính khác. Trước đó, Bà là một Giám đốc điều hành
-                                        văn phòng pháp lý tại California, Mỹ. Bà có bằng cử nhân kinh tế tại
-                                        Moscow State University of Foreign Affairs (MGIMO) tại Cộng hòa liên
-                                        bang Nga năm 1997 và bằng MBA tại California, Mỹ năm 2005.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row mar0 leader_div">
-                                <div class="col-12 col-lg-4">
-                                    <img class="img-fluid" src="assets/images/ceo.jpg" alt="">
-                                </div>
-                                <div class="col-12 col-lg-8">
-                                    <h5 class="text_bold">Ông Phạm Ngọc Quỳnh</h5>
-                                    <p>Giám đốc điều hành, Bộ phận Ngân hàng đầu tư</p>
-                                    <p>
-                                        Ông là người đứng đầu bộ phận Ngân hàng đầu tư từ năm 2007. Ông Quỳnh có
-                                        trên 5 năm kinh nghiệm tư vấn cho các công ty đa quốc gia như Procter &
-                                        Gamble (Mỹ), Saatchi & Saatchi (Mỹ), Collier Jardine (Hồng Kông),
-                                        Meihardt
-                                        (Úc), Berli Jucker (Thái Lan). Trước đó, ông là Tổng giám đốc cho một
-                                        công
-                                        ty kinh doanh hàng tiêu dùng. Ông Quỳnh có bằng quản lý kinh doanh nâng
-                                        cao
-                                        tại Đại học Amos Tuck (Mỹ).
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row mar0 leader_div">
-                                <div class="col-12 col-lg-4">
-                                    <img class="img-fluid" src="assets/images/ceo.jpg" alt="">
-                                </div>
-                                <div class="col-12 col-lg-8">
-                                    <h5 class="text_bold">Ông Trần Vinh Quang</h5>
-                                    <p>Giám đốc bộ phận đầu tư</p>
-                                    <p>
-                                        Ông Quang tham gia vào Thiên Việt từ năm 2011 và chịu trách nhiệm quản
-                                        lý
-                                        danh mục đầu tư chứng khoán niêm yết của TVS. Trước khi tham gia TVS,
-                                        ông
-                                        Quang từng có hơn 6 năm kinh nghiệm đảm nhiệm vị trí Trưởng phòng quản
-                                        lý
-                                        Danh mục Đầu tư cho Công ty Quản lý Quỹ Bản Việt, phụ trách 2 Quỹ đầu tư
-                                        với
-                                        tổng tài sản khoảng 70 triệu USD. Trước đó, ông Quang cũng từng công tác
-                                        tại
-                                        phòng kế toán tài chính tại Unilever Việt Nam. Ông Quang tôt nghiệp Cử
-                                        nhân
-                                        tài chính loại xuất sắc tại Đại học New South Wales – Úc vào năm 2005
-                                        theo
-                                        chương trình học bổng toàn phần của chính phủ Úc. Ông Quang đã hoàn tất
-                                        chương trình ACCA (Hiệp Hội Kế toán Công chứng Anh) và của CFA (Hiệp hội
-                                        Chuyên viên phân tích tài chính Mỹ). Ông Quang hiện là hội viên của hiệp
-                                        hội
-                                        CFA.
-                                    </p>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -156,8 +105,7 @@
                         <div class="nav" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                                href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
-                                Tổng
-                                quan
+                                Tổng quan
                             </a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                href="#nav-profile" role="tab" aria-controls="nav-profile"
