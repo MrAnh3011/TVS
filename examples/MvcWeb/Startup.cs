@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using Piranha.Data.EF.SQLServer;
 using Microsoft.Extensions.Configuration;
 using Piranha.AspNetCore.Identity.SQLServer;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace MvcWeb
 {
@@ -94,6 +95,9 @@ namespace MvcWeb
                 .AddType(typeof(Models.RelationPage))
                 .AddType(typeof(Models.ContactPage))
                 .AddType(typeof(Models.IntroPage))
+                .AddType(typeof(Models.ServicesPage))
+                .AddType(typeof(Models.InvestbankPage))
+                .AddType(typeof(Models.AgencyPage))
                 .Build()
                 .DeleteOrphans();
             var postTypeBuilder = new Piranha.AttributeBuilder.PostTypeBuilder(api)

@@ -124,6 +124,29 @@ namespace MvcWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("servicespage")]
+        public async Task<IActionResult> ServicesPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            var model = await _loader.GetPageAsync<Models.ServicesPage>(id, HttpContext.User, draft);
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("investbankpage")]
+        public async Task<IActionResult> InvestbankPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            var model = await _loader.GetPageAsync<Models.InvestbankPage>(id, HttpContext.User, draft);
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("agencypage")]
+        public async Task<IActionResult> AgencyPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            var model = await _loader.GetPageAsync<Models.AgencyPage>(id, HttpContext.User, draft);
+            return View(model);
+        }
 
         private string GetLangByPage(Guid id)
         {

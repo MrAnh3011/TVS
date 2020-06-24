@@ -1,0 +1,155 @@
+﻿@model MvcWeb.Models.InvestbankPage
+@{
+    ViewData["Title"] = "InvestbankPage";
+}
+
+<section id="page">
+    <section id="page_bg" class="fw">
+        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <div class="page_breadcrumb">
+            <h3>@Model.Banner.Title</h3>
+            <div>
+                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Dịch vụ</a>
+            </div>
+        </div>
+    </section>
+    <section id="page_content" class="fw">
+        <div class="container">
+            <div class="row mar0">
+                <div class="col-12 col-lg-9 page_content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade shadow_content show active" id="nav-bank-intro" role="tabpanel"
+                             aria-labelledby="nav-home-tab">
+                            @Html.Raw(Model.Intro)
+                        </div>
+                        <div class="tab-pane fade member" id="nav-bank-member" role="tabpanel"
+                             aria-labelledby="nav-profile-tab">
+                            <div class="title_row">
+                                <h2 class="title">Các thành viên</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <div class="row mar0 row_content">
+                                @for (int i = 0; i < Model.Directory.Count; i++)
+                                {
+                                    var item = Model.Directory[i];
+                                    <div class="col-12 col-lg-4 member_div">
+                                        <a data-toggle="modal" data-target="#member_modal@(i+1)">
+                                            <img class="img-fluid" src="@(item.SmallImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            <h5>@item.Name</h5>
+                                            <p>@item.Position</p>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                            @for (int i = 0; i < Model.Directory.Count; i++)
+                            {
+                                var item = Model.Directory[i];
+                                <div id="member_modal@(i+1)" class="modal fade member_modal" tabindex="-1" role="dialog"
+                                     aria-labelledby="my-modal-title" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <img class="img-fluid" src="@(item.BigImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5 class="member_name">@item.Name</h5>
+                                                <p class="member_position">@item.Position</p>
+                                                <p class="member_excerpt">
+                                                    @item.Description
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary close_btn"
+                                                        data-dismiss="modal">
+                                                    Đóng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="tab-pane fade shadow_content" id="nav-bank-business" role="tabpanel"
+                             aria-labelledby="nav-contact-tab">
+                            <h5 class="text_bold">Các thương vụ tiêu biểu</h5>
+                            <p>
+                                @Model.TypicalDeal
+                            </p>
+                            <div class="table_wrapper">
+                                <table class="table table-striped table-hover bank_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Năm</th>
+                                            <th>Giá trị</th>
+                                            <th>Khách hàng</th>
+                                            <th>Nhà đầu tư</th>
+                                            <th>Mô tả</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.lstDealDetail)
+                                        {
+                                            <tr>
+                                                <td>@item.Year</td>
+                                                <td>@item.Value</td>
+                                                <td>
+                                                    <img class="img-fluid" src="@(item.Customer.Media.PublicUrl.Substring(1)??"")" alt="">
+                                                </td>
+                                                <td>
+                                                    <img class="img-fluid" src="@(item.Investor.Media.PublicUrl.Substring(1)??"")" alt="">
+                                                </td>
+                                                <td>@item.Description</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade partner" id="nav-bank-partner" role="tabpanel"
+                             aria-labelledby="nav-contact-tab">
+                            <div class="title_row">
+                                <h2 class="title">Đối tác và khách hàng</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <div class="row mar0 partner_wrapper">
+                                @foreach (var item in Model.lstPartner)
+                                {
+                                    <div class="col-12 col-lg-4 partner_div">
+                                        <div class="partner_image">
+                                            <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                                        </div>
+                                        <p>@item.Title</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 page_category">
+                    <div class="title_row">
+                        <h2 class="title">Danh mục</h2>
+                        <p class="title_line"></p>
+                    </div>
+                    <nav>
+                        <div class="nav" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                               href="#nav-bank-intro" role="tab" aria-controls="nav-home"
+                               aria-selected="true">
+                                Giới thiệu
+                            </a>
+                            <a class="nav-item nav-link" id="nav-bank-member-tab" data-toggle="tab"
+                               href="#nav-bank-member" role="tab" aria-controls="nav-profile"
+                               aria-selected="false">Các thành viên</a>
+                            <a class="nav-item nav-link" id="nav-bank-business-tab" data-toggle="tab"
+                               href="#nav-bank-business" role="tab" aria-controls="nav-contact"
+                               aria-selected="false">Các thương vụ tiêu biểu</a>
+                            <a class="nav-item nav-link" id="nav-bank-partner-tab" data-toggle="tab"
+                               href="#nav-bank-partner" role="tab" aria-controls="nav-contact"
+                               aria-selected="false">Đối tác và khách hàng</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
