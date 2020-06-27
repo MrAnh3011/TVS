@@ -20,6 +20,7 @@ namespace MvcWeb
     {
         public static async Task RunAsync(IApi api)
         {
+            /*
             if ((await api.Pages.GetStartpageAsync()) == null)
             {
                 var images = new dynamic []
@@ -93,7 +94,6 @@ namespace MvcWeb
                     Image = images[4].id,
                     Body = "<p>Everything is Open Source and released under the <code>MIT</code> license for maximum flexibility.</p>"
                 });
-                */
                 // Start page blocks
                 startpage.Blocks.Add(new ImageBlock
                 {
@@ -159,17 +159,18 @@ namespace MvcWeb
                 await api.Pages.SaveAsync(startpage);
 
                 // Features page
-                var featurespage = await Models.StandardPage.CreateAsync(api);
-                featurespage.SiteId = siteId;
-                featurespage.Title = "Features";
-                featurespage.Route = "/pagewide";
-                featurespage.SortOrder = 1;
+                //var featurespage = await Models.StandardPage.CreateAsync(api);
+                //featurespage.SiteId = siteId;
+                //featurespage.Title = "Features";
+                //featurespage.Route = "/pagewide";
+                //featurespage.SortOrder = 1;
 
                 // Features hero
-                featurespage.Hero.Subtitle = "Features";
-                featurespage.Hero.Ingress = "<p>It's all about who has the sharpest teeth in the pond.</p>";
+                //featurespage.Hero.Subtitle = "Features";
+                //featurespage.Hero.Ingress = "<p>It's all about who has the sharpest teeth in the pond.</p>";
 
                 // Features blocks
+
                 using (var stream = File.OpenRead("seed/features.md"))
                 {
                     using (var reader = new StreamReader(stream))
@@ -311,6 +312,7 @@ namespace MvcWeb
                 blogpost.Published = DateTime.Now.AddDays(7);
                 await api.Posts.SaveAsync(blogpost);
             }
+        */
         }
     }
 }

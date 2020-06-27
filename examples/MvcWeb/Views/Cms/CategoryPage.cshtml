@@ -1,0 +1,78 @@
+﻿@model MvcWeb.Models.CategoryPage
+@{
+    ViewData["Title"] = "CategoryPage";
+    var listPost = ViewBag.listPost;
+    var listCategory = ViewBag.listCategory;
+    var listHighlight = ViewBag.listHighLight;
+}
+
+    <section id="page">
+        <section id="page_content" class="fw">
+            <div class="container">
+                <div id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="/home">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="/tin-tuc">Tin tức</a></li>
+                        <li class="breadcrumb-item">Bản tin TVS</li>
+                    </ol>
+                </div>
+                <div class="row mar0">
+                    <div class="col-12 col-lg-9 page_content">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-news-tvs" role="tabpanel"
+                                 aria-labelledby="nav-home-tab">
+                                <div class="row mar0 news_wrapper">
+                                    @foreach (var item in listPost)
+                                    {
+                                        <div class="col-12 col-lg-6 news_div">
+                                            <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                            <a class="news_title" href="@item.Permalink">
+                                                @item.Title
+                                            </a>
+                                            <p class="news_date"><i class="far fa-clock"></i> 01/01/2020</p>
+                                            <p class="news_excerpt">
+                                                @Html.Raw(item.Excerpt)
+                                            </p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 pad0">
+                        <div class="page_category">
+                            <div class="title_row">
+                                <h2 class="title">Danh mục</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <nav>
+                                <div class="nav" id="nav-tab" role="tablist">
+                                    @foreach (var item in listCategory)
+                                    {
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                                           href="@item.Slug" role="tab" aria-controls="nav-home"
+                                           aria-selected="true">@item.Title</a>
+                                    }
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="page_category">
+                            <div class="title_row">
+                                <h2 class="title">Tin nổi bật</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <div class="hot_news">
+                                @foreach (var item in listHighlight)
+                                {
+                                    <div class="col-lg-12 hot_news_div">
+                                        <a href="@item.Post.Permalink">@item.Post.Title</a>
+                                        <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>

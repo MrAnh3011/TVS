@@ -24,5 +24,9 @@ namespace MvcWeb.Models
 
         [Region(Display = RegionDisplayMode.Full, Title = "Giới thiệu", ListTitle = "Giới thiệu", ListPlaceholder = "Giới thiệu")]
         public HtmlField Intro { get; set; }
+
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Người nhận mail", ListTitle = "Người nhận mail", ListPlaceholder = "Người nhận mail")]
+        public StringField MailReceiver { get; set; }
     }
 }

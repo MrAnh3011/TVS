@@ -89,8 +89,6 @@ namespace MvcWeb
 
             // Build content types
             var pageTypeBuilder = new Piranha.AttributeBuilder.PageTypeBuilder(api)
-                .AddType(typeof(Models.BlogArchive))
-                .AddType(typeof(Models.StandardPage))
                 .AddType(typeof(Models.TeaserPage))
                 .AddType(typeof(Models.RelationPage))
                 .AddType(typeof(Models.ContactPage))
@@ -98,10 +96,13 @@ namespace MvcWeb
                 .AddType(typeof(Models.ServicesPage))
                 .AddType(typeof(Models.InvestbankPage))
                 .AddType(typeof(Models.AgencyPage))
+                .AddType(typeof(Models.NewsPage))
+                .AddType(typeof(Models.RequestOpenAccPage))
+                .AddType(typeof(Models.CategoryPage))
                 .Build()
                 .DeleteOrphans();
             var postTypeBuilder = new Piranha.AttributeBuilder.PostTypeBuilder(api)
-                .AddType(typeof(Models.BlogPost))
+                .AddType(typeof(Models.NewsPost))
                 .Build()
                 .DeleteOrphans();
             var siteTypeBuilder = new Piranha.AttributeBuilder.SiteTypeBuilder(api)

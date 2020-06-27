@@ -58,21 +58,21 @@
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="hoten">Họ và tên</label>
-                                <input type="text" class="form-control" id="hoten" aria-describedby="emailHelp"
+                                <input type="text" class="form-control" id="ctphoten" aria-describedby="emailHelp"
                                        placeholder="Nhập đầy đủ họ tên của bạn ở đây">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="tencongty">Tên công ty</label>
-                                <input type="text" class="form-control" id="tencongty"
+                                <input type="text" class="form-control" id="ctptencongty"
                                        aria-describedby="emailHelp" placeholder="Tên công ty">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="chucdanh">Chức danh </label>
-                                <input type="text" class="form-control" id="chucdanh"
+                                <input type="text" class="form-control" id="ctpchucdanh"
                                        aria-describedby="emailHelp" placeholder="Chức danh">
                             </div>
                         </div>
@@ -81,28 +81,28 @@
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="sofax">Số fax</label>
-                                <input type="text" class="form-control" id="sofax" aria-describedby="emailHelp"
+                                <input type="text" class="form-control" id="ctpsofax" aria-describedby="emailHelp"
                                        placeholder="Số fax của công ty bạn ở đây">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="email"> E-mail</label>
-                                <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                                <input type="text" class="form-control" id="ctpemail" aria-describedby="emailHelp"
                                        placeholder="Địa chỉ mail của bạn ">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="phone">Số điện thoại </label>
-                                <input type="text" class="form-control" id="phone" aria-describedby="emailHelp"
+                                <input type="text" class="form-control" id="ctpphone" aria-describedby="emailHelp"
                                        placeholder="Số điện thoại của bạn ">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="diachi">Địa chỉ </label>
-                        <textarea class="form-control" id="diachi" rows="4"
+                        <textarea class="form-control" id="ctpdiachi" rows="4"
                                   placeholder="Nhập lời nhắn của bạn"></textarea>
                     </div>
                     <div class="text-form">
@@ -112,34 +112,35 @@
                         <ul>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="tuvansatnhap">
+                                    <input type="checkbox" class="custom-control-input" id="ctptuvansatnhap">
                                     <label class="custom-control-label" for="tuvansatnhap">Tư vấn sát nhập</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="doitac">
+                                    <input type="checkbox" class="custom-control-input" id="ctpdoitac">
                                     <label class="custom-control-label" for="doitac">Đối tác / Cơ hội hợp tác</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="taicocaudn">
+                                    <input type="checkbox" class="custom-control-input" id="ctptaicocaudn">
                                     <label class="custom-control-label" for="taicocaudn">Tái cấu trúc doanh nghiệp</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="tangvon">
+                                    <input type="checkbox" class="custom-control-input" id="ctptangvon">
                                     <label class="custom-control-label" for="tangvon">Tăng vốn</label>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div class="btn-contact">
-                        <button><a>Gửi</a></button>
+                        <button id="btnContactPage"><a>Gửi</a></button>
                     </div>
                 </form>
+                <span id="mailReceiver">@Model.MailReceiver</span>
             </div>
         </div>
     </section>

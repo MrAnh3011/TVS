@@ -1,0 +1,242 @@
+﻿@model MvcWeb.Models.RequestOpenAccPage
+@{
+    ViewData["Title"] = "RequestOpenAcc";
+}
+
+<section id="open_account" class="fw">
+    <div class="container">
+        <h5>Gửi yêu cầu mở tài khoản</h5>
+        <div class="account_form">
+            <form action="">
+                <div class="account_title">
+                    <h6>I. Thông tin chung</h6>
+                    <div class="row mar0">
+                        <div class="col-lg-6">
+                            <p>1. Mở tài khoản cho</p>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="openfor" value="Cá nhân" checked>
+                                    <span class="radio_text">Cá nhân</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="openfor" value="Doanh nghiệp">
+                                    <span class="radio_text">Doanh nghiệp</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>2. Quốc tịch</p>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="nationality" value="Việt Nam" checked>
+                                    <span class="radio_text">Việt Nam</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="nationality" value="Nước ngoài">
+                                    <span class="radio_text">Nước ngoài</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="account_title">
+                    <h6>II. Thông tin cá nhân</h6>
+                    <div class="row mar0">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inpNameAcc">Họ và tên <span>(*)</span></label>
+                                <input id="inpNameAcc" class="form-control" placeholder="Họ và tên" type="text"
+                                       name="">
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính <span>(*)</span></label>
+                                <select name="" id="accSex" class="form-control">
+                                    <option value="-1">Vui lòng chọn</option>
+                                    <option value="0">Nam</option>
+                                    <option value="1">Nữ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="accDateProvide">Ngày cấp <span>(*)</span></label>
+                                <input id="accDateProvide" class="form-control" placeholder="Ngày cấp"
+                                       type="text" name="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="accDateBirth">Ngày sinh <span>(*)</span></label>
+                                <input id="accDateBirth" class="form-control" placeholder="dd/mm/yyyy" type="text"
+                                       name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="accIDcard">Số CMT / CCCD / Hộ chiếu <span>(*)</span></label>
+                                <input id="accIDcard" class="form-control"
+                                       placeholder="Số CMT / CCCD / Hộ chiếu" type="text" name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="accLocatProvide">Nơi cấp <span>(*)</span></label>
+                                <input id="accLocatProvide" class="form-control" placeholder="Nơi cấp" type="text"
+                                       name="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="account_title">
+                    <h6>III. Thông tin liên lạc</h6>
+                    <div class="row mar0">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="accPhoneNum">Số điện thoại <span>(*)</span></label>
+                                <input id="accPhoneNum" class="form-control" placeholder="Số điện thoại"
+                                       type="text" name="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="accMail">Mail <span>(*)</span></label>
+                                <input id="accMail" class="form-control" placeholder="Mail của bạn"
+                                       type="text" name="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="accAddress">Địa chỉ <span>(*)</span></label>
+                            <input id="accAddress" class="form-control" placeholder="Địa chỉ" type="text"
+                                   name="">
+                        </div>
+                    </div>
+                </div>
+                <div class="account_title">
+                    <div class="row mar0 contract">
+                        <div class="col-lg-6">
+                            <p>Bạn có cần in sẵn hợp đồng không?</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" data-id="need_contract" class="form-check-input"
+                                           name="contract" value="Cần in sẵn thông tin hợp đồng" checked>
+                                    <span class="radio_text">Cần in sẵn thông tin hợp đồng</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" data-id="no_need_contract" name="contract" value="Không cần">
+                                    <span class="radio_text">Không cần</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="abcd">
+                    <div class="account_title">
+                        <h6>IV. Thông tin nơi ở</h6>
+                        <div class="row mar0">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Quốc gia <span>(*)</span></label>
+                                    <select name="" id="selCountries" class="form-control">
+                                        <option value="-1">Quốc gia</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accCity">Thành phố <span>(*)</span></label>
+                                    <input id="accCity" class="form-control" placeholder="Thành phố"
+                                           type="text" name="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account_title">
+                        <h6>V. Thông tin nghề nghiệp</h6>
+                        <div class="row mar0">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accCompany">Công ty làm việc</label>
+                                    <input id="accCompany" class="form-control" placeholder="Công ty làm việc"
+                                           type="text" name="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="accCompanyPhone">Số điện thoại công ty</label>
+                                    <input id="accCompanyPhone" class="form-control"
+                                           placeholder="Số điện thoại công ty" type="text" name="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accPosition">Vị trí làm việc</label>
+                                    <input id="accPosition" class="form-control" placeholder="Vị trí làm việc" type="text" name="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="accFax">Fax công ty</label>
+                                    <input id="accFax" class="form-control" placeholder="Fax công ty" type="text" name="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account_title">
+                        <h6>VI. Tài khoản ngân hàng</h6>
+                        <div class="row mar0">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accBanknum">Số tài khoản</label>
+                                    <input id="accBanknum" class="form-control" placeholder="Số tài khoản"
+                                           type="text" name="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="accBankManger">Người quản lý tài khoản</label>
+                                    <input id="accBankManger" class="form-control"
+                                           placeholder="Người quản lý tài khoản" type="text" name="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accBankname">Ngân hàng</label>
+                                    <input id="accBankname" class="form-control" placeholder="Ngân hàng"
+                                           type="text" name="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account_title">
+                        <h6>VII. Thông tin khác</h6>
+                        <div class="row mar0">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accCompanyManager">Tên công ty đại chúng bạn đang quản lý</label>
+                                    <input id="accCompanyManager" class="form-control" placeholder="Tên công ty"
+                                           type="text" name="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accCompanySpent">
+                                        Công ty đại chúng bạn đang giữ hơn 5% vốn điều
+                                        lệ
+                                    </label>
+                                    <input id="accCompanySpent" class="form-control" placeholder="Tên công ty"
+                                           type="text" name="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="button" id="openAcc" class="btn btn-primary" value="Mở tài khoản" />
+            </form>
+            <span style="display:none" id="mailReceiv">@Model.Email</span>
+        </div>
+    </div>
+</section>

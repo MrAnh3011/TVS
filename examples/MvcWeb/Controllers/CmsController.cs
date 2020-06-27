@@ -9,10 +9,14 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MvcWeb.Models;
 using Piranha;
 using Piranha.AspNetCore.Services;
 using Piranha.Models;
@@ -33,31 +37,36 @@ namespace MvcWeb.Controllers
         }
 
         [HttpGet]
-        [Route("archive")]
-        public async Task<IActionResult> Archive(Guid id, int? year = null, int? month = null, int? page = null,
-            Guid? category = null, Guid? tag = null)
+        [Route("newspage")]
+        public async Task<IActionResult> NewsPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _api.Pages.GetByIdAsync<Models.BlogArchive>(id);
-            model.Archive = await _api.Archives.GetByIdAsync(id, page, category, tag, year, month);
-
+            var model = await _loader.GetPageAsync<NewsPage>(id, HttpContext.User, draft);
+            model.Archive = await _api.Archives.GetByIdAsync(id);
+            var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
+            ViewBag.lstCategory = lstCategory;
             return View(model);
         }
 
-        [HttpGet]
-        [Route("page")]
-        public async Task<IActionResult> Page(Guid id, bool draft = false)
+        [Route("categorypage/{keyword?}")]
+        public async Task<IActionResult> CategoryPage(Guid id, string keyword, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.StandardPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<CategoryPage>(id, HttpContext.User, draft);
+            var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
+            var listPost = _db.Posts.Where(x => x.CategoryId == categoryId[0].Id).ToList();
+            var lstPostInfo = new List<NewsPost>();
+            foreach (var item in listPost)
+            {
+                var tmpPost = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
+                lstPostInfo.Add(tmpPost);
+            }
+            var blogId = listPost[0].BlogId;
 
-            return View(model);
-        }
-
-        [HttpGet]
-        [Route("pagewide")]
-        public async Task<IActionResult> PageWide(Guid id, bool draft = false)
-        {
-            var model = await _loader.GetPageAsync<Models.StandardPage>(id, HttpContext.User, draft);
-
+            var modelPage = await _loader.GetPageAsync<NewsPage>(blogId, HttpContext.User, draft);
+            var listCategory = await _api.Posts.GetAllCategoriesAsync(blogId);
+            
+            ViewBag.listPost = lstPostInfo;
+            ViewBag.listCategory = listCategory;
+            ViewBag.listHighLight = modelPage.lstHighlight;
             return View(model);
         }
 
@@ -65,7 +74,14 @@ namespace MvcWeb.Controllers
         [Route("post")]
         public async Task<IActionResult> Post(Guid id, bool draft = false)
         {
-            var model = await _loader.GetPostAsync<Models.BlogPost>(id, HttpContext.User, draft);
+            var model = await _loader.GetPostAsync<NewsPost>(id, HttpContext.User, draft);
+            var newsModel = await _loader.GetPageAsync<NewsPage>(model.BlogId, HttpContext.User, false);
+
+            var lstRelated = newsModel.Archive.Posts.Where(x => x.Category.Slug == model.Category.Slug);
+            var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
+            ViewBag.lstCategory = lstCategory;
+            ViewBag.lstHightLight = newsModel.lstHighlight;
+            ViewBag.lstRelated = lstRelated;
 
             return View(model);
         }
@@ -74,15 +90,15 @@ namespace MvcWeb.Controllers
         [Route("teaserpage")]
         public async Task<IActionResult> TeaserPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.TeaserPage>(id, HttpContext.User, draft);
-            return View("startpage",model);
+            var model = await _loader.GetPageAsync<TeaserPage>(id, HttpContext.User, draft);
+            return View("startpage", model);
         }
 
         [HttpGet]
         [Route("relationpage")]
         public async Task<IActionResult> RelationPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.RelationPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<RelationPage>(id, HttpContext.User, draft);
             //var siteLang = GetLangByPage(id);
             //if (siteLang.Contains("/en"))
             //{
@@ -109,7 +125,7 @@ namespace MvcWeb.Controllers
         [Route("contactpage")]
         public async Task<IActionResult> ContactPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.ContactPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<ContactPage>(id, HttpContext.User, draft);
 
             return View(model);
         }
@@ -118,7 +134,7 @@ namespace MvcWeb.Controllers
         [Route("intropage")]
         public async Task<IActionResult> IntroPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.IntroPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<IntroPage>(id, HttpContext.User, draft);
 
 
             return View(model);
@@ -128,7 +144,7 @@ namespace MvcWeb.Controllers
         [Route("servicespage")]
         public async Task<IActionResult> ServicesPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.ServicesPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<ServicesPage>(id, HttpContext.User, draft);
             return View(model);
         }
 
@@ -136,7 +152,7 @@ namespace MvcWeb.Controllers
         [Route("investbankpage")]
         public async Task<IActionResult> InvestbankPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.InvestbankPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<InvestbankPage>(id, HttpContext.User, draft);
             return View(model);
         }
 
@@ -144,7 +160,16 @@ namespace MvcWeb.Controllers
         [Route("agencypage")]
         public async Task<IActionResult> AgencyPage(Guid id, bool startpage = false, bool draft = false)
         {
-            var model = await _loader.GetPageAsync<Models.AgencyPage>(id, HttpContext.User, draft);
+            var model = await _loader.GetPageAsync<AgencyPage>(id, HttpContext.User, draft);
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("reqopenacc")]
+        public async Task<IActionResult> RequestOpenAcc(Guid id, bool startpage = false, bool draft = false)
+        {
+            var model = await _loader.GetPageAsync<RequestOpenAccPage>(id, HttpContext.User, draft);
+
             return View(model);
         }
 
