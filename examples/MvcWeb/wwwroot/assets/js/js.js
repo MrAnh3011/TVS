@@ -480,6 +480,8 @@
     $("#btnContactPage").click(function () {
         ShowLoadingScreen();
         let ToMail = $("#mailReceiver").text();
+        let FromMail = $("#mailSender").text();
+        let FromPass = $("#mailSenderPass").text();
         let hoten = "Họ tên: " + $("#ctphoten").val();
         let tencty = "Tên công ty: " + $("#ctptencongty").val();
         let chucdanh = "Chức danh: " + $("#ctpchucdanh").val();
@@ -500,6 +502,8 @@
         let body = hoten + "\n" + tencty + "\n" + chucdanh + "\n" + fax + "\n" + email + "\n" + phone + "\n" + diachi + "\n" + ttmn;
 
         let info = JSON.stringify({
+            From: FromMail,
+            FromPass: FromPass,
             To: ToMail,
             Subject: "TVS - Nhận thông tin hàng quý",
             Body: body
@@ -547,6 +551,8 @@
     $("#openAcc").click(function () {
         ShowLoadingScreen();
         let ToMail = $("#mailReceiv").text();
+        let FromMail = $("#mailSender").text();
+        let FromPass = $("#mailPass").text();
         let openFor = "Mở tài khoản cho: " + $('input[name="openfor"]:checked').val();
         let nationality = "Quốc tịch: " + $('input[name="nationality"]:checked').val();
         let name = "Họ và tên: " + $("#inpNameAcc").val();
@@ -596,6 +602,8 @@
         body += companyName + "\n" + companySpent + "\n";
 
         let info = JSON.stringify({
+            From: FromMail,
+            FromPass: FromPass,
             To: ToMail,
             Subject: "TVS - Gửi yêu cầu mở tài khoản",
             Body: body

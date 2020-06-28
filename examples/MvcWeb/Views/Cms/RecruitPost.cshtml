@@ -1,0 +1,221 @@
+﻿@model MvcWeb.Models.NewsPost
+@{
+    ViewData["Title"] = "RecruitPost";
+    var lstJob = ViewBag.lstJob;
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+}
+
+<section id="page">
+    <section id="page_bg" class="fw">
+        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <div class="page_breadcrumb">
+            <h3>@Model.Banner.Title</h3>
+            <div>
+                <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Tuyển dụng" : "Recruit")</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-deital fw">
+        <div class="container">
+            <div class="row mar0 flex-content">
+                <div class="col col-lg-8 col-12 content-left">
+                    <div class="ct-left">
+                        <div class="row mar0 justify-content-between">
+                            <div class="col col-lg-8 col-12 pad0">
+                                <div class="title-1">
+                                    <h5>@Model.Title</h5>
+                                </div>
+                            </div>
+                            <div class="col col-lg-4 col-12">
+                                <div class="btn-ungtuyen">
+                                    <button><a href="">@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</a></button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        @Html.DisplayFor(m => m.Blocks)
+                        <hr>
+                        <div class="pd-ut">
+                            <div class=" title-2">
+                                <h5 class="">@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</h5>
+                            </div>
+                            <form action="" class="form-ut">
+                                <div class="row">
+                                    <div class="col col-lg-6 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Full Name") <span>(*)</span></label>
+                                            <input type="email" class="form-control " id="hoten"
+                                                   aria-describedby="emailHelp" placeholder="Họ và tên">
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-6 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="gioitinh">@(lang == "vi" ? "Giới tính" : "Sex") <span>(*)</span></label>
+                                            <select name="cars" class=" form-control" id="gioitinh">
+                                                <option selected>@(lang == "vi" ? "Giới tính" : "Sex")</option>
+                                                <option value="nam">@(lang == "vi" ? "Name" : "Male")</option>
+                                                <option value="nu">@(lang == "vi" ? "Nữ" : "Female")</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-lg-6 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="sdt">@(lang == "vi" ? "Điện thoại" : "Phone") <span>(*)</span></label>
+                                            <input type="email" class="form-control" id="sdt"
+                                                   aria-describedby="emailHelp" placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone") ">
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-6 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email">Email <span>(*)</span></label>
+                                            <input type="email" class="form-control" id="email"
+                                                   aria-describedby="emailHelp" placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-lg-6 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="diadiem">@(lang == "vi" ? "Địa điểm ứng tuyển" : "Workplace") <span>(*)</span></label>
+                                            <select name="cars" class="form-control" id="diadiem">
+                                                <option selected>Hà Nội</option>
+                                                <option value="hanoi">Hà Nội</option>
+                                                <option value="hochiminh">Hồ Chí Minh</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col col-lg-6 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="vitri">@(lang == "vi" ? "Vị trí ứng tuyển" : "Position") <span>(*)</span></label>
+                                            <select name="cars" class=" form-control" id="vitri">
+                                                <option selected> @(lang == "vi" ? "Chọn vị trí ứng tuyển" : "Choose position")</option>
+                                                @foreach (var item in lstJob)
+                                                {
+                                                    <option value="@item.Title">@item.Title</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="customFile">@(lang == "vi" ? "Tải lên CV" : "Upload CV") <span>(*)</span></label>
+                                            <input type="file" class="form-control" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-auto">
+                                        <div class="btn-contact">
+                                            <button>@(lang == "vi" ? "Gửi ngay" : "Send")</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-12 content-right">
+                    <div class="ct-right">
+                        <div class=" title-2">
+                            <h5 class="">@(lang == "vi" ? "Các vị trí đang tuyển" : "Vacancies")</h5>
+                        </div>
+                        <div class="list-cv">
+                            <ul>
+                                <li>
+                                    <p><span>@(lang == "vi" ? "Phòng ban" : "Department") : </span><span>@Model.Recruit.Department</span></p>
+                                    <p><span>@(lang == "vi" ? "Ngày bắt đầu" : "Start date") :</span><span>@Model.Recruit.StartDate.Value?.ToString("dd/MM/yyyy")</span></p>
+                                    <p><span>@(lang == "vi" ? "Số lượng" : "Amount") :</span><span>@Model.Recruit.Amount</span></p>
+                                    <p><span>@(lang == "vi" ? "Kinh nghiệm" : "Experience") :</span><span>@Model.Recruit.Experience</span></p>
+                                    <p><span>@(lang == "vi" ? "Địa điểm" : "Location") :</span><span>@Model.Recruit.Location</span></p>
+                                    <p><span>@(lang == "vi" ? "Mức lương" : "Salary") :</span><span>@Model.Recruit.Salary</span></p>
+                                    <p><span>@(lang == "vi" ? "Hạn nộp hồ sơ" : "Deadline") :</span><span>@Model.Recruit.EndDate </span></p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="new-job new-job-deital fw">
+        <div class="container">
+            <div class=" title-2">
+                <h5> Vị trí có thể bạn quan tâm</h5>
+            </div>
+            <div class="content-job">
+                <div class="row mar0">
+                    <div class="col col-lg-4 col-md-4 col-12">
+                        <p><a href="">Nhân viên thiết kế đồ họa</a></p>
+                    </div>
+                    <div class="col col-lg-4 col-md-4 col-12">
+                        <div class="flex-job">
+                            <p><span><i class="fas fa-suitcase"></i></span> Marketing</p>
+                            <p><span><i class="fas fa-map-marker-alt"></i></span> Hà Nội</p>
+                        </div>
+                    </div>
+                    <div class="col col-lg-2 col-md-2 col-12">
+                        <p><span>Hạn nộp : </span><span>31/12/2020</span></p>
+                    </div>
+                    <div class="col col-lg-2 col-md-2 col-12">
+                        <div class="btn-ungtuyen">
+                            <button><a href="">Ứng tuyển ngay</a></button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mar0">
+                    <div class="col col-lg-4 col-md-4 col-12">
+                        <p><a href="">Trưởng phòng Marketing</a></p>
+                    </div>
+                    <div class="col col-lg-4 col-md-4 col-12">
+                        <div class="flex-job">
+                            <p><span><i class="fas fa-suitcase"></i></span> Marketing</p>
+                            <p><span><i class="fas fa-map-marker-alt"></i></span> Hà Nội</p>
+                        </div>
+                    </div>
+                    <div class="col col-lg-2 col-md-2 col-12">
+                        <p><span>Hạn nộp : </span><span>31/12/2020</span></p>
+                    </div>
+                    <div class="col col-lg-2 col-md-2 col-12">
+                        <div class="btn-ungtuyen">
+                            <button><a href="">Ứng tuyển ngay</a></button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mar0">
+                    <div class="col col-lg-4 col-md-4 col-12">
+                        <p><a href="">Nhân viên Content</a> </p>
+                    </div>
+                    <div class="col col-lg-4 col-md-4 col-12">
+                        <div class="flex-job">
+                            <p><span><i class="fas fa-suitcase"></i></span> Marketing</p>
+                            <p><span><i class="fas fa-map-marker-alt"></i></span> Hà Nội</p>
+                        </div>
+                    </div>
+                    <div class="col col-lg-2 col-md-2 col-12">
+                        <p><span>Hạn nộp : </span><span>31/12/2020</span></p>
+                    </div>
+                    <div class="col col-lg-2 col-md-2 col-12">
+                        <div class="btn-ungtuyen">
+                            <button><a href="">Ứng tuyển ngay</a></button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>

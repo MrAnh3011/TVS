@@ -28,5 +28,13 @@ namespace MvcWeb.Models
 
         [Region(Display = RegionDisplayMode.Full, Title = "Người nhận mail", ListTitle = "Người nhận mail", ListPlaceholder = "Người nhận mail")]
         public StringField MailReceiver { get; set; }
+
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Người gửi mail", ListTitle = "Người gửi mail", ListPlaceholder = "Người gửi mail")]
+        public StringField MailSender { get; set; }
+
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Mật khẩu mail", ListTitle = "Mật khẩu mail", ListPlaceholder = "Mật khẩu mail")]
+        public StringField MailSenderPass { get; set; }
     }
 }

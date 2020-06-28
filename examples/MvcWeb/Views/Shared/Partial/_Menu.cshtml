@@ -3,8 +3,8 @@
         <div class="row mar0">
             <div class="col-12 col-lg-12 pad0">
                 <ul class="fw">
-                    <li><a href="login.html">Đăng nhập</a></li>
-                    <li><a href="open-account.html">Gửi yêu cầu mở tài khoản</a></li>
+                    <li><a href="/dang-nhap">Đăng nhập</a></li>
+                    <li><a href="/yeu-cau-mo-tk">Gửi yêu cầu mở tài khoản</a></li>
                 </ul>
             </div>
         </div>
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row mar0">
             <div class="col-12 col-lg-1 flex logo">
-                <a href="index.html"><img class="img-fluid" src="assets/images/TVS.png" alt=""></a>
+                <a href="/"><img class="img-fluid" src="assets/images/TVS.png" alt=""></a>
             </div>
             <div class="col-12 col-lg-11 pad0">
                 <nav class="fw">
@@ -38,36 +38,28 @@
                         </div>
                     </div>
                     <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
-                        <li><a href="gioithieu.html">Giới thiệu</a></li>
-                        <li>
-                            <a>Dịch vụ</a>
-                            <ul>
-                                <li><a href="#">Quản lý quỹ</a></li>
+                        @foreach (var item in WebApp.Site.Sitemap)
+                        {
+                            @if (!item.IsHidden)
+                            {
                                 <li>
-                                    <a>Ngân hàng đầu tư</a>
-                                    <ul>
-                                        <li><a href="nganhangdautu.html">Giới thiệu</a></li>
-                                        <li><a href="nganhangdautu.html">Các thành viên</a></li>
-                                        <li><a href="nganhangdautu.html">Các thương vụ tiêu biểu</a></li>
-                                        <li><a href="nganhangdautu.html">Đối tác và khách hàng</a></li>
-                                    </ul>
+                                    @if (item.Items.Any())
+                                    {
+                                        <a href="">@item.MenuTitle</a>
+                                        <ul>
+                                            @foreach (var sub in item.Items)
+                                            {
+                                                <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <a href="@item.Permalink">@item.MenuTitle</a>
+                                    }
                                 </li>
-                                <li>
-                                    <a>Môi giới</a>
-                                    <ul>
-                                        <li><a href="moigioi.html">Giới thiệu</a></li>
-                                        <li><a href="moigioi.html">Các thành viên</a></li>
-                                        <li><a href="moigioi.html">Các thương vụ tiêu biểu</a></li>
-                                        <li><a href="moigioi.html">Đối tác và khách hàng</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Phân tích</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="quanhecodong.html">Quan hệ cổ đông</a></li>
-                        <li><a href="tintuc.html">Tin tức</a></li>
-                        <li><a href="tuyendung.html">Tuyển dụng</a></li>
-                        <li><a href="lienhe.html">Liên hệ</a></li>
+                            }
+                        }
                         <li>
                             <a href="#"><i class="fas fa-globe-americas"></i> Tiếng việt</a>
                             <ul class="language">

@@ -1,6 +1,11 @@
 ﻿@model MvcWeb.Models.RelationPage
 @{
     ViewData["Title"] = "RelationPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="page">
@@ -9,7 +14,7 @@
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
-                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Quan hệ cổ đông</a>
+                <a href="#">@(lang == "vi" ? "Trang chủ" : "Home page")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Quan hệ cổ đông" : "Shareholder relations")</a>
             </div>
         </div>
     </section>
@@ -26,7 +31,7 @@
         <div class="row shareholder_report" id="shareholder_report_1">
             <div class="container">
                 <div class="title_row">
-                    <h2 class="title">@ViewBag.PublishInfo</h2>
+                    <h2 class="title">@(lang == "vi" ? "Công bố thông tin" : "Information disclosure")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>
@@ -35,9 +40,9 @@
                     <table class="table table-striped" id="tblPublish">
                         <thead>
                             <tr>
-                                <th>Tài liệu</th>
-                                <th>Thời gian đăng</th>
-                                <th>Tải về</th>
+                                <th>@(lang == "vi" ? "Tài liệu" : "Document")</th>
+                                <th>@(lang == "vi" ? "Thời gian đăng" : "Date post")</th>
+                                <th>@(lang == "vi" ? "Tải về" : "Dowload")</th>
                                 <th>Năm</th>
                             </tr>
                         </thead>
@@ -47,7 +52,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -60,7 +65,7 @@
         <div class="row shareholder_report" id="shareholder_report_2">
             <div class="container">
                 <div class="title_row">
-                    <h2 class="title">Báo cáo quản trị</h2>
+                    <h2 class="title">@(lang == "vi" ? "Báo cáo quản trị" : "Report admin")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>
@@ -69,9 +74,9 @@
                     <table class="table table-striped" id="tblAdmin">
                         <thead>
                             <tr>
-                                <th>Tài liệu</th>
-                                <th>Thời gian đăng</th>
-                                <th>Tải về</th>
+                                <th>@(lang == "vi" ? "Tài liệu" : "Document")</th>
+                                <th>@(lang == "vi" ? "Thời gian đăng" : "Date post")</th>
+                                <th>@(lang == "vi" ? "Tải về" : "Dowload")</th>
                                 <th>Năm</th>
                             </tr>
                         </thead>
@@ -81,7 +86,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -94,7 +99,7 @@
         <div class="row shareholder_report" id="shareholder_report_3">
             <div class="container">
                 <div class="title_row">
-                    <h2 class="title">Báo cáo tài chính quý</h2>
+                    <h2 class="title">@(lang == "vi" ? "Báo cáo tài chính quý" : "Quarterly financial statements")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>
@@ -103,9 +108,9 @@
                     <table class="table table-striped" id="tblFinance">
                         <thead>
                             <tr>
-                                <th>Tài liệu</th>
-                                <th>Thời gian đăng</th>
-                                <th>Tải về</th>
+                                <th>@(lang == "vi" ? "Tài liệu" : "Document")</th>
+                                <th>@(lang == "vi" ? "Thời gian đăng" : "Date post")</th>
+                                <th>@(lang == "vi" ? "Tải về" : "Dowload")</th>
                                 <th>Năm</th>
                             </tr>
                         </thead>
@@ -115,7 +120,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -128,7 +133,7 @@
         <div class="row shareholder_report" id="shareholder_report_4">
             <div class="container">
                 <div class="title_row">
-                    <h2 class="title">Báo cáo tài chính giữa năm</h2>
+                    <h2 class="title">@(lang == "vi" ? "Báo cáo tài chính giữa năm" : "Mid-year financial statements")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>
@@ -137,9 +142,9 @@
                     <table class="table table-striped" id="tblMidYear">
                         <thead>
                             <tr>
-                                <th>Tài liệu</th>
-                                <th>Thời gian đăng</th>
-                                <th>Tải về</th>
+                                <th>@(lang == "vi" ? "Tài liệu" : "Document")</th>
+                                <th>@(lang == "vi" ? "Thời gian đăng" : "Date post")</th>
+                                <th>@(lang == "vi" ? "Tải về" : "Dowload")</th>
                                 <th>Năm</th>
                             </tr>
                         </thead>
@@ -149,7 +154,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -162,7 +167,7 @@
         <div class="row shareholder_report" id="shareholder_report_5">
             <div class="container">
                 <div class="title_row">
-                    <h2 class="title">Báo cáo tài chính năm</h2>
+                    <h2 class="title">@(lang == "vi" ? "Báo cáo tài chính năm" : "Annual financial reports")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>
@@ -171,9 +176,9 @@
                     <table class="table table-striped" id="tblYearly">
                         <thead>
                             <tr>
-                                <th>Tài liệu</th>
-                                <th>Thời gian đăng</th>
-                                <th>Tải về</th>
+                                <th>@(lang == "vi" ? "Tài liệu" : "Document")</th>
+                                <th>@(lang == "vi" ? "Thời gian đăng" : "Date post")</th>
+                                <th>@(lang == "vi" ? "Tải về" : "Dowload")</th>
                                 <th>Năm</th>
                             </tr>
                         </thead>
@@ -183,7 +188,7 @@
                             <tr>
                                 <td>@item.docName</td>
                                 <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                 <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                             </tr>
                             }
@@ -196,7 +201,7 @@
         <div class="row shareholder_report" id="shareholder_report_6">
             <div class="container">
                 <div class="title_row">
-                    <h2 class="title">Báo cáo chỉ tiêu an toàn tài chính</h2>
+                    <h2 class="title">@(lang == "vi" ? "Báo cáo chỉ tiêu an toàn tài chính" : "Report financial safety criteria")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>
@@ -205,9 +210,9 @@
                     <table class="table table-striped" id="tblIndicator">
                         <thead>
                             <tr>
-                                <th>Tài liệu</th>
-                                <th>Thời gian đăng</th>
-                                <th>Tải về</th>
+                                <th>@(lang == "vi" ? "Tài liệu" : "Document")</th>
+                                <th>@(lang == "vi" ? "Thời gian đăng" : "Date post")</th>
+                                <th>@(lang == "vi" ? "Tải về" : "Dowload")</th>
                                 <th>Năm</th>
                             </tr>
                         </thead>
@@ -217,7 +222,7 @@
                             <tr>
                                 <td>@item.docName</td>
                                 <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> Tải về </a></td>
+                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                 <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                             </tr>
                             }
@@ -230,18 +235,18 @@
 
     <section id="section_menu">
         <div class="title_row">
-            <h2 class="title">Danh mục</h2>
+            <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
             <p class="title_line"></p>
         </div>
         <div class="row_category">
             <!-- set data-id = id of shareholder_report class seted before -->
             <div class="row_category_div" data-id="paradigm">@Model.ManagementModel.Title</div>
-            <div class="row_category_div" data-id="shareholder_report_1">@ViewBag.PublishInfo</div>
-            <div class="row_category_div" data-id="shareholder_report_2">@ViewBag.AdminReport</div>
-            <div class="row_category_div" data-id="shareholder_report_3">@ViewBag.FinancialReport</div>
-            <div class="row_category_div" data-id="shareholder_report_4">@ViewBag.MiddleReport</div>
-            <div class="row_category_div" data-id="shareholder_report_5">@ViewBag.YearlyReport</div>
-            <div class="row_category_div" data-id="shareholder_report_6">@ViewBag.IndicatorReport</div>
+            <div class="row_category_div" data-id="shareholder_report_1">@(lang == "vi" ? "Công bố thông tin" : "Information disclosure")</div>
+            <div class="row_category_div" data-id="shareholder_report_2">@(lang == "vi" ? "Báo cáo quản trị" : "Report admin")</div>
+            <div class="row_category_div" data-id="shareholder_report_3">@(lang == "vi" ? "Báo cáo tài chính quý" : "Quarterly financial statements")</div>
+            <div class="row_category_div" data-id="shareholder_report_4">@(lang == "vi" ? "Báo cáo tài chính giữa năm" : "Mid-year financial statements")</div>
+            <div class="row_category_div" data-id="shareholder_report_5">@(lang == "vi" ? "Báo cáo tài chính năm" : "Annual financial reports")</div>
+            <div class="row_category_div" data-id="shareholder_report_6">@(lang == "vi" ? "Báo cáo chỉ tiêu an toàn tài chính" : "Report financial safety criteria")</div>
         </div>
     </section>
 </section>

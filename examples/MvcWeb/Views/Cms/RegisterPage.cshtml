@@ -1,0 +1,98 @@
+﻿@model MvcWeb.Models.RegisterPage
+@{
+    ViewData["Title"] = "RegisterPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+}
+
+<section id="page_login">
+    <img class="img-fluid" src="assets/images/login_bg.jpg" alt="">
+    <div class="register_div">
+        <h5 class="text_bold">@(lang == "vi" ? "Đăng ký" : "Register")</h5>
+        <form action="">
+            <div class="row mar0">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="my-input">@(lang == "vi" ? "Họ và tên" : "Full name") <span>(*)</span></label>
+                        <input id="my-input" class="form-control" placeholder="@(lang == "vi" ? "Họ và tên" : "Full name")" type="text" name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="my-input2">@(lang == "vi" ? "Địa chỉ Facebook" : "Facebook address")</label>
+                        <input id="my-input2" class="form-control" placeholder="@(lang == "vi" ? "Địa chỉ Facebook" : "Facebook address")" type="text" name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="my-input3">@(lang == "vi" ? "Mật khẩu" : "Passwords") <span>(*)</span></label>
+                        <input id="my-input3" class="form-control" placeholder="@(lang == "vi" ? "Mật khẩu" : "Passwords")" type="password" name="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="my-input4">@(lang == "vi" ? "Số điện thoại" : "Phone") <span>(*)</span></label>
+                        <input id="my-input4" class="form-control" placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone")" type="text"
+                               name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="my-input5">@(lang == "vi" ? "Mail của bạn" : "Email") <span>(*)</span></label>
+                        <input id="my-input5" class="form-control" placeholder="@(lang == "vi" ? "Mail của bạn" : "Email")" type="text"
+                               name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="my-input6">@(lang == "vi" ? "Xác nhận mật khẩu" : "Re input password") <span>(*)</span></label>
+                        <input id="my-input6" class="form-control" placeholder="@(lang == "vi" ? "Xác nhận mật khẩu" : "Re input password")" type="password" name="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="my-input7">@(lang == "vi" ? "Thị trường quan tâm" : "Market of interest")</label>
+                    <div class="row mar0 market_care">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optradio" checked>
+                                <span class="radio_text">@(lang == "vi" ? "Cổ phần niêm yết" : "Listed shares")</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optradio">
+                                <span class="radio_text">@(lang == "vi" ? "Trái phiếu" : "Bond")</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optradio">
+                                <span class="radio_text">@(lang == "vi" ? "Phái sinh" : "Derivative")</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="optradio">
+                                <span class="radio_text">@(lang == "vi" ? "Cổ phần chưa niêm yết" : "Unlisted shares")</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row mar0 register_request">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="request_radio" checked>
+                                <span class="radio_text">@(lang == "vi" ? "Gửi yêu cầu mở tài khoản TVS" : "Submit a request to open a TVS account")</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary register">@(lang == "vi" ? "Đăng ký" : "Register")</button>
+            </div>
+        </form>
+        <!-- Xử lý input radio -->
+    </div>
+</section>

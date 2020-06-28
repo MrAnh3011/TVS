@@ -1,6 +1,11 @@
 ﻿@model MvcWeb.Models.ContactPage
 @{
     ViewData["Title"] = "ContactPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 
@@ -10,7 +15,7 @@
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
-                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Liên hệ</a>
+                <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Liên hệ" : "Contact")</a>
             </div>
         </div>
     </section>
@@ -31,12 +36,12 @@
                                 </div>
                                 <div class="list-address">
                                     <ul>
-                                        <li><span>Điện thoại:</span>@item.Phone</li>
+                                        <li><span>@(lang == "vi" ? "Điện thoại:" : "Phone: ")</span>@item.Phone</li>
                                         <li><span>Fax:</span>@item.Fax</li>
                                         <li>
-                                            <span>Địa chỉ:</span>@item.Address
+                                            <span>@(lang == "vi" ? "Địa chỉ:" : "Address: ")</span>@item.Address
                                         </li>
-                                        <li><a href="@item.MapLink.Value">Xem trên bản đồ</a></li>
+                                        <li><a href="@item.MapLink.Value">@(lang == "vi" ? "Xem trên bản đồ" : "View in maps")</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,90 +62,92 @@
                     <div class="row">
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="hoten">Họ và tên</label>
+                                <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Name")</label>
                                 <input type="text" class="form-control" id="ctphoten" aria-describedby="emailHelp"
-                                       placeholder="Nhập đầy đủ họ tên của bạn ở đây">
+                                       placeholder="@(lang == "vi" ? "Nhập đầy đủ họ và tên" : "Input name")">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="tencongty">Tên công ty</label>
+                                <label for="tencongty">@(lang == "vi" ? "Tên công ty" : "Company")</label>
                                 <input type="text" class="form-control" id="ctptencongty"
                                        aria-describedby="emailHelp" placeholder="Tên công ty">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="chucdanh">Chức danh </label>
+                                <label for="chucdanh">@(lang == "vi" ? "Chức danh" : "Title")</label>
                                 <input type="text" class="form-control" id="ctpchucdanh"
-                                       aria-describedby="emailHelp" placeholder="Chức danh">
+                                       aria-describedby="emailHelp" placeholder="@(lang == "vi" ? "Chức danh" : "Title")">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="sofax">Số fax</label>
+                                <label for="sofax">@(lang == "vi" ? "Fax" : "Fax")</label>
                                 <input type="text" class="form-control" id="ctpsofax" aria-describedby="emailHelp"
-                                       placeholder="Số fax của công ty bạn ở đây">
+                                       placeholder="@(lang == "vi" ? "Số fax của công ty bạn" : "Fax number")">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="email"> E-mail</label>
                                 <input type="text" class="form-control" id="ctpemail" aria-describedby="emailHelp"
-                                       placeholder="Địa chỉ mail của bạn ">
+                                       placeholder="@(lang == "vi" ? "Địa chỉ email của bạn" : "Your email")">
                             </div>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="phone">Số điện thoại </label>
+                                <label for="phone">@(lang == "vi" ? "Điện thoại" : "Phone")</label>
                                 <input type="text" class="form-control" id="ctpphone" aria-describedby="emailHelp"
-                                       placeholder="Số điện thoại của bạn ">
+                                       placeholder="@(lang == "vi" ? "Điện thoại" : "Your phone number") ">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="diachi">Địa chỉ </label>
+                        <label for="diachi">@(lang == "vi" ? "Địa chỉ" : "Address")</label>
                         <textarea class="form-control" id="ctpdiachi" rows="4"
-                                  placeholder="Nhập lời nhắn của bạn"></textarea>
+                                  placeholder="@(lang == "vi" ? "Địa chỉ" : "Addres")"></textarea>
                     </div>
                     <div class="text-form">
-                        <p>Loại thông tin mà bạn muốn nhận </p>
+                        <p>@(lang == "vi" ? "Nhập thông tin bạn muốn tìm" : "Input info you want to seach")</p>
                     </div>
                     <div class="check-box">
                         <ul>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
                                     <input type="checkbox" class="custom-control-input" id="ctptuvansatnhap">
-                                    <label class="custom-control-label" for="tuvansatnhap">Tư vấn sát nhập</label>
+                                    <label class="custom-control-label" for="tuvansatnhap">@(lang == "vi" ? "Tư vấn sát nhập" : "Merger consultant")</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
                                     <input type="checkbox" class="custom-control-input" id="ctpdoitac">
-                                    <label class="custom-control-label" for="doitac">Đối tác / Cơ hội hợp tác</label>
+                                    <label class="custom-control-label" for="doitac">@(lang == "vi" ? "Đối tác/ Cơ hội đối tác" : "Partners / Partner opportunities")</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
                                     <input type="checkbox" class="custom-control-input" id="ctptaicocaudn">
-                                    <label class="custom-control-label" for="taicocaudn">Tái cấu trúc doanh nghiệp</label>
+                                    <label class="custom-control-label" for="taicocaudn">@(lang == "vi" ? "Tái cấu trúc doanh nghiệp" : "Corporate restructuring")</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox mr-sm-2">
                                     <input type="checkbox" class="custom-control-input" id="ctptangvon">
-                                    <label class="custom-control-label" for="tangvon">Tăng vốn</label>
+                                    <label class="custom-control-label" for="tangvon">@(lang == "vi" ? "Tăng vốn" : "Capital increase")</label>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div class="btn-contact">
-                        <button id="btnContactPage"><a>Gửi</a></button>
+                        <button id="btnContactPage"><a>@(lang == "vi" ? "Gửi" : "Send")</a></button>
                     </div>
                 </form>
-                <span id="mailReceiver">@Model.MailReceiver</span>
+                <span style="display:none" id="mailReceiver">@Model.MailReceiver</span>
+                <span style="display:none" id="mailSender">@Model.MailSender</span>
+                <span style="display:none" id="mailSenderPass">@Model.MailSenderPass</span>
             </div>
         </div>
     </section>

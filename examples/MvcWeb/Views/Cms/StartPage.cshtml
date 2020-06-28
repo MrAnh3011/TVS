@@ -1,6 +1,11 @@
 ﻿@model MvcWeb.Models.TeaserPage
 @{
     ViewBag.Title = Model.Title;
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="image_bg" class="fw">
@@ -21,7 +26,7 @@
         </div>
         <div class="row mar0">
             <div class="col-12 col-lg-4 w30 services_div_title title_row">
-                <h2 class="title">Dịch vụ cung cấp và thông tin</h2>
+                <h2 class="title">@(lang == "vi" ? "Dịch vụ cung cấp và thông tin" : "Providing services and information")</h2>
                 <p class="title_line">
                     <span class="title_line_mb"></span>
                 </p>
@@ -49,42 +54,43 @@
             </p>
         </div>
         <div class="row mar0">
-            <div class="col-12 col-lg-8 big_news">
-                <img class="img-fluid" src="assets/images/big_news.jpg" alt="">
-                <div class="news_title">
-                    <a href="#">
-                        Tình hình tài chính các công ty lao đao trước biến động khó lường dịch
-                        Covid-19
-                    </a>
-                    <p> <i class="fas fa-clock"></i> 10 giờ trước</p>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4">
-                <div class="col-12 col-lg-12 small_news">
-                    <img class="img-fluid" src="assets/images/small_news.jpg" alt="">
+            @{
+                string ago = lang == "vi" ? " giờ trước" : " hours ago";
+                var items = Model.lstNews;
+                <div class="col-12 col-lg-8 big_news">
+                    <img class="img-fluid" src="@(items[0].Post.PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
                     <div class="news_title">
-                        <a href="#">
-                            Tình hình tài chính các công ty lao đao trước biến động khó lường dịch
-                            Covid-19
+                        <a href="@items[0].Post.Permalink">
+                            @Html.Raw(items[0].Post.Excerpt)
                         </a>
-                        <p> <i class="fas fa-clock"></i> 10 giờ trước</p>
+                        <p> <i class="fas fa-clock"></i>@(DateTime.Now.Hour - items[0].Post.Published?.Hour) @ago</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-12 small_news">
-                    <img class="img-fluid" src="assets/images/small_news.jpg" alt="">
-                    <div class="news_title">
-                        <a href="#">
-                            Tình hình tài chính các công ty lao đao trước biến động khó lường dịch
-                            Covid-19
-                        </a>
-                        <p> <i class="fas fa-clock"></i> 10 giờ trước</p>
+                <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-12 small_news">
+                        <img class="img-fluid" src="@(items[1].Post.PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                        <div class="news_title">
+                            <a href="@items[1].Post.Permalink">
+                                @Html.Raw(items[1].Post.Excerpt)
+                            </a>
+                            <p> <i class="fas fa-clock"></i>@(DateTime.Now.Hour - items[1].Post.Published?.Hour) @ago</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-12 small_news">
+                        <img class="img-fluid" src="@(items[2].Post.PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                        <div class="news_title">
+                            <a href="@items[2].Post.Permalink">
+                                @Html.Raw(items[2].Post.Excerpt)
+                            </a>
+                            <p> <i class="fas fa-clock"></i>@(DateTime.Now.Hour - items[2].Post.Published?.Hour) @ago</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
         <div class="row mar0">
             <div class="viewmore">
-                <a href="#" class="link">Xem thêm</a>
+                <a href="#" class="link">@(lang == "vi" ? "Xem thêm" : "Read more")</a>
             </div>
         </div>
     </div>

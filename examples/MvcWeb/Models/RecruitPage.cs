@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 
 namespace MvcWeb.Models
 {
-    [PostType(Title = "Tin tức")]
-    public class NewsPost : Post<NewsPost>
+    [PageType(Title = "Tuyển dụng",IsArchive = true, UseBlocks = false)]
+    [PageTypeRoute(Title = "Recruit Page", Route = "/recruitpage")]
+    public class RecruitPage : Page<RecruitPage>
     {
         [Region(Display = RegionDisplayMode.Full, Title = "Banner", ListTitle = "Banner", ListPlaceholder = "Banner")]
         public ImageTitle Banner { get; set; }
 
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Tham gia với chúng tôi", ListTitle = "Tham gia với chúng tôi", ListPlaceholder = "Tham gia với chúng tôi")]
+        public JoinWithMe JWMe { get; set; }
+
+
         [Region(Display = RegionDisplayMode.Full, Title = "Vị trí đang tuyển", ListTitle = "Vị trí đang tuyển", ListPlaceholder = "Vị trí đang tuyển")]
-        public RecruitInfo Recruit { get; set; }
+        public PostArchive<DynamicPost> Archive { get; set; }
     }
 }

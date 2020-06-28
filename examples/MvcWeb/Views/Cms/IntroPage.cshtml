@@ -1,6 +1,11 @@
 ﻿@model MvcWeb.Models.IntroPage
 @{
     ViewData["Title"] = "IntroPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="page">
@@ -9,7 +14,7 @@
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
-                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Giới thiệu</a>
+                <a href="#">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Giới thiệu" : "Introduction")</a>
             </div>
         </div>
     </section>
@@ -25,7 +30,7 @@
                         <div class="tab-pane fade member" id="nav-profile" role="tabpanel"
                              aria-labelledby="nav-profile-tab">
                             <div class="title_row">
-                                <h2 class="title">Hội đồng quản trị</h2>
+                                <h2 class="title">@(lang == "vi" ? "Hội đồng quản trị" : "Administrative Council")</h2>
                                 <p class="title_line"></p>
                             </div>
                             <div class="row mar0 row_content">
@@ -61,7 +66,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary close_btn"
                                                         data-dismiss="modal">
-                                                    Đóng
+                                                    @(lang == "vi" ? "Đóng" : "Close")
                                                 </button>
                                             </div>
                                         </div>
@@ -75,7 +80,7 @@
                         <div class="tab-pane fade leader" id="nav-contact" role="tabpanel"
                              aria-labelledby="nav-contact-tab">
                             <div class="title_row">
-                                <h2 class="title">Ban điều hành</h2>
+                                <h2 class="title">@(lang == "vi" ? "Ban điều hành" : "Excecutive Board")</h2>
                                 <p class="title_line"></p>
                             </div>
                             @foreach (var item in Model.lstExecutive)
@@ -98,21 +103,21 @@
                 </div>
                 <div class="col-12 col-lg-3 page_category">
                     <div class="title_row">
-                        <h2 class="title">Danh mục</h2>
+                        <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
                         <p class="title_line"></p>
                     </div>
                     <nav>
                         <div class="nav" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                                href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
-                                Tổng quan
+                                @(lang == "vi" ? "Tổng quan" : "overview")
                             </a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                href="#nav-profile" role="tab" aria-controls="nav-profile"
-                               aria-selected="false">Hội đồng quản trị</a>
+                               aria-selected="false">@(lang == "vi" ? "Hội đồng quản trị" : "Administrative Council")</a>
                             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
                                href="#nav-contact" role="tab" aria-controls="nav-contact"
-                               aria-selected="false">Ban điều hành</a>
+                               aria-selected="false">@(lang == "vi" ? "Ban điều hành" : "Executive Board")</a>
                         </div>
                     </nav>
                 </div>

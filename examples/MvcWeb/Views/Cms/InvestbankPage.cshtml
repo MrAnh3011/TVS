@@ -1,6 +1,11 @@
 ﻿@model MvcWeb.Models.InvestbankPage
 @{
     ViewData["Title"] = "InvestbankPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="page">
@@ -9,7 +14,7 @@
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
-                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Dịch vụ</a>
+                <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Dịch vụ" : "Services")</a>
             </div>
         </div>
     </section>
@@ -25,7 +30,7 @@
                         <div class="tab-pane fade member" id="nav-bank-member" role="tabpanel"
                              aria-labelledby="nav-profile-tab">
                             <div class="title_row">
-                                <h2 class="title">Các thành viên</h2>
+                                <h2 class="title">@(lang == "vi" ? "Các thành viên" : "Members")</h2>
                                 <p class="title_line"></p>
                             </div>
                             <div class="row mar0 row_content">
@@ -61,7 +66,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary close_btn"
                                                         data-dismiss="modal">
-                                                    Đóng
+                                                    @(lang == "vi" ? "Đóng" : "Close")
                                                 </button>
                                             </div>
                                         </div>
@@ -71,7 +76,7 @@
                         </div>
                         <div class="tab-pane fade shadow_content" id="nav-bank-business" role="tabpanel"
                              aria-labelledby="nav-contact-tab">
-                            <h5 class="text_bold">Các thương vụ tiêu biểu</h5>
+                            <h5 class="text_bold">@(lang == "vi" ? "Các thương vụ tiêu biẻu" : "Consumer deals")</h5>
                             <p>
                                 @Model.TypicalDeal
                             </p>
@@ -79,11 +84,11 @@
                                 <table class="table table-striped table-hover bank_table">
                                     <thead>
                                         <tr>
-                                            <th>Năm</th>
-                                            <th>Giá trị</th>
-                                            <th>Khách hàng</th>
-                                            <th>Nhà đầu tư</th>
-                                            <th>Mô tả</th>
+                                            <th>@(lang == "vi" ? "Năm" : "Year")</th>
+                                            <th>@(lang == "vi" ? "Giá trị" : "Value")</th>
+                                            <th>@(lang == "vi" ? "Khách hàng" : "Customer")</th>
+                                            <th>@(lang == "vi" ? "Nhà đầu tư" : "Investors")</th>
+                                            <th>@(lang == "vi" ? "Mô tả" : "Description")</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -108,7 +113,7 @@
                         <div class="tab-pane fade partner" id="nav-bank-partner" role="tabpanel"
                              aria-labelledby="nav-contact-tab">
                             <div class="title_row">
-                                <h2 class="title">Đối tác và khách hàng</h2>
+                                <h2 class="title">@(lang == "vi" ? "Đối tác và khách hàng" : "Partners and customers")</h2>
                                 <p class="title_line"></p>
                             </div>
                             <div class="row mar0 partner_wrapper">
@@ -127,7 +132,7 @@
                 </div>
                 <div class="col-12 col-lg-3 page_category">
                     <div class="title_row">
-                        <h2 class="title">Danh mục</h2>
+                        <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
                         <p class="title_line"></p>
                     </div>
                     <nav>
@@ -135,17 +140,17 @@
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                                href="#nav-bank-intro" role="tab" aria-controls="nav-home"
                                aria-selected="true">
-                                Giới thiệu
+                                @(lang == "vi" ? "Giới thiệu" : "Introduction")
                             </a>
                             <a class="nav-item nav-link" id="nav-bank-member-tab" data-toggle="tab"
                                href="#nav-bank-member" role="tab" aria-controls="nav-profile"
-                               aria-selected="false">Các thành viên</a>
+                               aria-selected="false">@(lang == "vi" ? "Các thành viên" : "Members")</a>
                             <a class="nav-item nav-link" id="nav-bank-business-tab" data-toggle="tab"
                                href="#nav-bank-business" role="tab" aria-controls="nav-contact"
-                               aria-selected="false">Các thương vụ tiêu biểu</a>
+                               aria-selected="false">@(lang == "vi" ? "Các thương vụ tiêu biểu" : "Consumer deals")</a>
                             <a class="nav-item nav-link" id="nav-bank-partner-tab" data-toggle="tab"
                                href="#nav-bank-partner" role="tab" aria-controls="nav-contact"
-                               aria-selected="false">Đối tác và khách hàng</a>
+                               aria-selected="false">@(lang == "vi" ? "Đối tác và khách hàng" : "Partners and customers")</a>
                         </div>
                     </nav>
                 </div>

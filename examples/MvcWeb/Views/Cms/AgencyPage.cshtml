@@ -1,6 +1,12 @@
 ﻿@model MvcWeb.Models.AgencyPage
 @{
     ViewData["Title"] = "AgencyPage";
+    ViewData["Title"] = "RelationPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="page">
@@ -9,7 +15,7 @@
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
-                <a href="#">Trang chủ</a> <span>/</span> <a href="#">Dịch vụ</a>
+                <a href="#">@(lang == "vi" ? "Trang chủ" : "Home page")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Dịch vụ" : "Services")</a>
             </div>
         </div>
     </section>
@@ -38,25 +44,24 @@
                 </div>
                 <div class="col-12 col-lg-3 page_category">
                     <div class="title_row">
-                        <h2 class="title">Danh mục</h2>
+                        <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
                         <p class="title_line"></p>
                     </div>
                     <nav>
                         <div class="nav" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                                href="#nav-intro" role="tab" aria-controls="nav-home" aria-selected="true">
-                                Giới
-                                thiệu dịch vụ môi giới
+                                @(lang == "vi" ? "Giới thiệu dịch vụ môi giới " : "Introduce")
                             </a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                href="#nav-trading-online" role="tab" aria-controls="nav-profile"
-                               aria-selected="false">Giao dịch trực tuyến</a>
+                               aria-selected="false">@(lang == "vi" ? "Giao dịch trực tuyển " : "Online Trading")</a>
                             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
                                href="#nav-trading-support" role="tab" aria-controls="nav-contact"
-                               aria-selected="false">Hỗ trợ giao dịch</a>
+                               aria-selected="false">>@(lang == "vi" ? "Hỗ trợ giao dịch" : "Support Tradding")</a>
                             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
                                href="#nav-finance" role="tab" aria-controls="nav-contact"
-                               aria-selected="false">Dịch vụ tài chính</a>
+                               aria-selected="false">>@(lang == "vi" ? "Dịch vụ tài chính " : "Financial services")</a>
                         </div>
                     </nav>
                 </div>

@@ -4,6 +4,12 @@
     var lstCategories = (List<Piranha.Models.Taxonomy>)ViewBag.lstCategory;
     var lstHightLight = (List<Piranha.Extend.Fields.PostField>)ViewBag.lstHightLight;
     var lstRelated = ViewBag.lstRelated;
+
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="page">
@@ -12,14 +18,11 @@
             <div id="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
-                        <a href="index.html">
-                            Trang
-                            chủ
-                        </a>
+                        <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="tintuc.html">Tin tức</a></li>
-                    <li class="breadcrumb-item"><a href="tintuc.html">Bản tin TVS</a></li>
-                    <li class="breadcrumb-item">Chi tiết tin tức</li>
+                    <li class="breadcrumb-item"><a href="">@(lang == "vi" ? "Tin tức" : "News")</a></li>
+                    <li class="breadcrumb-item"><a href="">@Model.Category.Title</a></li>
+                    <li class="breadcrumb-item">@(lang == "vi" ? "Chi tiết tin tức" : "News Detail")</li>
                 </ol>
             </div>
             <div class="row mar0">
@@ -29,7 +32,7 @@
                 <div class="col-12 col-lg-3 pad0">
                     <div class="page_category">
                         <div class="title_row">
-                            <h2 class="title">Danh mục</h2>
+                            <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
                             <p class="title_line"></p>
                         </div>
                         <div class="row_category">
@@ -43,7 +46,7 @@
                     </div>
                     <div class="page_category">
                         <div class="title_row">
-                            <h2 class="title">Tin nổi bật</h2>
+                            <h2 class="title">@(lang == "vi" ? "Tin nổi bật" : "Hot news")</h2>
                             <p class="title_line"></p>
                         </div>
                         <div class="hot_news">
@@ -62,7 +65,7 @@
             </div>
             <div class="row mar0 related_news">
                 <div class="title_row">
-                    <h2 class="title">Các tin tức khác</h2>
+                    <h2 class="title">@(lang == "vi" ? "Các tin tức khác" : "Other news")</h2>
                     <p class="title_line">
                         <span class="title_line_mb"></span>
                     </p>

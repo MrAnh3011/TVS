@@ -32,7 +32,7 @@ namespace MvcWeb.Controllers
             mm.To.Add(info.To);
             mm.Subject = info.Subject;
             mm.Body = info.Body;
-            mm.From = new MailAddress("apecmailsender@gmail.com");
+            mm.From = new MailAddress(info.From);
             mm.IsBodyHtml = false;
             try
             {
@@ -40,7 +40,7 @@ namespace MvcWeb.Controllers
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = true;
                 smtp.EnableSsl = true;
-                smtp.Credentials = new System.Net.NetworkCredential("apecmailsender@gmail.com", "anhpt3011");
+                smtp.Credentials = new System.Net.NetworkCredential(info.From, info.FromPass);
                 smtp.Send(mm);
             }
             catch (Exception e)
@@ -52,6 +52,8 @@ namespace MvcWeb.Controllers
     };
     public class MailModel
     {
+        public string From { get; set; }
+        public string FromPass { get; set; }
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }

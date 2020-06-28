@@ -8,18 +8,14 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MvcWeb.Models;
 using Piranha;
 using Piranha.AspNetCore.Services;
-using Piranha.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MvcWeb.Controllers
 {
@@ -40,10 +36,27 @@ namespace MvcWeb.Controllers
         [Route("newspage")]
         public async Task<IActionResult> NewsPage(Guid id, bool startpage = false, bool draft = false)
         {
+            string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<NewsPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
             model.Archive = await _api.Archives.GetByIdAsync(id);
             var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
             ViewBag.lstCategory = lstCategory;
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("recruitpage")]
+        public async Task<IActionResult> RecruitPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            string urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<RecruitPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
+            model.Archive = await _api.Archives.GetByIdAsync(id);
             return View(model);
         }
 
@@ -63,7 +76,7 @@ namespace MvcWeb.Controllers
 
             var modelPage = await _loader.GetPageAsync<NewsPage>(blogId, HttpContext.User, draft);
             var listCategory = await _api.Posts.GetAllCategoriesAsync(blogId);
-            
+
             ViewBag.listPost = lstPostInfo;
             ViewBag.listCategory = listCategory;
             ViewBag.listHighLight = modelPage.lstHighlight;
@@ -74,23 +87,41 @@ namespace MvcWeb.Controllers
         [Route("post")]
         public async Task<IActionResult> Post(Guid id, bool draft = false)
         {
+            string urlLang = GetLangByPost(id);
             var model = await _loader.GetPostAsync<NewsPost>(id, HttpContext.User, draft);
-            var newsModel = await _loader.GetPageAsync<NewsPage>(model.BlogId, HttpContext.User, false);
+            model.Permalink = urlLang + model.Permalink;
 
-            var lstRelated = newsModel.Archive.Posts.Where(x => x.Category.Slug == model.Category.Slug);
-            var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
-            ViewBag.lstCategory = lstCategory;
-            ViewBag.lstHightLight = newsModel.lstHighlight;
-            ViewBag.lstRelated = lstRelated;
+            ViewBag.urlLang = urlLang;
+            if (model.Permalink.Contains("tin-tuc") || model.Permalink.Contains("news"))
+            {
+                var newsModel = await _loader.GetPageAsync<NewsPage>(model.BlogId, HttpContext.User, false);
 
-            return View(model);
+                var lstRelated = newsModel.Archive.Posts.Where(x => x.Category.Slug == model.Category.Slug);
+                var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
+                ViewBag.lstCategory = lstCategory;
+                ViewBag.lstHightLight = newsModel.lstHighlight;
+                ViewBag.lstRelated = lstRelated;
+
+                return View(model);
+            }
+            else
+            {
+                var lstJob = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
+
+                ViewBag.lstJob = lstJob;
+                return View("RecruitPost", model);
+            }
         }
 
         [HttpGet]
         [Route("teaserpage")]
         public async Task<IActionResult> TeaserPage(Guid id, bool startpage = false, bool draft = false)
         {
+            string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<TeaserPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
             return View("startpage", model);
         }
 
@@ -98,26 +129,11 @@ namespace MvcWeb.Controllers
         [Route("relationpage")]
         public async Task<IActionResult> RelationPage(Guid id, bool startpage = false, bool draft = false)
         {
+            var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<RelationPage>(id, HttpContext.User, draft);
-            //var siteLang = GetLangByPage(id);
-            //if (siteLang.Contains("/en"))
-            //{
-            //    ViewBag.PublishInfo = "Disclosure";
-            //    ViewBag.AdminReport = "Admin report";
-            //    ViewBag.FinancialReport = "Quarterly financial statements";
-            //    ViewBag.MiddleReport = "Mid-year financial statements";
-            //    ViewBag.YearlyReport = "Annual financial reports";
-            //    ViewBag.IndicatorReport = "Report financial safety criteria";
-            //}
-            //else
-            //{
-            ViewBag.PublishInfo = "Công bố thông tin";
-            ViewBag.AdminReport = "Báo cáo quản trị";
-            ViewBag.FinancialReport = "Báo cáo tài chính quý";
-            ViewBag.MiddleReport = "Báo cáo tài chính giữa năm";
-            ViewBag.YearlyReport = "Báo cáo tài chính năm";
-            ViewBag.IndicatorReport = "Báo cáo chỉ tiêu an toàn tài chính";
-            //}
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
             return View(model);
         }
 
@@ -125,8 +141,11 @@ namespace MvcWeb.Controllers
         [Route("contactpage")]
         public async Task<IActionResult> ContactPage(Guid id, bool startpage = false, bool draft = false)
         {
+            var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<ContactPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
 
+            ViewBag.urlLang = urlLang;
             return View(model);
         }
 
@@ -134,9 +153,11 @@ namespace MvcWeb.Controllers
         [Route("intropage")]
         public async Task<IActionResult> IntroPage(Guid id, bool startpage = false, bool draft = false)
         {
+            var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<IntroPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
 
-
+            ViewBag.urlLang = urlLang;
             return View(model);
         }
 
@@ -152,7 +173,11 @@ namespace MvcWeb.Controllers
         [Route("investbankpage")]
         public async Task<IActionResult> InvestbankPage(Guid id, bool startpage = false, bool draft = false)
         {
+            var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<InvestbankPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
             return View(model);
         }
 
@@ -160,7 +185,11 @@ namespace MvcWeb.Controllers
         [Route("agencypage")]
         public async Task<IActionResult> AgencyPage(Guid id, bool startpage = false, bool draft = false)
         {
+            var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<AgencyPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
             return View(model);
         }
 
@@ -173,10 +202,41 @@ namespace MvcWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("login")]
+        public async Task<IActionResult> LoginPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            var urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<LoginPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("register")]
+        public async Task<IActionResult> RegisterPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            var urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<RegisterPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
+            return View(model);
+        }
+
         private string GetLangByPage(Guid id)
         {
             Guid siteID = _db.Pages.SingleOrDefault(x => x.Id == id).SiteId;
             string hostName = _db.Sites.SingleOrDefault(x => x.Id == siteID).Hostnames;
+            return "/" + hostName.Split('/')[1];
+        }
+        private string GetLangByPost(Guid id)
+        {
+            Guid blogId = _db.Posts.SingleOrDefault(x => x.Id == id).BlogId;
+            Guid siteId = _db.Pages.SingleOrDefault(x => x.Id == blogId).SiteId;
+            string hostName = _db.Sites.SingleOrDefault(x => x.Id == siteId).Hostnames;
             return "/" + hostName.Split('/')[1];
         }
     }
