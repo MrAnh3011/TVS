@@ -33,6 +33,11 @@ namespace Piranha
         public DbSet<Data.Alias> Aliases { get; set; }
 
         /// <summary>
+        /// Gets/sets the UserLogin set.
+        /// </summary>
+        public DbSet<Data.UserLogin> UserLogins { get; set; }
+
+        /// <summary>
         /// Gets/sets the block set.
         /// </summary>
         public DbSet<Data.Block> Blocks { get; set; }

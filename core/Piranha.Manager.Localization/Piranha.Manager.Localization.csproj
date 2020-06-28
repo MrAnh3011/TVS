@@ -40,4 +40,19 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\UserLogins.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserLogins.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\UserLogins.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserLogins.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

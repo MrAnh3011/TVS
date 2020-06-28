@@ -1,0 +1,66 @@
+﻿@inject ManagerLocalizer Localizer
+
+<form id="userloginForm" action="post" v-on:submit.prevent="save()" novalidate>
+    <div id="userloginModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-random"></i> Add new User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="id" v-model="model.id" type="hidden">
+                    <div class="form-group">
+                        <label for="userEmail">User Email</label>
+                        <input id="userEmail" v-model="model.userEmail" class="form-control" type="text" required>
+                        <div class="invalid-feedback">
+                            User Email is mandatory.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassWord">User Password</label>
+                        <input id="userPassWord" v-model="model.userPassWord" class="form-control" type="text" required>
+                        <div class="invalid-feedback">
+                            User Password is mandatory.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">User Name</label>
+                        <input id="userName" v-model="model.userName" class="form-control" type="text" required>
+                        <div class="invalid-feedback">
+                            User Name is mandatory.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone">User Phone</label>
+                        <input id="userPhone" v-model="model.userPhone" class="form-control" type="text" required>
+                        <div class="invalid-feedback">
+                            User Name is mandatory.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userFacebook">User Facebook</label>
+                        <input id="userFacebook" v-model="model.userFacebook" class="form-control" type="text" required>
+                        <div class="invalid-feedback">
+                            User Facebook is mandatory.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userCare">User Care</label>
+                        <input id="userCare" v-model="model.userCare" class="form-control" type="text" required>
+                        <div class="invalid-feedback">
+                            User Facebook is mandatory.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-labeled">
+                        <i class="fas fa-check"></i>Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

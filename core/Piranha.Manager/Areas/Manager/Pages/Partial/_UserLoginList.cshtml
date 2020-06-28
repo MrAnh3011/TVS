@@ -1,0 +1,37 @@
+﻿@inject ManagerLocalizer Localizer
+
+<div class="container-fluid">
+    <div class="row">
+        <div v-if="items.length !== 0" class="col">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>User Email</th>
+                        <th>User PassWord</th>
+                        <th>User Name</th>
+                        <th>User Phone</th>
+                        <th>User Facebook</th>
+                        <th>User Care</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in items">
+                        <td><code>{{ item.userEmail }}</code></td>
+                        <td><code>{{ item.userPassWord }}</code></td>
+                        <td><code>{{ item.userName }}</code></td>
+                        <td><code>{{ item.userPhone }}</code></td>
+                        <td><code>{{ item.userFacebook }}</code></td>
+                        <td><code>{{ item.userCare }}</code></td>
+                        <td class="actions one"><a v-if="piranha.permissions.userlogin.delete" href="#" class="danger" v-on:click.prevent="remove(item.id)"><i class="fas fa-trash"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div v-else class="col">
+            <div class="empty-info">
+                <p>Looks like there's no items here. Click on the button above to get started!</p>
+            </div>
+        </div>
+    </div>
+</div>

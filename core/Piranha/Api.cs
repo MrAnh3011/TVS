@@ -30,6 +30,11 @@ namespace Piranha
         public IAliasService Aliases { get; }
 
         /// <summary>
+        /// Gets/sets the userlogin service.
+        /// </summary>
+        public IUserLoginService UserLogins { get; }
+
+        /// <summary>
         /// Gets/sets the archive service.
         /// </summary>
         public IArchiveService Archives { get; }
@@ -85,6 +90,7 @@ namespace Piranha
         /// repositories.
         /// </summary>
         public Api(
+            IUserLoginRepository userLoginRepository,
             IContentFactory contentFactory,
             IAliasRepository aliasRepository,
             IArchiveRepository archiveRepository,
@@ -113,6 +119,7 @@ namespace Piranha
 
             // Create services with dependencies
             Aliases = new AliasService(aliasRepository, Sites, cache);
+            UserLogins = new UserLoginService(userLoginRepository, Sites, cache);
             Media = new MediaService(mediaRepository, Params, storage, processor, cache);
             Pages = new PageService(pageRepository, contentFactory, Sites, Params, Media, cache, search);
             Posts = new PostService(postRepository, contentFactory, Sites, Pages, Params, Media, cache, search);

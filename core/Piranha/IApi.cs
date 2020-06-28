@@ -24,6 +24,11 @@ namespace Piranha
         IAliasService Aliases { get; }
 
         /// <summary>
+        /// Gets/sets the UserLogin repository.
+        /// </summary>
+        IUserLoginService UserLogins { get; }
+
+        /// <summary>
         /// Gets/sets the archive service.
         /// </summary>
         IArchiveService Archives { get; }

@@ -16,6 +16,9 @@ namespace Piranha.Manager
     public static class Permission
     {
         public const string Admin = "PiranhaAdmin";
+        public const string UserLogins = "PiranhaUserLogin";
+        public const string UserLoginsDelete = "PiranhaUserLoginsDelete";
+        public const string UserLoginsEdit = "PiranhaUserLoginsEdit";
         public const string Aliases = "PiranhaAliases";
         public const string AliasesDelete = "PiranhaAliasesDelete";
         public const string AliasesEdit = "PiranhaAliasesEdit";
@@ -52,6 +55,9 @@ namespace Piranha.Manager
         public static string[] All() {
             return new [] {
                 Admin,
+                UserLogins,
+                UserLoginsDelete,
+                UserLoginsEdit,
                 Aliases,
                 AliasesDelete,
                 AliasesEdit,

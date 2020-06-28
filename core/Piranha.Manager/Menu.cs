@@ -37,6 +37,14 @@ namespace Piranha.Manager
                     },
                     new MenuItem
                     {
+                        InternalId = "User Login",
+                        Name = "User Login",
+                        Route = "~/manager/userlogin",
+                        Policy = Permission.Pages,
+                        Css = "fas fa-copy"
+                    },
+                    new MenuItem
+                    {
                         InternalId = "Media",
                         Name = "Media",
                         Route = "~/manager/media",

@@ -19,6 +19,9 @@ namespace Piranha.Manager
         /// </summary>
         public IStringLocalizer<Localization.Alias> Alias { get; private set; }
 
+
+        public IStringLocalizer<Localization.UserLogin> UserLogins { get; private set; }
+
         /// <summary>
         /// Gets/sets comment string resource.
         /// </summary>

@@ -41,6 +41,7 @@ public static class PiranhaEFExtensions
 
         // Register repositories
         services.Add(new ServiceDescriptor(typeof(IAliasRepository), typeof(AliasRepository), scope));
+        services.Add(new ServiceDescriptor(typeof(IUserLoginRepository), typeof(UserLoginRepository), scope));
         services.Add(new ServiceDescriptor(typeof(IArchiveRepository), typeof(ArchiveRepository), scope));
         services.Add(new ServiceDescriptor(typeof(IMediaRepository), typeof(MediaRepository), scope));
         services.Add(new ServiceDescriptor(typeof(IPageRepository), typeof(PageRepository), scope));

@@ -44,6 +44,16 @@ namespace Piranha.Manager
                 }
             };
 
+
+            public ActionList<ToolbarAction> UserLoginEdit { get; private set; } = new ActionList<ToolbarAction>
+            {
+                new ToolbarAction
+                {
+                    InternalId = "Add",
+                    ActionView = "Partial/Actions/_UserLoginAdd"
+                }
+            };
+
             /// <summary>
             /// Gets the available actions for the comments view.
             /// </summary>
