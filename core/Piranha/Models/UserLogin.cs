@@ -7,7 +7,7 @@ using System.Text;
 namespace Piranha.Models
 {
     [Serializable]
-    [Table("Piranha_UserLogin")]
+    [Table("Piranha_Login")]
     public class UserLogin
     {
         public Guid Id { get; set; }

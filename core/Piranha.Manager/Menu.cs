@@ -41,7 +41,7 @@ namespace Piranha.Manager
                         Name = "User Login",
                         Route = "~/manager/userlogin",
                         Policy = Permission.Pages,
-                        Css = "fas fa-copy"
+                        Css = "fa fa-user"
                     },
                     new MenuItem
                     {

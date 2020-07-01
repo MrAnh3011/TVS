@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Piranha;
 using Piranha.AspNetCore.Services;
+using Piranha.Data;
 
 namespace MvcWeb.Controllers
 {
@@ -56,6 +57,27 @@ namespace MvcWeb.Controllers
             }
             return Json(new { status = "success", message = "Thêm thành công" });
         }
+
+        public JsonResult Login(LoginModel model)
+        {
+
+            return Json( new { });
+        }
+
+        public JsonResult Register (LoginModel model)
+        {
+            UserLogin mod = new UserLogin();
+
+            mod.UserMail = model.Email;
+            mod.UserPassWord = model.Password;
+            mod.UserName = model.FullName;
+            mod.UserPhone = model.Phone;
+            mod.UserFacebook = model.FbAddress;
+            mod.UserCare = model.UserCare;
+            mod.Id = Guid.NewGuid();
+
+            return Json(new { status = "success", message = "Thêm thành công" });
+        }
     };
     public class MailModel
     {
@@ -65,5 +87,16 @@ namespace MvcWeb.Controllers
         public string Subject { get; set; }
         public string Body { get; set; }
         public string MailPath { get; set; }
+    }
+
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
+        public string FbAddress { get; set; }
+        public string UserCare { get; set; }
+        public string SendOpenAcc { get; set; }
     }
 }
