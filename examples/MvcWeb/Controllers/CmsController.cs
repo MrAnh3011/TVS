@@ -9,6 +9,7 @@
  */
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MvcWeb.Models;
 using Piranha;
 using Piranha.AspNetCore.Services;
@@ -63,7 +64,11 @@ namespace MvcWeb.Controllers
         [Route("categorypage/{keyword?}")]
         public async Task<IActionResult> CategoryPage(Guid id, string keyword, bool startpage = false, bool draft = false)
         {
+            string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<CategoryPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
             var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
             var listPost = _db.Posts.Where(x => x.CategoryId == categoryId[0].Id).ToList();
             var lstPostInfo = new List<NewsPost>();
@@ -94,10 +99,17 @@ namespace MvcWeb.Controllers
             ViewBag.urlLang = urlLang;
             if (model.Permalink.Contains("tin-tuc") || model.Permalink.Contains("news"))
             {
-                var newsModel = await _loader.GetPageAsync<NewsPage>(model.BlogId, HttpContext.User, false);
-
-                var lstRelated = newsModel.Archive.Posts.Where(x => x.Category.Slug == model.Category.Slug);
+                var newsModel = await _api.Pages.GetByIdAsync<NewsPage>(model.BlogId);
+                var lstPostRelated = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
                 var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
+
+                var lstRelated = new List<NewsPost>();
+                foreach(var item in lstPostRelated)
+                {
+                    var res = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
+                    lstRelated.Add(res);
+                }
+
                 ViewBag.lstCategory = lstCategory;
                 ViewBag.lstHightLight = newsModel.lstHighlight;
                 ViewBag.lstRelated = lstRelated;
@@ -150,8 +162,8 @@ namespace MvcWeb.Controllers
         }
 
         [HttpGet]
-        [Route("intropage")]
-        public async Task<IActionResult> IntroPage(Guid id, bool startpage = false, bool draft = false)
+        [Route("intropage/{keyword?}")]
+        public async Task<IActionResult> IntroPage(Guid id, string keyword, bool startpage = false, bool draft = false)
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<IntroPage>(id, HttpContext.User, draft);
@@ -225,6 +237,25 @@ namespace MvcWeb.Controllers
             ViewBag.urlLang = urlLang;
             return View(model);
         }
+
+        [Route("searchpage/{keyword?}")]
+        public async Task<IActionResult> SearchPage(Guid id, string keyword, bool startpage = false, bool draft = false)
+        {
+            var urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<SearchPage>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
+            var listPost = _db.Posts.Where(x => x.Title.Contains(keyword)).ToList();
+            var newsPosts = new List<NewsPost>();
+            foreach (var item in listPost)
+            {
+                var itemPosts = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, draft);
+                newsPosts.Add(itemPosts);
+            }
+            ViewBag.lstPosts = newsPosts;
+            ViewBag.urlLang = urlLang;
+            return View(model);
+        }
+
 
         private string GetLangByPage(Guid id)
         {

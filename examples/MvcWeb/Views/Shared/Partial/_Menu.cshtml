@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row mar0">
             <div class="col-12 col-lg-1 flex logo">
-                <a href="/"><img class="img-fluid" src="assets/images/TVS.png" alt=""></a>
+                <a href="/"><img class="img-fluid" src="~/assets/images/TVS.png" alt=""></a>
             </div>
             <div class="col-12 col-lg-11 pad0">
                 <nav class="fw">
@@ -28,9 +28,9 @@
                                 </button>
                             </div>
                             <div class="col-6 search_mb">
-                                <form action="" id="search_form" class="fw">
+                                <form action="" id="search_formmb" class="fw">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="search" id="search">
+                                        <input type="text" class="form-control" name="search_mb" id="search_mb">
                                         <i class="fas fa-search search_icon"></i>
                                     </div>
                                 </form>
@@ -43,6 +43,26 @@
                             @if (!item.IsHidden)
                             {
                                 <li>
+                                    @if (item.Permalink == "/gioi-thieu")
+                                    {
+                                        <a href="">@item.MenuTitle</a>
+                                        <ul>
+                                            <li><a href="/gioi-thieu/ve-chung-toi">Về chúng tôi</a></li>
+                                            <li><a href="/gioi-thieu/hoi-dong-quan-tri">Hội đồng quản trị</a></li>
+                                            <li><a href="/gioi-thieu/ban-dieu-hanh">Ban điều hành</a></li>
+                                        </ul>
+                                        continue;
+                                    }
+                                    @if (item.Permalink == "/intro")
+                                    {
+                                        <a href="">@item.MenuTitle</a>
+                                        <ul>
+                                            <li><a href="/about-us">About us</a></li>
+                                            <li><a href="/administrative-concil">Administrative Council</a></li>
+                                            <li><a href="/executive-board">Executive Board</a></li>
+                                        </ul>
+                                        continue;
+                                    }
                                     @if (item.Items.Any())
                                     {
                                         <a href="">@item.MenuTitle</a>
@@ -61,21 +81,21 @@
                             }
                         }
                         <li>
-                            <a href="#"><i class="fas fa-globe-americas"></i> Tiếng việt</a>
+                            <a href="/vn"><i class="fas fa-globe-americas"></i> Tiếng việt</a>
                             <ul class="language">
                                 <li>
-                                    <a href="#">English</a>
+                                    <a href="/en">English</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <div class="search_pc fw">
-                                <form action="" id="search_form" class="fw">
+                                <div id="search_form" class="fw">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="search" id="search">
+                                        <input type="text" class="form-control" name="search_pc" id="search_pc">
                                         <i class="fas fa-search search_icon"></i>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </li>
                     </ul>

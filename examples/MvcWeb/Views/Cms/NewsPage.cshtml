@@ -49,16 +49,14 @@
                             <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
                             <p class="title_line"></p>
                         </div>
-                        <nav>
-                            <div class="nav" id="nav-tab" role="tablist">
-                                @foreach (var item in lstCategories)
-                                {
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-                                       href="@item.Slug" role="tab" aria-controls="nav-home"
-                                       aria-selected="true">@item.Title</a>
-                                }
-                            </div>
-                        </nav>
+                        <div class="row_category">
+                            @foreach (var item in lstCategories)
+                            {
+                                <div class="row_category_div">
+                                    <a href="@(lang == "vi" ? "danh-muc" : "category")/@item.Slug">@item.Title</a>
+                                </div>
+                            }
+                        </div>
                     </div>
                     <div class="page_category">
                         <div class="title_row">

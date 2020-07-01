@@ -76,7 +76,7 @@
 
     $('.search_icon').on('click', function (e) {
         if (width < 1024) {
-            $('.search_mb>#search_form input').toggleClass('show_search');
+            $('.search_mb>#search_formmb input').toggleClass('show_searchmb');
         } else if (width > 1024) {
             $('.search_pc>#search_form input').toggleClass('show_search');
         }
@@ -473,8 +473,16 @@
     });
 
 
-
-
+    var pathname = $(location).attr('pathname');
+    if (pathname.includes("ban-dieu-hanh") || pathname.includes("executive-board")) {
+        $("#nav-contact-tab").click();
+    }
+    else if (pathname.includes("hoi-dong-quan-tri") || pathname.includes("administrative-concil")) {
+        $("#nav-profile-tab").click();
+    }
+    else if (pathname.includes("ve-chung-toi") || pathname.includes("about-us")) {
+        $("#nav-home-tab").click();
+    }
 
 
     $("#btnContactPage").click(function () {
@@ -577,7 +585,7 @@
         let companyName = "Công ty đại chúng cho người đang quản lý: " + $("#accCompanyManager").val();
         let companySpent = "Công ty đại chúng bạn đang giữ hơn 5% vốn điều lệ: " + $("#accCompanySpent").val();
 
-        if (!$("#inpNameAcc").val() || !$("#accDateBirth").val() || $("#accSex").val()!= -1 || !$("#accIDcard").val() ||
+        if (!$("#inpNameAcc").val() || !$("#accDateBirth").val() || $("#accSex").val() != -1 || !$("#accIDcard").val() ||
             !$("#accDateProvide").val() || !$("#accLocatProvide").val() || !$("#accPhoneNum").val() || !$("#accMail").val()
             || !$("#accAddress").val() || !$("#selCountries").val() != -1 || !$("#accCity").val()) {
             HideLoadingScreen();
@@ -625,5 +633,19 @@
                 alert("Gửi thông tin không thành công, vui lòng kiểm tra lại.");
             }
         });
+    });
+
+    $("#search_pc").keyup(function (event) {
+        if (event.which == 13) {
+            var input = $("#search_pc").val();
+            window.location.href = "tim-kiem/" + input;
+        }
+    });
+
+    $("#search_mb").keyup(function (event) {
+        if (event.which == 13) {
+            var input = $("#search_mb").val();
+            window.location.href = "tim-kiem/" + input;
+        }
     });
 });

@@ -273,12 +273,21 @@ a:hover {
 
 #search_form .form-group .search_icon {
   position: absolute;
-  top: 20%;
+  top: 25%;
   right: 5%;
   z-index: 19;
   font-size: 16px;
   cursor: pointer;
   color: #444444;
+}
+#search_formmb .form-group .search_icon {
+    position: absolute;
+    top: 36%;
+    right: 12%;
+    z-index: 19;
+    font-size: 16px;
+    cursor: pointer;
+    color: #444444;
 }
 
 #search_form .form-group input {
@@ -291,10 +300,24 @@ a:hover {
   width: 0;
   float: right;
 }
-
+#search_formmb .form-group input {
+    border-radius: 25px;
+    background: #f4f4f4;
+    padding: 0;
+    border: none;
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
+    width: 0;
+    float: right;
+}
 #search_form .form-group .show_search {
   width: 100% !important;
   padding: 0px 10px;
+}
+
+#search_formmb .form-group .show_searchmb {
+    width: 100% !important;
+    padding: 0px 10px;
 }
 
 #content #image_bg {
@@ -1607,7 +1630,7 @@ a:hover {
   .menu-toggle .icon-bar:hover {
     background: #000000 !important;
   }
-  #search_form {
+  #search_formmb {
     margin: 10px 0;
   }
   #header {
@@ -1942,7 +1965,7 @@ a:hover {
   .menu-toggle .icon-bar:hover {
     background: #000000 !important;
   }
-  #search_form {
+  #search_formmb {
     margin: 10px 0;
   }
   #header {

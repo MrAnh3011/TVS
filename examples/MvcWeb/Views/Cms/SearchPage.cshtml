@@ -1,0 +1,50 @@
+﻿@model MvcWeb.Models.SearchPage
+@{
+    ViewData["Title"] = "SearchPage";
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+}
+
+    <section id="page">
+        <section id="page_bg" class="fw">
+            <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+            <div class="page_breadcrumb">
+                <h3>@Model.Banner.Title</h3>
+                <div>
+                    <a href="#">@(lang == "vi" ? "Trang chủ" : "Home page")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Tìm kiếm" : "Search")</a>
+                </div>
+            </div>
+        </section>
+        <section id="page_content" class="fw">
+            <div class="container">
+                <div class="row mar0">
+                    <div class="col-12 col-lg-12 page_content">
+                        <div class="row mar0 news_wrapper">
+                            @foreach (var item in ViewBag.lstPosts)
+                            {
+                                <div class="col-12 col-lg-4 news_div">
+                                    <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                    <a class="news_title" href="@item.Permalink">
+                                        @item.Title
+                                    </a>
+                                    <p class="news_date"><i class="far fa-clock"></i>@item.Published.ToString("dd/MM/yyyy")</p>
+                                    <p class="news_excerpt">
+                                        @Html.Raw(item.Excerpt)
+                                    </p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 pad0">
+                        <div class="page_category">
+                        </div>
+                        <div class="page_category">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
