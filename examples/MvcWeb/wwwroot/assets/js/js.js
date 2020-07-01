@@ -579,7 +579,7 @@
         let companyPhone = "Số điện thoại công ty: " + $("#accCompanyPhone").val();
         let position = "Vị trí làm việc: " + $("#accPosition").val();
         let companyFax = "Fax công ty: " + $("#accFax").val();
-        let bankacc = "Số TK ngân hàng: " + $("#accBanknum").val();
+        let bankacc = "Số tài khoản: "+ $("accBanknum").val();
         let bankManager = "Người quản lý tài khoản: " + $("#accBankManger").val();
         let bank = "Ngân hàng: " + $("#accBankname").val();
         let companyName = "Công ty đại chúng cho người đang quản lý: " + $("#accCompanyManager").val();
@@ -633,6 +633,19 @@
                 alert("Gửi thông tin không thành công, vui lòng kiểm tra lại.");
             }
         });
+    });
+
+    $("#send_recruit").click(function () {
+        ShowLoadingScreen();
+        let FullName = $("#hoten").val();
+        let Sex = $("#gioitinh option:selected").text();
+        let Phone = $("#sdt").val();
+        let Email = $("#email").val();
+        let Place = $("#diadiem option:selected").text();
+        let Locate = $("#vitri option:selected").text();
+        let File = $("#fileupload").val();
+        console.log(File);
+
     });
 
     $("#search_pc").keyup(function (event) {

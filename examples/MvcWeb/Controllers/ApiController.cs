@@ -34,6 +34,13 @@ namespace MvcWeb.Controllers
             mm.Body = info.Body;
             mm.From = new MailAddress(info.From);
             mm.IsBodyHtml = false;
+
+            if(info.MailPath != null)
+            {
+                Attachment attachment = new Attachment(info.MailPath);
+                mm.Attachments.Add(attachment);
+            }
+
             try
             {
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com");
@@ -57,5 +64,6 @@ namespace MvcWeb.Controllers
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public string MailPath { get; set; }
     }
 }
