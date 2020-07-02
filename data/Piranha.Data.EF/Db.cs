@@ -35,7 +35,7 @@ namespace Piranha
         /// <summary>
         /// Gets/sets the UserLogin set.
         /// </summary>
-        public DbSet<Data.UserLogin> UserLogins { get; set; }
+        public DbSet<Data.Login> Logins { get; set; }
 
         /// <summary>
         /// Gets/sets the block set.

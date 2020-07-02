@@ -66,7 +66,7 @@ namespace MvcWeb.Controllers
 
         public JsonResult Register (LoginModel model)
         {
-            UserLogin mod = new UserLogin();
+            Login mod = new Login();
 
             mod.UserMail = model.Email;
             mod.UserPassWord = model.Password;

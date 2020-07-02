@@ -26,7 +26,7 @@ namespace Piranha
         /// <summary>
         /// Gets/sets the UserLogin repository.
         /// </summary>
-        IUserLoginService UserLogins { get; }
+        ILoginService UserLogins { get; }
 
         /// <summary>
         /// Gets/sets the archive service.

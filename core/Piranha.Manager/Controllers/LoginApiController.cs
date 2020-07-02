@@ -13,16 +13,16 @@ using Piranha.Manager.Services;
 namespace Piranha.Manager.Controllers
 {
     [Area("Manager")]
-    [Route("manager/api/userlogin")]
+    [Route("manager/api/loginuser")]
     [Authorize(Policy = Permission.Admin)]
     [ApiController]
-    public class UserLoginApiController : Controller
+    public class LoginApiController : Controller
     {
         private readonly IApi _api;
-        private readonly UserLoginService _service;
+        private readonly LoginService _service;
         private readonly ManagerLocalizer _localizer;
 
-        public UserLoginApiController(IApi api, UserLoginService service, ManagerLocalizer localizer)
+        public LoginApiController(IApi api, LoginService service, ManagerLocalizer localizer)
         {
             _api = api;
             _service = service;
@@ -31,17 +31,16 @@ namespace Piranha.Manager.Controllers
 
         [Route("list/{siteId?}")]
         [HttpGet]
-        [Authorize(Policy = Permission.UserLogins)]
-        public async Task<UserLoginListModel> List(Guid? siteId = null)
+        public async Task<LoginListModel> List(Guid? siteId = null)
         {
-            return await _service.GetList(siteId);
+            var list = await _service.GetList(siteId);
+            return list;
         }
 
 
         [Route("save")]
         [HttpPost]
-        [Authorize(Policy = Permission.UserLoginsEdit)]
-        public async Task<IActionResult> Save(UserLoginListModel.ListItem model)
+        public async Task<IActionResult> Save(LoginListModel.ListItem model)
         {
             try
             {
@@ -52,14 +51,14 @@ namespace Piranha.Manager.Controllers
                 result.Status = new StatusMessage
                 {
                     Type = StatusMessage.Success,
-                    Body = _localizer.Alias["The userlogin was successfully added to the list"]
+                    Body = _localizer.Alias["The UserLogin was successfully added to the list"]
                 };
 
                 return Ok(result);
             }
             catch (ValidationException e)
             {
-                var result = new UserLoginListModel();
+                var result = new LoginListModel();
                 result.Status = new StatusMessage
                 {
                     Type = StatusMessage.Error,
@@ -72,7 +71,6 @@ namespace Piranha.Manager.Controllers
 
         [Route("delete/{id:Guid}")]
         [HttpGet]
-        [Authorize(Policy = Permission.UserLoginsDelete)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var userlogins = await _service.Delete(id);
@@ -84,7 +82,7 @@ namespace Piranha.Manager.Controllers
                 result.Status = new StatusMessage
                 {
                     Type = StatusMessage.Success,
-                    Body = _localizer.Alias["The alias was successfully deleted"]
+                    Body = _localizer.Alias["The UserLogin was successfully deleted"]
                 };
 
                 return Ok(result);

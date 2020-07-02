@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Piranha.Manager.Models
 {
-    public class UserLoginListModel
+    public class LoginListModel
     {
         public class ListItem
         {
@@ -12,17 +12,17 @@ namespace Piranha.Manager.Models
 
             public Guid SiteId { get; set; }
 
-            public string UserName { get; set; }
+            public string? UserName { get; set; }
 
-            public string UserPassWord { get; set; }
+            public string? UserPassWord { get; set; }
 
-            public string UserPhone { get; set; }
+            public string? UserPhone { get; set; }
 
-            public string UserMail { get; set; }
+            public string? UserMail { get; set; }
 
-            public string UserFacebook { get; set; }
+            public string? UserFacebook { get; set; }
 
-            public string UserCare { get; set; }
+            public string? UserCare { get; set; }
 
             public bool IsPermanent { get; set; }
         }

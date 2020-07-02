@@ -39,7 +39,7 @@ namespace Piranha.Manager
                     {
                         InternalId = "User Login",
                         Name = "User Login",
-                        Route = "~/manager/userlogin",
+                        Route = "~/manager/loginuser",
                         Policy = Permission.Pages,
                         Css = "fa fa-user"
                     },

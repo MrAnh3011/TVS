@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Piranha.Manager.Services
 {
-    public class UserLoginService
+    public class LoginService
     {
         private readonly IApi _api;
 
-        public UserLoginService(IApi api)
+        public LoginService(IApi api)
         {
             _api = api;
         }
 
-        public async Task<UserLoginListModel> GetList(Guid? siteId = null)
+        public async Task<LoginListModel> GetList(Guid? siteId = null)
         {
             Site site = null;
 
@@ -33,7 +33,7 @@ namespace Piranha.Manager.Services
                 site = await _api.Sites.GetByIdAsync(siteId.Value);
             }
 
-            var model = new UserLoginListModel
+            var model = new LoginListModel
             {
                 SiteId = siteId.Value,
                 SiteTitle = site.Title
@@ -41,7 +41,7 @@ namespace Piranha.Manager.Services
 
             // Get all available sites
             var sites = await _api.Sites.GetAllAsync();
-            model.Sites = sites.Select(s => new UserLoginListModel.SiteItem
+            model.Sites = sites.Select(s => new LoginListModel.SiteItem
             {
                 Id = s.Id,
                 Title = s.Title
@@ -49,24 +49,24 @@ namespace Piranha.Manager.Services
 
             // Get all available aliases for the current site
             var userlogins = await _api.UserLogins.GetAllAsync(siteId.Value);
-            model.Items = userlogins.Select(a => new UserLoginListModel.ListItem
+            model.Items = userlogins.Select(a => new LoginListModel.ListItem
             {
                 Id = a.Id,
                 SiteId = a.SiteId,
-                UserName = a.UserName,
-                UserPassWord = a.UserPassWord,
-                UserPhone = a.UserPhone,
-                UserMail = a.UserMail,
-                UserFacebook = a.UserFacebook,
-                UserCare = a.UserCare,
+                UserName = a.UserName == null ? "" : a.UserName,
+                UserPassWord = a.UserPassWord == null ? "" : a.UserPassWord,
+                UserPhone = a.UserPhone == null ? "" : a.UserPhone,
+                UserMail = a.UserMail == null ? "" : a.UserMail,
+                UserFacebook = a.UserFacebook == null ? "" : a.UserFacebook,
+                UserCare = a.UserCare == null ? "" : a.UserCare,
             }).ToList();
 
             return model;
         }
 
-        public async Task Save(UserLoginListModel.ListItem model)
+        public async Task Save(LoginListModel.ListItem model)
         {
-            await _api.UserLogins.SaveAsync(new UserLogin
+            await _api.UserLogins.SaveAsync(new Login
             {
                 Id = model.Id.HasValue ? model.Id.Value : Guid.NewGuid(),
                 SiteId = model.SiteId,
@@ -80,7 +80,7 @@ namespace Piranha.Manager.Services
         }
 
 
-        public async Task<UserLoginListModel.ListItem> Delete(Guid id)
+        public async Task<LoginListModel.ListItem> Delete(Guid id)
         {
             var userLogin = await _api.UserLogins.GetByIdAsync(id);
 
@@ -88,7 +88,7 @@ namespace Piranha.Manager.Services
             {
                 await _api.UserLogins.DeleteAsync(userLogin.Id);
 
-                return new UserLoginListModel.ListItem
+                return new LoginListModel.ListItem
                 {
                     Id = userLogin.Id,
                     SiteId = userLogin.SiteId,

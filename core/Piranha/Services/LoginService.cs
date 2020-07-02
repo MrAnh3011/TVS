@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Piranha.Services
 {
-    public class UserLoginService : IUserLoginService
+    public class LoginService : ILoginService
     {
-        private readonly IUserLoginRepository _repo;
+        private readonly ILoginRepository _repo;
         private readonly ISiteService _siteService;
         private readonly ICache _cache;
 
-        public UserLoginService(IUserLoginRepository repo, ISiteService siteService, ICache cache)
+        public LoginService(ILoginRepository repo, ISiteService siteService, ICache cache)
         {
             _repo = repo;
             _siteService = siteService;
@@ -29,7 +29,7 @@ namespace Piranha.Services
             await _repo.Delete(id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<UserLogin>> GetAllAsync(Guid? siteId = null)
+        public async Task<IEnumerable<Login>> GetAllAsync(Guid? siteId = null)
         {
             if (!siteId.HasValue)
             {
@@ -47,9 +47,9 @@ namespace Piranha.Services
             return null;
         }
 
-        public async Task<UserLogin> GetByIdAsync(Guid id)
+        public async Task<Login> GetByIdAsync(Guid id)
         {
-            var model = _cache?.Get<UserLogin>(id.ToString());
+            var model = _cache?.Get<Login>(id.ToString());
 
             if (model == null)
             {
@@ -64,7 +64,7 @@ namespace Piranha.Services
             return model;
         }
 
-        public async Task SaveAsync(UserLogin model)
+        public async Task SaveAsync(Login model)
         {
             await _repo.Save(model).ConfigureAwait(false);
         }

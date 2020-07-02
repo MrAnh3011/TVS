@@ -30,6 +30,7 @@ public static class ManagerModuleExtensions
 
         // Add the manager services
         services.AddScoped<AliasService>();
+        services.AddScoped<LoginService>();
         services.AddScoped<CommentService>();
         services.AddScoped<ConfigService>();
         services.AddScoped<ContentTypeService>();

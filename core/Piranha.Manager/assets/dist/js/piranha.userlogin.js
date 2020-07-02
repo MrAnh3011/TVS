@@ -11,12 +11,12 @@ piranha.userlogin = new Vue({
         items: [],
         model: {
             id: null,
+            userMail: null,
             userName: null,
             userPassWord: null,
             userPhone: null,
             userFacebook: null,
             userCare: null,
-            userEmail : null,
         }
     },
     methods: {
@@ -27,9 +27,10 @@ piranha.userlogin = new Vue({
                 siteId = "";
             }
 
-            fetch(piranha.baseUrl + "manager/api/userlogin/list/" + siteId)
+            fetch(piranha.baseUrl + "manager/api/loginuser/list/" + siteId)
                 .then(function (response) { return response.json(); })
                 .then(function (result) {
+                    console.log(result);
                     self.siteId = result.siteId;
                     self.siteTitle = result.siteTitle;
                     self.sites = result.sites;
@@ -45,7 +46,7 @@ piranha.userlogin = new Vue({
                 return;
             }
 
-            fetch(piranha.baseUrl + "manager/api/userlogin/save", {
+            fetch(piranha.baseUrl + "manager/api/loginuser/save", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -53,12 +54,12 @@ piranha.userlogin = new Vue({
                 body: JSON.stringify({
                     id: piranha.userlogin.model.id,
                     siteId: piranha.userlogin.siteId,
-                    userName: piranha.userlogin.userName,
+                    userMail: piranha.userlogin.model.userMail,
                     userPassWord: piranha.userlogin.model.userPassWord,
                     userPhone: piranha.userlogin.model.userPhone,
                     userFacebook: piranha.userlogin.model.userFacebook,
                     userCare: piranha.userlogin.model.userCare,
-                    userEmail: piranha.userlogin.model.userEmail,
+                    userName: piranha.userlogin.model.userName,
                 })
             })
                 .then(function (response) { return response.json(); })
@@ -77,7 +78,7 @@ piranha.userlogin = new Vue({
                         piranha.userlogin.model.userPhone = null;
                         piranha.userlogin.model.userFacebook = null;
                         piranha.userlogin.model.userCare = null;
-                        piranha.userlogin.model.userEmail = null;
+                        piranha.userlogin.model.userMail = null;
 
                         piranha.userlogin.items = result.items;
                     }
@@ -99,7 +100,7 @@ piranha.userlogin = new Vue({
                 confirmIcon: "fas fa-trash",
                 confirmText: piranha.resources.texts.delete,
                 onConfirm: function () {
-                    fetch(piranha.baseUrl + "manager/api/userlogin/delete/" + id)
+                    fetch(piranha.baseUrl + "manager/api/loginuser/delete/" + id)
                         .then(function (response) { return response.json(); })
                         .then(function (result) {
                             self.items = result.items;

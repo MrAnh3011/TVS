@@ -45,12 +45,12 @@ namespace Piranha.Manager
             };
 
 
-            public ActionList<ToolbarAction> UserLoginEdit { get; private set; } = new ActionList<ToolbarAction>
+            public ActionList<ToolbarAction> LoginEdit { get; private set; } = new ActionList<ToolbarAction>
             {
                 new ToolbarAction
                 {
                     InternalId = "Add",
-                    ActionView = "Partial/Actions/_UserLoginAdd"
+                    ActionView = "Partial/Actions/_LoginAdd"
                 }
             };
 

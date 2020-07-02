@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Piranha.Repositories
 {
-    public interface IUserLoginRepository
+    public interface ILoginRepository
     {
-        Task<IEnumerable<UserLogin>> GetAll(Guid siteId);
+        Task<IEnumerable<Login>> GetAll(Guid siteId);
 
-        Task<UserLogin> GetById(Guid id);
+        Task<Login> GetById(Guid id);
 
         Task<bool> GetResultByLoginPass(string username, string password);
 
-        Task Save(UserLogin model);
+        Task Save(Login model);
 
         Task Delete(Guid id);
     }

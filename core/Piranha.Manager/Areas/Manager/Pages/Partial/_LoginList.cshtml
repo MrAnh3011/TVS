@@ -17,13 +17,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in items">
-                        <td><code>{{ item.userEmail }}</code></td>
+                        <td><code>{{ item.userMail }}</code></td>
                         <td><code>{{ item.userPassWord }}</code></td>
                         <td><code>{{ item.userName }}</code></td>
                         <td><code>{{ item.userPhone }}</code></td>
                         <td><code>{{ item.userFacebook }}</code></td>
                         <td><code>{{ item.userCare }}</code></td>
-                        <td class="actions one"><a v-if="piranha.permissions.userlogin.delete" href="#" class="danger" v-on:click.prevent="remove(item.id)"><i class="fas fa-trash"></i></a></td>
+                        <td class="actions one"><a href="#" class="danger" v-on:click.prevent="remove(item.id)"><i class="fas fa-trash"></i></a></td>
                     </tr>
                 </tbody>
             </table>

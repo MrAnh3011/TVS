@@ -8,30 +8,30 @@ using System.Threading.Tasks;
 
 namespace Piranha.Repositories
 {
-    public class UserLoginRepository : IUserLoginRepository
+    public class LoginRepository : ILoginRepository
     {
         private readonly IDb _db;
-        public UserLoginRepository(IDb db)
+        public LoginRepository(IDb db)
         {
             _db = db;
         }
         public async Task Delete(Guid id)
         {
-            var userlogins = await _db.UserLogins.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
+            var userlogins = await _db.Logins.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
             if (userlogins != null)
             {
-                _db.UserLogins.Remove(userlogins);
+                _db.Logins.Remove(userlogins);
                 await _db.SaveChangesAsync().ConfigureAwait(false);
             }
         }
 
-        public async Task<IEnumerable<UserLogin>> GetAll(Guid siteId)
+        public async Task<IEnumerable<Login>> GetAll(Guid siteId)
         {
-            return await _db.UserLogins.AsNoTracking()
+            var query = await _db.Logins.AsNoTracking()
                 .Where(x => x.SiteId == siteId)
                 .OrderBy(x => x.UserName)
                 .ThenBy(x => x.UserMail)
-                .Select(x => new UserLogin
+                .Select(x => new Login
                 {
                     Id = x.Id,
                     SiteId = x.SiteId,
@@ -46,14 +46,15 @@ namespace Piranha.Repositories
                 })
                 .ToListAsync()
                 .ConfigureAwait(false);
+            return query;
         }
 
-        public Task<UserLogin> GetById(Guid id)
+        public Task<Login> GetById(Guid id)
         {
-            return _db.UserLogins
+            return _db.Logins
                 .AsNoTracking()
                 .Where(x => x.Id == id)
-                .Select(x => new UserLogin
+                .Select(x => new Login
                 {
                     Id = x.Id,
                     SiteId = x.SiteId,
@@ -71,7 +72,7 @@ namespace Piranha.Repositories
 
         public async Task<bool> GetResultByLoginPass(string username, string password)
         {
-            var result = await _db.UserLogins
+            var result = await _db.Logins
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.UserMail == username && x.UserPassWord == password)
                 .ConfigureAwait(false);
@@ -80,17 +81,17 @@ namespace Piranha.Repositories
             return false;
         }
 
-        public async Task Save(UserLogin model)
+        public async Task Save(Login model)
         {
-            var userlogins = await _db.UserLogins.FirstOrDefaultAsync(x => x.Id == model.Id).ConfigureAwait(false);
+            var userlogins = await _db.Logins.FirstOrDefaultAsync(x => x.Id == model.Id).ConfigureAwait(false);
             if (userlogins == null)
             {
-                userlogins = new Data.UserLogin
+                userlogins = new Data.Login
                 {
                     Id = model.Id != Guid.Empty ? model.Id : Guid.NewGuid(),
                     Created = DateTime.Now
                 };
-                await _db.UserLogins.AddAsync(userlogins).ConfigureAwait(false);
+                await _db.Logins.AddAsync(userlogins).ConfigureAwait(false);
             }
             userlogins.SiteId = model.SiteId;
             userlogins.UserName = model.UserName;

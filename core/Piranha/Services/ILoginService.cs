@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Piranha.Services
 {
-    public interface IUserLoginService
+    public interface ILoginService
     {
-        Task<IEnumerable<UserLogin>> GetAllAsync(Guid? siteId = null);
+        Task<IEnumerable<Login>> GetAllAsync(Guid? siteId = null);
 
-        Task<UserLogin> GetByIdAsync(Guid id);
+        Task<Login> GetByIdAsync(Guid id);
 
         Task<bool> GetResultByLoginPassAsync(string username, string password);
 
-        Task SaveAsync(UserLogin model);
+        Task SaveAsync(Login model);
 
         Task DeleteAsync(Guid id);
     }

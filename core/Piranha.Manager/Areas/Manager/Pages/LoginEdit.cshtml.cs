@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace Piranha.Manager.Models
 {
     [Authorize(Policy = Permission.Aliases)]
-    public class UserLoginEditViewModel : PageModel
+    public class LoginEditViewModel : PageModel
     {
     }
 }

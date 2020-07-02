@@ -1,10 +1,10 @@
-﻿@page "~/manager/userlogin"
-@model UserLoginEditViewModel
+﻿@page "~/manager/loginuser"
+@model LoginEditViewModel
 @inject IAuthorizationService Auth
 @inject ManagerLocalizer Localizer
 @{
-    ViewBag.Title = "User Login";
-    ViewBag.MenuItem = "UserLogins";
+    ViewBag.Title = "Login";
+    ViewBag.MenuItem = "Logins";
 }
 @section script
 {
@@ -38,7 +38,7 @@
                         <a class="dropdown-item" href="#" li v-for="site in sites" v-on:click.prevent="load(site.id)">{{ site.title }}</a>
                     </div>
                 </div>
-                @foreach (var action in Piranha.Manager.Actions.Toolbars.UserLoginEdit)
+                @foreach (var action in Piranha.Manager.Actions.Toolbars.LoginEdit)
                 {
                     <partial name="@action.ActionView" />
                 }
@@ -46,8 +46,8 @@
         </div>
     </div>
 
-    <div class="app" :class="{ ready: !loading }">
-        <partial name="Partial/_UserLoginList" />
-        <partial name="Partial/_UserLoginForm" />
+    <div class="app ready">
+        <partial name="Partial/_LoginList" />
+        <partial name="Partial/_LoginForm" />
     </div>
 </div>

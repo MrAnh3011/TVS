@@ -8,7 +8,7 @@ namespace Piranha.Models
 {
     [Serializable]
     [Table("Piranha_Login")]
-    public class UserLogin
+    public class Login
     {
         public Guid Id { get; set; }
 

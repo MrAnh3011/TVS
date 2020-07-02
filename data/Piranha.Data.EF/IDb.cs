@@ -28,7 +28,7 @@ namespace Piranha
         /// <summary>
         /// Gets/sets the userlogin set.
         /// </summary>
-        DbSet<Data.UserLogin> UserLogins { get; set; }
+        DbSet<Data.Login> Logins { get; set; }
 
         /// <summary>
         /// Gets/sets the block set.
