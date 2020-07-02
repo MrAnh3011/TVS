@@ -137,7 +137,7 @@ a:hover {
 
 #header .login ul li {
   float: right;
-  padding: 10px 0;
+  padding: 10px 10px;
 }
 
 #header .login ul li a {
@@ -145,12 +145,11 @@ a:hover {
   color: #ffffff;
   text-transform: uppercase;
   display: inline-block;
-  border-right: 1px solid #ffffff;
 }
 
-#header .login ul li:first-child a {
-  border-right: none;
-}
+    #header .login ul li:last-child a {
+        border-right: 1px solid #ffffff;
+    }
 
 #header .menu {
   background: #ffffff;

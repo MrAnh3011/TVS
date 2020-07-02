@@ -12,7 +12,7 @@
     <img class="img-fluid" src="assets/images/login_bg.jpg" alt="">
     <div class="login_div">
         <h5 class="text_bold">@(lang == "vi" ? "Đăng nhập" : "Login")</h5>
-        <form action="">
+        <div>
             <div class="form-group">
                 <label for="my-input">@(lang == "vi" ? "Địa chỉ mail" : "Email")</label>
                 <input id="my-input" class="form-control" placeholder="@(lang == "vi" ? "Địa chỉ mail của bạn" : "Your email")" type="text" name="">
@@ -22,12 +22,12 @@
                 <input id="my-input2" class="form-control" placeholder="@(lang == "vi" ? "Mật khẩu" : "Passwords")" type="password" name="">
             </div>
             <div class="form-group">
-                <a href="forgot-password.html" class="forgot">@(lang == "vi" ? "Quên mật khẩu" : "Forgot passwords")</a>
+                <a href="/@(lang == "vi" ? "quen-mat-khau" : "forgotpass")" class="forgot">@(lang == "vi" ? "Quên mật khẩu" : "Forgot passwords")</a>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary login">@(lang == "vi" ? "Đăng nhập" : "Login")</button>
+                <button id="btnLogin" class="btn btn-primary login">@(lang == "vi" ? "Đăng nhập" : "Login")</button>
             </div>
-        </form>
+        </div>
         <div class="login_social">
             <p><span>@(lang == "vi" ? "Hoặc" : "Or")</span></p>
             <a class="btn btn-danger login_gmail"><i class="fab fa-google"></i> @(lang == "vi" ? "Đăng nhập với Gmail" : "Login in with Gmail")</a>

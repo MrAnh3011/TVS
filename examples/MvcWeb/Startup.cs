@@ -103,6 +103,7 @@ namespace MvcWeb
                 .AddType(typeof(Models.LoginPage))
                 .AddType(typeof(Models.RegisterPage))
                 .AddType(typeof(Models.SearchPage))
+                .AddType(typeof(Models.ForgotPassword))
                 .Build()
                 .DeleteOrphans();
             var postTypeBuilder = new Piranha.AttributeBuilder.PostTypeBuilder(api)

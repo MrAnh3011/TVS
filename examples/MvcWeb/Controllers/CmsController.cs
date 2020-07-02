@@ -256,7 +256,17 @@ namespace MvcWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("forgotpass")]
+        public async Task<IActionResult> ForgotPass(Guid id, bool startpage = false, bool draft = false)
+        {
+            var urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<ForgotPassword>(id, HttpContext.User, draft);
+            model.Permalink = urlLang + model.Permalink;
 
+            ViewBag.urlLang = urlLang;
+            return View(model);
+        }
         private string GetLangByPage(Guid id)
         {
             Guid siteID = _db.Pages.SingleOrDefault(x => x.Id == id).SiteId;

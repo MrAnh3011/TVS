@@ -5,7 +5,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Cms\Partial\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>

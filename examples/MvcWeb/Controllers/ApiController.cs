@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Piranha;
 using Piranha.AspNetCore.Services;
 using Piranha.Data;
+using Piranha.Data.EF.SQLServer.Migrations;
 
 namespace MvcWeb.Controllers
 {
@@ -36,7 +37,7 @@ namespace MvcWeb.Controllers
             mm.From = new MailAddress(info.From);
             mm.IsBodyHtml = false;
 
-            if(info.MailPath != null)
+            if (info.MailPath != null)
             {
                 Attachment attachment = new Attachment(info.MailPath);
                 mm.Attachments.Add(attachment);
@@ -58,25 +59,52 @@ namespace MvcWeb.Controllers
             return Json(new { status = "success", message = "Thêm thành công" });
         }
 
-        public JsonResult Login(LoginModel model)
+        [HttpPost]
+        [Route("login")]
+        public JsonResult Login(LogInfo model)
         {
+            string email = model.email;
+            string pass = model.password;
 
-            return Json( new { });
+            try
+            {
+                List<Piranha.Data.Login> lstLogin = _db.Logins.Where(x => x.UserMail == email && x.UserPassWord == pass).ToList();
+
+                if (lstLogin.Count > 0)
+                    return Json(new { status = "success", message = "Đăng nhập thành công", data = lstLogin });
+                else return Json(new { status = "error", message = "Đăng nhập thất bại", data = "" });
+            }
+            catch (Exception)
+            {
+                return Json(new { status = "error", message = "Lỗi không xác định", data = "" });
+            }
         }
 
-        public JsonResult Register (LoginModel model)
+        public async Task<JsonResult> Register(LoginModel model)
         {
-            Login mod = new Login();
+            try
+            {
+                Login mod = new Login();
 
-            mod.UserMail = model.Email;
-            mod.UserPassWord = model.Password;
-            mod.UserName = model.FullName;
-            mod.UserPhone = model.Phone;
-            mod.UserFacebook = model.FbAddress;
-            mod.UserCare = model.UserCare;
-            mod.Id = Guid.NewGuid();
+                mod.Id = Guid.NewGuid();
+                mod.SiteId = new Guid("B5951303-713E-4A58-8684-079EE924170E");
+                mod.UserMail = model.Email == "" ? " " : model.Email;
+                mod.UserPassWord = model.Password == "" ? " " : model.Password;
+                mod.UserName = model.FullName == "" ? " " : model.FullName;
+                mod.UserPhone = model.Phone == "" ? " " : model.Phone;
+                mod.UserFacebook = model.FbAddress == "" ? " " : model.FbAddress;
+                mod.UserCare = model.UserCare == "" ? " " : model.UserCare;
+                mod.Created = DateTime.Now;
+                mod.LastModified = DateTime.Now;
 
-            return Json(new { status = "success", message = "Thêm thành công" });
+                await _db.Logins.AddAsync(mod).ConfigureAwait(false);
+                await _db.SaveChangesAsync().ConfigureAwait(false);
+                return Json(new { status = "success", message = "Thêm thành công" });
+            }
+            catch (Exception)
+            {
+                return Json(new { status = "error", message = "Thêm thất bại" });
+            }
         }
     };
     public class MailModel
@@ -98,5 +126,11 @@ namespace MvcWeb.Controllers
         public string FbAddress { get; set; }
         public string UserCare { get; set; }
         public string SendOpenAcc { get; set; }
+    }
+
+    public class LogInfo
+    {
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }

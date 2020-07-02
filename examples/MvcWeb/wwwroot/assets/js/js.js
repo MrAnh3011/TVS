@@ -12,6 +12,18 @@
         $(".loading-screen").css({ "display": "none" });
     }
 
+    function saveToken(tokenKey) {
+        let date = new Date();
+        let hour = 5;
+        date.setTime(date.getTime() + (hour * 60 * 60 * 1000));
+        $.cookie("SessionUser", tokenKey, { expires: date });
+    };
+    function getToken() {
+        return $.cookie("SessionUser");
+    }
+    function removeToken() {
+        $.removeCookie("SessionUser");
+    }
 
     //$('#header_login .search_mb form').css('min-width', search_width);
 
@@ -654,11 +666,59 @@
             window.location.href = "tim-kiem/" + input;
         }
     });
-
     $("#search_mb").keyup(function (event) {
         if (event.which == 13) {
             var input = $("#search_mb").val();
             window.location.href = "tim-kiem/" + input;
         }
     });
+
+    $("#btnLogin").click(function () {
+        let email = $("#my-input").val();
+        let pass = $("#my-input2").val();
+
+        if (email === "" || pass === "") {
+            alert("Bạn cần nhập đầy đủ thông tin");
+            return;
+        }
+
+        ShowLoadingScreen();
+        $.ajax({
+            url: "/api/login",
+            data: JSON.stringify({
+                email: email,
+                password: pass
+            }),
+            dataType: "json",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                if (response.status == "success") {
+                    var username = response.data[0].userName;
+                }
+                HideLoadingScreen();
+                saveToken(username);
+                window.location.href = "/";
+            },
+            error: function (response) {
+                HideLoadingScreen();
+                alert(response.message);
+                return;
+            },
+        });
+    });
+
+    var userLoginRes = getToken();
+    if (userLoginRes) {
+        $("#logintext").css({ "display": "none" });
+        let usName = userLoginRes;
+        $("#itemresultLog").css({ "display": "block" });
+        $("#usernameLog").text(usName);
+    }
+    $("#logOut").click(function () {
+        removeToken();
+        location.reload();
+    });
+
+
 });
