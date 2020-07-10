@@ -508,18 +508,9 @@
         let fax = "Số fax: " + $("#ctpsofax").val();
         let email = "E-mail" + $("#ctpemail").val();
         let phone = "Số điện thoại: " + $("#ctpphone").val();
-        let diachi = "Địa chỉ: " + $("#ctpdiachi").val();
-        let ttmn = "Thông tin muốn nhận : ";
-        if ($("#ctptuvansatnhap").checked)
-            ttmn += "Tư vấn sát nhập, ";
-        if ($("#ctpdoitac").checked)
-            ttmn += "Đối tác / Cơ hội hợp tác, ";
-        if ($("#ctptaicocaudn").checked)
-            ttmn += "Tái cấu trúc doanh nghiệp, ";
-        if ($("#ctptangvon").checked)
-            ttmn += "Tăng vốn.";
+        let thongtin = "Thông tin cần tư vấn: " + $("#ctpthongtin").val();
 
-        let body = hoten + "\n" + tencty + "\n" + chucdanh + "\n" + fax + "\n" + email + "\n" + phone + "\n" + diachi + "\n" + ttmn;
+        let body = hoten + "\n" + tencty + "\n" + chucdanh + "\n" + fax + "\n" + email + "\n" + phone + "\n" + thongtin;
 
         let info = JSON.stringify({
             From: FromMail,
@@ -721,4 +712,93 @@
     });
 
 
+    $("#tvsRegister").click(function () {
+        let FullName = $("#regFullName").val();
+        let Facebook = $("#regFacebook").val();
+        let Password = $("#regPassword").val();
+        let Phone = $("#regPhone").val();
+        let Mail = $("#regMail").val();
+        let RePass = $("#regRePass").val();
+        let Care = $("input[name='optradio']:checked").val();
+
+        if (!FullName || !Facebook || !Password || !Phone || !Mail || !RePass || !Care) {
+            alert("Bạn phải nhập đẩy đủ thông tin");
+            return;
+        }
+
+        if (Password !== RePass) {
+            alert("Mật khẩu và Xác nhận mật khẩu không giống nhau ");
+            return;
+        }
+
+        ShowLoadingScreen()
+        $.ajax({
+            url: "/api/register",
+            data: JSON.stringify({
+                Email: Mail,
+                Password: Password,
+                FullName: FullName,
+                Phone: Phone,
+                FbAddress: Facebook,
+                UserCare: Care
+            }),
+            dataType: "json",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                HideLoadingScreen();
+                if (response.status == "success") {
+                    alert(response.message);
+                    window.location.href = "/dang-nhap";
+                }
+                else {
+                    alert(response.message);
+                }
+            },
+            error: function (response) {
+                HideLoadingScreen();
+                alert(response.message);
+            }
+        });
+    });
+
+    $("#btnForgotpass").click(function () {
+        let Email = $("#forgot-email").val();
+        let Pass = $("#forgot-pass").val();
+        let Repass = $("#forgot-repass").val();
+
+        if (!Email || !Pass || !Repass) {
+            alert("Bạn phải nhập đẩy đủ thông tin");
+            return;
+        }
+        if (Pass !== Repass) {
+            alert("Mật khẩu và Xác nhận mật khẩu không giống nhau ");
+            return;
+        }
+
+        ShowLoadingScreen();
+        $.ajax({
+            url: "/api/forgotpass",
+            data: JSON.stringify({
+                email: Email,
+                password: Pass,
+            }),
+            dataType: "json",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                if (response.status == "success") {
+                    alert(response.message);
+                    window.location.href = "/dang-nhap";
+                }
+                else {
+                    alert(response.message);
+                }
+            },
+            error: function (response) {
+                HideLoadingScreen();
+                alert(response.message);
+            }
+        });
+    });
 });

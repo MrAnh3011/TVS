@@ -72,9 +72,13 @@
                                     {
                                         <a href="">@item.MenuTitle</a>
                                         <ul>
-                                            @foreach (var sub in item.Items)
+                                            @if (item.Permalink == "/dich-vu")
                                             {
-                                                <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                                <li><a href="https://www.tvam.vn/vi" target="_blank">Quản lý quỹ</a></li>
+                                                @foreach (var sub in item.Items)
+                                                {
+                                                    <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                                }
                                             }
                                         </ul>
                                     }
@@ -86,7 +90,7 @@
                             }
                         }
                         <li>
-                            <a href="/vn"><i class="fas fa-globe-americas"></i> Tiếng việt</a>
+                            <a href="/vi"><i class="fas fa-globe-americas"></i> Tiếng việt</a>
                             <ul class="language">
                                 <li>
                                     <a href="/en">English</a>

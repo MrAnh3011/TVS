@@ -25,7 +25,7 @@ namespace MvcWeb.Models
     public class TeaserPage : Page<TeaserPage>
     {
         [Region(Display = RegionDisplayMode.Full, Title = "Ảnh trang chủ", ListTitle = "Ảnh trang chủ", ListPlaceholder = "Ảnh trang chủ")]
-        public ImageField indexPicture { get; set; }
+        public IList<ImageField> indexPicture { get; set; }
 
 
         [Region(Display = RegionDisplayMode.Full, Title = "Shortcut", ListTitle = "Shortcut", ListPlaceholder = "Shortcut")]

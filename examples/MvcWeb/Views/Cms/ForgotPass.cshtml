@@ -11,22 +11,26 @@
 <section id="page_login">
     <img class="img-fluid" src="assets/images/login_bg.jpg" alt="">
     <div class="login_div">
-        <h5 class="text_bold">Quên mật khẩu</h5>
-        <form action="">
+        <h5 class="text_bold">@(lang == "vi" ? "Quên mật khẩu" : "Forgot password")</h5>
+        <div>
             <div class="form-group">
-                <label for="my-input">Mật khẩu</label>
-                <input id="my-input" class="form-control" placeholder="Mật khẩu" type="password" name="">
+                <label for="forgot-email">Email</label>
+                <input id="forgot-email" class="form-control" placeholder="Email" type="text" name="">
             </div>
             <div class="form-group">
-                <label for="my-input2">Xác nhận mật khẩu</label>
-                <input id="my-input2" class="form-control" placeholder="Xác nhận mật khẩu" type="password" name="">
+                <label for="forgot-pass">@(lang == "vi" ? "Mật khẩu" : "Password")</label>
+                <input id="forgot-pass" class="form-control" placeholder="@(lang == "vi" ? "Mật khẩu" : "Password")" type="password" name="">
             </div>
             <div class="form-group">
-                <button class="btn btn-primary login">Lưu mật khẩu mới</button>
+                <label for="forgot-repass">@(lang == "vi" ? "Xác nhận mật khẩu" : "Re-input Password")</label>
+                <input id="forgot-repass" class="form-control" placeholder="@(lang == "vi" ? "Mật khẩu" : "Password")" type="password" name="">
             </div>
-        </form>
+            <div class="form-group">
+                <button id="btnForgotpass" class="btn btn-primary login">@(lang == "vi" ? "Lưu mật khẩu mới" : "Save new password")</button>
+            </div>
+        </div>
         <div class="login_social">
-            <a href="login.html" class="register">Quay lại đăng nhập</a>
+            <a href="@(lang == "vi" ? "dang-nhap" : "login")" class="register">@(lang == "vi" ? "Quay lại đăng nhập" : "Return login")</a>
         </div>
     </div>
 </section>

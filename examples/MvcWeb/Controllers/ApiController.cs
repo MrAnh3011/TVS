@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Piranha;
 using Piranha.AspNetCore.Services;
 using Piranha.Data;
@@ -80,10 +82,18 @@ namespace MvcWeb.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("register")]
         public async Task<JsonResult> Register(LoginModel model)
         {
             try
             {
+                var result = await _db.Logins.Where(x => x.UserMail == model.Email).FirstOrDefaultAsync().ConfigureAwait(false);
+                if (result != null)
+                {
+                    return Json(new { status = "error", message = "Tài khoản đã tồn tại" });
+                }
+
                 Login mod = new Login();
 
                 mod.Id = Guid.NewGuid();
@@ -104,6 +114,30 @@ namespace MvcWeb.Controllers
             catch (Exception)
             {
                 return Json(new { status = "error", message = "Thêm thất bại" });
+            }
+        }
+
+
+        [HttpPost]
+        [Route("forgotpass")]
+        public async Task<JsonResult> ForgotPass(LogInfo model)
+        {
+            try
+            {
+                Login result = await _db.Logins.Where(x => x.UserMail == model.email).FirstOrDefaultAsync().ConfigureAwait(false);
+
+                if (result != null)
+                {
+                    result.UserPassWord = model.password;
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    return Json(new { status = "success", message = "Sửa thành công" });
+                }
+                else
+                    return Json(new { status = "error", message = "Sửa thất bại" });
+            }
+            catch (Exception)
+            {
+                return Json(new { status = "error", message = "Sửa thất bại" });
             }
         }
     };

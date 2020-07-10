@@ -6,8 +6,7 @@
 }
 
 @font-face {
-  font-family: 'VNF_Futura';
-  src: url(../fonts/VNF_Futura.ttf);
+    font-family: Arial,sans-serif;
 }
 
 ul {
@@ -40,7 +39,7 @@ a:hover {
 #wrapper {
   margin: 0 auto;
   overflow: hidden;
-  font-family: 'VNF_Futura', sans-serif;
+  font-family: Arial, sans-serif;
   color: #444444;
   font-size: 14px;
   background: #f9f9f9;
@@ -177,6 +176,7 @@ a:hover {
   text-transform: uppercase;
   border-bottom: 2px solid transparent;
   cursor: pointer;
+  font-weight: bold;
 }
 
 #header .menu .ace-responsive-menu li a .fa-chevron-right {
@@ -321,6 +321,10 @@ a:hover {
 
 #content #image_bg {
   position: relative;
+}
+
+#content #image_bg img{
+    max-height: 500px;
 }
 
 #content #image_bg::after {
@@ -503,11 +507,19 @@ a:hover {
   overflow: hidden;
 }
 
+#content #news .big_news{
+    height: 470px;
+}
+#content #news .small_news{
+    height: 220px;
+}
 #content #news .big_news img,
 #content #news .small_news img {
   border-radius: 4px;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
+  -webkit-filter: brightness(0.5);
+  height: 100%;
 }
 
 #content #news .big_news .news_title,
@@ -1643,6 +1655,9 @@ a:hover {
   #content #image_bg .image_info {
     position: unset;
   }
+#content #image_bg img {
+    max-height: 300px;
+}
   #content #services {
     margin: 20px 0;
   }

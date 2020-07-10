@@ -9,7 +9,16 @@
 }
 
 <section id="image_bg" class="fw">
-    <img class="img-fluid" src="@(Model.indexPicture.Media.PublicUrl.Substring(1)??"")" alt="">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var item in Model.indexPicture)
+            {
+                <div class="carousel-item @(Model.indexPicture.First() == item ?"active" : "")">
+                    <img class="d-block w-100" src="@(item.Media.PublicUrl.Substring(1)??"")" alt="">
+                </div>
+            }
+        </div>
+    </div>
 </section>
 <section id="services" class="fw">
     <div class="container">
@@ -90,7 +99,7 @@
         </div>
         <div class="row mar0">
             <div class="viewmore">
-                <a href="#" class="link">@(lang == "vi" ? "Xem thêm" : "Read more")</a>
+                <a href="@(lang == "vi" ? "/tin-tuc" : "/news")" class="link">@(lang == "vi" ? "Xem thêm" : "Read more")</a>
             </div>
         </div>
     </div>
