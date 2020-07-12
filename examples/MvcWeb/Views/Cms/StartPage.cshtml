@@ -27,8 +27,10 @@
                 @foreach (var item in Model.lstShortcut)
                 {
                     <div class="col-6 col-lg-2 image_div">
-                        <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
-                        <h6>@item.Title</h6>
+                        <a href="@item.Link.Value">
+                            <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                            <h6>@item.Title</h6>
+                        </a>
                     </div>
                 }
             </div>

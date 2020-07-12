@@ -19,26 +19,32 @@
                         <label for="my-input">@(lang == "vi" ? "Họ và tên" : "Full name") <span>(*)</span></label>
                         <input id="regFullName" class="form-control" placeholder="@(lang == "vi" ? "Họ và tên" : "Full name")" type="text" name="">
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="my-input4">@(lang == "vi" ? "Số điện thoại" : "Phone") <span>(*)</span></label>
+                        <input id="regPhone" class="form-control" placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone")" type="text" name="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="my-input2">@(lang == "vi" ? "Địa chỉ Facebook" : "Facebook address")</label>
                         <input id="regFacebook" class="form-control" placeholder="@(lang == "vi" ? "Địa chỉ Facebook" : "Facebook address")" type="text" name="">
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="my-input5">@(lang == "vi" ? "Mail của bạn" : "Email") <span>(*)</span></label>
+                        <input id="regMail" class="form-control" placeholder="@(lang == "vi" ? "Mail của bạn" : "Email")" type="text" name="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="my-input3">@(lang == "vi" ? "Mật khẩu" : "Passwords") <span>(*)</span></label>
                         <input id="regPassword" class="form-control" placeholder="@(lang == "vi" ? "Mật khẩu" : "Passwords")" type="password" name="">
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="my-input4">@(lang == "vi" ? "Số điện thoại" : "Phone") <span>(*)</span></label>
-                        <input id="regPhone" class="form-control" placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone")" type="text"
-                               name="">
-                    </div>
-                    <div class="form-group">
-                        <label for="my-input5">@(lang == "vi" ? "Mail của bạn" : "Email") <span>(*)</span></label>
-                        <input id="regMail" class="form-control" placeholder="@(lang == "vi" ? "Mail của bạn" : "Email")" type="text"
-                               name="">
-                    </div>
                     <div class="form-group">
                         <label for="my-input6">@(lang == "vi" ? "Xác nhận mật khẩu" : "Re input password") <span>(*)</span></label>
                         <input id="regRePass" class="form-control" placeholder="@(lang == "vi" ? "Xác nhận mật khẩu" : "Re input password")" type="password" name="">
@@ -81,9 +87,8 @@
                     <div class="row mar0 register_request">
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="request_radio" checked>
-                                <span class="radio_text">@(lang == "vi" ? "Gửi yêu cầu mở tài khoản TVS" : "Submit a request to open a TVS account")</span>
-                                <span class="checkmark"></span>
+                                <input type="checkbox" class="form-check-input" name="request_check" checked>
+                                <span class="radio_text">@(lang == "vi" ? "Yêu cầu tư vấn mở tk giao dịch" : "Ask for advice to open a trading account")</span>
                             </label>
                         </div>
                     </div>

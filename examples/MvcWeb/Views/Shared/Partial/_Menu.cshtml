@@ -18,10 +18,11 @@
 <div class="menu">
     <div class="container">
         <div class="row mar0">
-            <div class="col-12 col-lg-1 flex logo">
-                <a href="/"><img class="img-fluid" src="~/assets/images/TVS.png" alt=""></a>
+            <div class="col-12 col-lg-2 flex logo">
+                <a href="/"><img class="img-fluid" src="~/assets/images/TVS.png" alt=""></a>&ensp;
+                <a href="/"><img class="img-fluid" src="~/assets/images/slogan.png" alt=""></a>
             </div>
-            <div class="col-12 col-lg-11 pad0">
+            <div class="col-12 col-lg-10 pad0">
                 <nav class="fw">
                     <div class="menu-toggle">
                         <div class="row mar0">
@@ -50,7 +51,7 @@
                                 <li>
                                     @if (item.Permalink == "/gioi-thieu")
                                     {
-                                        <a href="">@item.MenuTitle</a>
+                                        <a>@item.MenuTitle</a>
                                         <ul>
                                             <li><a href="/gioi-thieu/ve-chung-toi">Về chúng tôi</a></li>
                                             <li><a href="/gioi-thieu/hoi-dong-quan-tri">Hội đồng quản trị</a></li>
@@ -60,7 +61,7 @@
                                     }
                                     @if (item.Permalink == "/intro")
                                     {
-                                        <a href="">@item.MenuTitle</a>
+                                        <a>@item.MenuTitle</a>
                                         <ul>
                                             <li><a href="/about-us">About us</a></li>
                                             <li><a href="/administrative-concil">Administrative Council</a></li>
@@ -70,7 +71,7 @@
                                     }
                                     @if (item.Items.Any())
                                     {
-                                        <a href="">@item.MenuTitle</a>
+                                        <a>@item.MenuTitle</a>
                                         <ul>
                                             @if (item.Permalink == "/dich-vu")
                                             {

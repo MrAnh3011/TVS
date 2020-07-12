@@ -582,15 +582,15 @@
         let companyPhone = "Số điện thoại công ty: " + $("#accCompanyPhone").val();
         let position = "Vị trí làm việc: " + $("#accPosition").val();
         let companyFax = "Fax công ty: " + $("#accFax").val();
-        let bankacc = "Số tài khoản: "+ $("accBanknum").val();
+        let bankacc = "Số tài khoản: "+ $("#accBanknum").val();
         let bankManager = "Người quản lý tài khoản: " + $("#accBankManger").val();
         let bank = "Ngân hàng: " + $("#accBankname").val();
         let companyName = "Công ty đại chúng cho người đang quản lý: " + $("#accCompanyManager").val();
         let companySpent = "Công ty đại chúng bạn đang giữ hơn 5% vốn điều lệ: " + $("#accCompanySpent").val();
 
-        if (!$("#inpNameAcc").val() || !$("#accDateBirth").val() || $("#accSex").val() != -1 || !$("#accIDcard").val() ||
+        if (!$("#inpNameAcc").val() || !$("#accDateBirth").val() || $("#accSex").val() == -1 || !$("#accIDcard").val() ||
             !$("#accDateProvide").val() || !$("#accLocatProvide").val() || !$("#accPhoneNum").val() || !$("#accMail").val()
-            || !$("#accAddress").val() || !$("#selCountries").val() != -1 || !$("#accCity").val()) {
+            || !$("#accAddress").val() || $("#selCountries").val() == -1 || !$("#accCity").val()) {
             HideLoadingScreen();
             alert("Bạn phải nhập đầy đủ thông tin.");
             return;
