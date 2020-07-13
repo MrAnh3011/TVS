@@ -8,6 +8,14 @@
     else lang = "vi";
 }
 
+@if (Model.Popup.HasValue)
+{
+    <div class="ads">
+        <button type="button" id="closeads">&times;</button>
+        <img src="@(Model.Popup.Media.PublicUrl.Substring(1)??"")" />
+    </div>
+}
+
 <section id="image_bg" class="fw">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -22,7 +30,7 @@
 </section>
 <section id="services" class="fw">
     <div class="container">
-        <div class="image_info">
+        <div class="image_info animate__animated animate__bounceIn">
             <div class="image_row">
                 @foreach (var item in Model.lstShortcut)
                 {

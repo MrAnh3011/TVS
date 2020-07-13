@@ -38,5 +38,9 @@ namespace MvcWeb.Models
 
         [Region(Display = RegionDisplayMode.Full, Title = "Tin tức", ListTitle = "Tin tức", ListPlaceholder = "Tin tức")]
         public IList<PostField> lstNews { get; set; }
+
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Popup", ListTitle = "Popup", ListPlaceholder = "Popup")]
+        public ImageField Popup { get; set; }
     }
 }

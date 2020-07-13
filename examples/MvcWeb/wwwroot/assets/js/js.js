@@ -582,7 +582,7 @@
         let companyPhone = "Số điện thoại công ty: " + $("#accCompanyPhone").val();
         let position = "Vị trí làm việc: " + $("#accPosition").val();
         let companyFax = "Fax công ty: " + $("#accFax").val();
-        let bankacc = "Số tài khoản: "+ $("#accBanknum").val();
+        let bankacc = "Số tài khoản: " + $("#accBanknum").val();
         let bankManager = "Người quản lý tài khoản: " + $("#accBankManger").val();
         let bank = "Ngân hàng: " + $("#accBankname").val();
         let companyName = "Công ty đại chúng cho người đang quản lý: " + $("#accCompanyManager").val();
@@ -800,5 +800,14 @@
                 alert(response.message);
             }
         });
+    });
+
+    var popup = sessionStorage.getItem("advertisementPopup");
+    if (popup == null) {
+        $(".ads").css({ "display": "block" });
+    }
+    $("#closeads").click(function () {
+        $(".ads").css({ "display": "none" });
+        sessionStorage.setItem("advertisementPopup", 1);
     });
 });
