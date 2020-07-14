@@ -4,6 +4,7 @@
     var listPost = ViewBag.listPost;
     var lstCategories = ViewBag.listCategory;
     var listHighlight = ViewBag.listHighLight;
+    string categoryname = ViewBag.categoryName;
     string urlLang = ViewBag.urlLang;
     string lang = "";
     if (urlLang.Contains("/en"))
@@ -18,7 +19,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page"><a href="/home">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="/tin-tuc">Tin tức</a></li>
-                    <li class="breadcrumb-item">Bản tin TVS</li>
+                    <li class="breadcrumb-item">@categoryname</li>
                 </ol>
             </div>
             <div class="row mar0">

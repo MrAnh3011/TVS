@@ -810,4 +810,11 @@
         $(".ads").css({ "display": "none" });
         sessionStorage.setItem("advertisementPopup", 1);
     });
+
+
+    $("#btnRecruit").click(function () {
+        $('html, body').animate({
+            scrollTop: $("#labelRecruit").offset().top
+        },700);
+    });
 });

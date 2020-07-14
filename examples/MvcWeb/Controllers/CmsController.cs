@@ -70,6 +70,7 @@ namespace MvcWeb.Controllers
 
             ViewBag.urlLang = urlLang;
             var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
+            var categoryName = categoryId[0].Title;
             var listPost = _db.Posts.Where(x => x.CategoryId == categoryId[0].Id).ToList();
             var lstPostInfo = new List<NewsPost>();
             foreach (var item in listPost)
@@ -82,6 +83,7 @@ namespace MvcWeb.Controllers
             var modelPage = await _loader.GetPageAsync<NewsPage>(blogId, HttpContext.User, draft);
             var listCategory = await _api.Posts.GetAllCategoriesAsync(blogId);
 
+            ViewBag.categoryName = categoryName;
             ViewBag.listPost = lstPostInfo;
             ViewBag.listCategory = listCategory;
             ViewBag.listHighLight = modelPage.lstHighlight;
