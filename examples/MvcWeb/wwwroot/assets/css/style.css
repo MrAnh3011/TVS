@@ -414,6 +414,10 @@ a:hover {
   color: #0f4e91;
 }
 
+#content #services .services_div a {
+    color: #000;
+}
+
 #content #services .services_div h6 {
   color: #000000;
   font-weight: bold;
@@ -515,6 +519,8 @@ a:hover {
 
 #content #news .big_news{
     height: 470px;
+    padding: 0;
+    border-radius: 4px;
 }
 #content #news .small_news{
     height: 220px;
@@ -2336,18 +2342,25 @@ a:hover {
         transform: rotate(360deg);
     }
 }
-
+.backgroundads {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: rgba(0,0,0,.7);
+    display: none;
+    z-index: 100;
+}
 .ads {
     width: 50%;
     height: 70%;
     top: 0;
     margin: auto;
-    position: fixed;
-    z-index: 100;
     bottom: 0;
     right: 0;
     left: 0;
-    display: none;
+    position: fixed;
 }
 .ads img{
     width: 100%;
@@ -2357,8 +2370,8 @@ a:hover {
     position: absolute;
     right: 0;
     font-size: 30px;
-    background: none;
+    background: #FFF;
     border: none;
-    padding-right: 10px;
+    padding: 0px 10px;
     outline: none;
 }

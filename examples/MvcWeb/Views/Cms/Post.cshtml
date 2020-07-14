@@ -20,8 +20,8 @@
                     <li class="breadcrumb-item active" aria-current="page">
                         <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="">@(lang == "vi" ? "Tin tức" : "News")</a></li>
-                    <li class="breadcrumb-item"><a href="">@Model.Category.Title</a></li>
+                    <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/tin-tuc" : "/news")">@(lang == "vi" ? "Tin tức" : "News")</a></li>
+                    <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/danh-muc/" : "/category/")@Model.Category.Slug">@Model.Category.Title</a></li>
                     <li class="breadcrumb-item">@(lang == "vi" ? "Chi tiết tin tức" : "News Detail")</li>
                 </ol>
             </div>

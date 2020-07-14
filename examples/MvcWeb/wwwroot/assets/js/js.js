@@ -804,10 +804,10 @@
 
     var popup = sessionStorage.getItem("advertisementPopup");
     if (popup == null) {
-        $(".ads").css({ "display": "block" });
+        $(".backgroundads").css({ "display": "block" });
     }
     $("#closeads").click(function () {
-        $(".ads").css({ "display": "none" });
+        $(".backgroundads").css({ "display": "none" });
         sessionStorage.setItem("advertisementPopup", 1);
     });
 

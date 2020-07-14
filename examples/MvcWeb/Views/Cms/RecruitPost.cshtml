@@ -7,13 +7,14 @@
     if (urlLang.Contains("/en"))
         lang = "en";
     else lang = "vi";
+    var banner = ViewBag.banner;
 }
 
 <section id="page">
     <section id="page_bg" class="fw">
-        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <img class="img-fluid" src="@(banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
         <div class="page_breadcrumb">
-            <h3>@Model.Banner.Title</h3>
+            <h3>@banner.Title</h3>
             <div>
                 <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Tuyển dụng" : "Recruit")</a>
             </div>

@@ -120,8 +120,10 @@ namespace MvcWeb.Controllers
             }
             else
             {
+                var newsModel = await _api.Pages.GetByIdAsync<RecruitPage>(model.BlogId);
                 var lstJob = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
 
+                ViewBag.banner = newsModel.Banner;
                 ViewBag.lstJob = lstJob;
                 return View("RecruitPost", model);
             }

@@ -10,9 +10,11 @@
 
 @if (Model.Popup.HasValue)
 {
-    <div class="ads">
-        <button type="button" id="closeads">&times;</button>
-        <img src="@(Model.Popup.Media.PublicUrl.Substring(1)??"")" />
+    <div class="backgroundads">
+        <div class="ads">
+            <button type="button" id="closeads">&times;</button>
+            <img src="@(Model.Popup.Media.PublicUrl.Substring(1)??"")" />
+        </div>
     </div>
 }
 
@@ -53,12 +55,14 @@
             @foreach (var item in Model.lstServices)
             {
                 <div class="col-12 col-lg-4 w30 services_div">
-                    <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
-                    <h6>@item.Title</h6>
-                    <span class="services_div_line"></span>
-                    <p>
-                        @item.SubTitle
-                    </p>
+                    <a style="display: block;" href="@item.Link.Value">
+                        <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                        <h6>@item.Title</h6>
+                        <span class="services_div_line"></span>
+                        <p>
+                            @item.SubTitle
+                        </p>
+                    </a>
                 </div>
             }
         </div>

@@ -17,6 +17,8 @@ namespace MvcWeb.Models.Regions
         [Field(Options = FieldOption.HalfWidth)]
         public StringField SubTitle { get; set; }
 
+        [Field]
+        public StringField Link { get; set; }
 
         [Field]
         public ImageField Image { get; set; }
