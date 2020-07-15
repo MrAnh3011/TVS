@@ -122,7 +122,16 @@ namespace MvcWeb.Controllers
             {
                 var newsModel = await _api.Pages.GetByIdAsync<RecruitPage>(model.BlogId);
                 var lstJob = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
+                var lstPostbyCat = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
 
+                var lstMayCare = new List<NewsPost>();
+                foreach (var item in lstPostbyCat)
+                {
+                    var tmp = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
+                    lstMayCare.Add(tmp);
+                }
+
+                ViewBag.lstMayCare = lstMayCare;
                 ViewBag.banner = newsModel.Banner;
                 ViewBag.lstJob = lstJob;
                 return View("RecruitPost", model);

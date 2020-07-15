@@ -59,6 +59,13 @@
                                             <li><a href="/gioi-thieu/ve-chung-toi">Về chúng tôi</a></li>
                                             <li><a href="/gioi-thieu/hoi-dong-quan-tri">Hội đồng quản trị</a></li>
                                             <li><a href="/gioi-thieu/ban-dieu-hanh">Ban điều hành</a></li>
+                                            @if (item.Items.Any())
+                                            {
+                                                foreach (var sub in item.Items)
+                                                {
+                                                    <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                                }
+                                            }
                                         </ul>
                                         continue;
                                     }
@@ -69,22 +76,39 @@
                                             <li><a href="/about-us">About us</a></li>
                                             <li><a href="/administrative-concil">Administrative Council</a></li>
                                             <li><a href="/executive-board">Executive Board</a></li>
-                                        </ul>
-                                        continue;
-                                    }
-                                    @if (item.Items.Any())
-                                    {
-                                        <a>@item.MenuTitle</a>
-                                        <ul>
-                                            @if (item.Permalink == "/dich-vu")
+                                            @if (item.Items.Any())
                                             {
-                                                <li><a href="https://www.tvam.vn/vi" target="_blank">Quản lý quỹ</a></li>
-                                                @foreach (var sub in item.Items)
+                                                foreach (var sub in item.Items)
                                                 {
                                                     <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
                                                 }
                                             }
                                         </ul>
+                                        continue;
+                                    }
+                                    @if (item.Items.Any())
+                                    {
+                                        @if (item.Permalink == "/dich-vu")
+                                        {
+                                            <a>@item.MenuTitle</a>
+                                            <ul>
+                                                <li><a href="https://www.tvam.vn/vi" target="_blank">Quản lý quỹ</a></li>
+                                                @foreach (var sub in item.Items)
+                                                {
+                                                    <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="@item.Permalink">@item.MenuTitle</a>
+                                            <ul>
+                                                @foreach (var sub in item.Items)
+                                                {
+                                                    <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                                }
+                                            </ul>
+                                        }
                                     }
                                     else
                                     {

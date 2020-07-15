@@ -54,8 +54,14 @@
             </div>
             @foreach (var item in Model.lstServices)
             {
-                <div class="col-12 col-lg-4 w30 services_div">
-                    <a style="display: block;" href="@item.Link.Value">
+                string lnk = "";
+                if (item.Link.Value == "" || item.Link.Value == null)
+                    lnk = "";
+                else
+                    lnk = "href=" + item.Link.Value + " target= _blank";
+
+                <div class="col-6 col-lg-4 w30 services_div">
+                    <a style="display: block;" @lnk>
                         <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
                         <h6>@item.Title</h6>
                         <span class="services_div_line"></span>

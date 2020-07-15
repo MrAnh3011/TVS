@@ -46,7 +46,8 @@ namespace MvcWeb
             services.AddPiranhaFileStorage();
             services.AddPiranhaImageSharp();
             services.AddPiranhaManager();
-            services.AddPiranhaTinyMCE();
+            services.AddPiranhaSummernote();
+            //services.AddPiranhaTinyMCE();
             services.AddPiranhaApi();
 
             services.AddPiranha(options =>
@@ -132,7 +133,8 @@ namespace MvcWeb
             app.UseAuthorization();
             app.UsePiranhaIdentity();
             app.UsePiranhaManager();
-            app.UsePiranhaTinyMCE();
+            app.UsePiranhaSummernote();
+            //app.UsePiranhaTinyMCE();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

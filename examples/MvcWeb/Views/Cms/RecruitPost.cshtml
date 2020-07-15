@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "RecruitPost";
     var lstJob = ViewBag.lstJob;
+    var lstMayCare = ViewBag.lstMayCare;
     string urlLang = ViewBag.urlLang;
     string lang = "";
     if (urlLang.Contains("/en"))
@@ -38,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
+                        <hr style="margin-bottom: 30px;">
                         @Html.DisplayFor(m => m.Blocks)
                         <hr>
                         <div class="pd-ut">
@@ -133,13 +134,13 @@
                         <div class="list-cv">
                             <ul>
                                 <li>
-                                    <p><span>@(lang == "vi" ? "Phòng ban" : "Department") : </span><span>@Model.Recruit.Department</span></p>
-                                    <p><span>@(lang == "vi" ? "Ngày bắt đầu" : "Start date") :</span><span>@Model.Recruit.StartDate.Value?.ToString("dd/MM/yyyy")</span></p>
-                                    <p><span>@(lang == "vi" ? "Số lượng" : "Amount") :</span><span>@Model.Recruit.Amount</span></p>
-                                    <p><span>@(lang == "vi" ? "Kinh nghiệm" : "Experience") :</span><span>@Model.Recruit.Experience</span></p>
-                                    <p><span>@(lang == "vi" ? "Địa điểm" : "Location") :</span><span>@Model.Recruit.Location</span></p>
-                                    <p><span>@(lang == "vi" ? "Mức lương" : "Salary") :</span><span>@Model.Recruit.Salary</span></p>
-                                    <p><span>@(lang == "vi" ? "Hạn nộp hồ sơ" : "Deadline") :</span><span>@Model.Recruit.EndDate.Value?.ToString("dd/MM/yyyy") </span></p>
+                                    <p><span>@(lang == "vi" ? "Phòng ban" : "Department"): </span><span>@Model.Recruit.Department</span></p>
+                                    <p><span>@(lang == "vi" ? "Ngày bắt đầu" : "Start date"): </span><span>@Model.Recruit.StartDate.Value?.ToString("dd/MM/yyyy")</span></p>
+                                    <p><span>@(lang == "vi" ? "Số lượng" : "Amount"): </span><span>@Model.Recruit.Amount</span></p>
+                                    <p><span>@(lang == "vi" ? "Kinh nghiệm" : "Experience"): </span><span>@Model.Recruit.Experience</span></p>
+                                    <p><span>@(lang == "vi" ? "Địa điểm" : "Location"): </span><span>@Model.Recruit.Location</span></p>
+                                    <p><span>@(lang == "vi" ? "Mức lương" : "Salary"): </span><span>@Model.Recruit.Salary</span></p>
+                                    <p><span>@(lang == "vi" ? "Hạn nộp hồ sơ" : "Deadline"): </span><span>@Model.Recruit.EndDate.Value?.ToString("dd/MM/yyyy") </span></p>
                                 </li>
 
                             </ul>
@@ -153,69 +154,32 @@
     <div class="new-job new-job-deital fw">
         <div class="container">
             <div class=" title-2">
-                <h5> Vị trí có thể bạn quan tâm</h5>
+                <h5>@(lang == "vi" ? "Vị trí có thể bạn quan tâm" : "May be interested in")</h5>
             </div>
             <div class="content-job">
-                <div class="row mar0">
-                    <div class="col col-lg-4 col-md-4 col-12">
-                        <p><a href="">Nhân viên thiết kế đồ họa</a></p>
-                    </div>
-                    <div class="col col-lg-4 col-md-4 col-12">
-                        <div class="flex-job">
-                            <p><span><i class="fas fa-suitcase"></i></span> Marketing</p>
-                            <p><span><i class="fas fa-map-marker-alt"></i></span> Hà Nội</p>
+                @foreach (var item in lstMayCare)
+                {
+                    <div class="row mar0">
+                        <div class="col col-lg-4 col-md-4 col-12">
+                            <p><a href="@item.Permalink">@item.Title</a></p>
+                        </div>
+                        <div class="col col-lg-4 col-md-4 col-12">
+                            <div class="flex-job">
+                                <p><span><i class="fas fa-suitcase"></i></span> @item.Category.Title</p>
+                                <p><span><i class="fas fa-map-marker-alt"></i></span> @item.Recruit.Location</p>
+                            </div>
+                        </div>
+                        <div class="col col-lg-2 col-md-2 col-12">
+                            <p><span>@(lang == "vi" ? "Hạn nộp" : "Deadline") : </span><span>@item.Recruit.EndDate.Value.ToString("dd/MM/yyyy")</span></p>
+                        </div>
+                        <div class="col col-lg-2 col-md-2 col-12">
+                            <div class="btn-ungtuyen">
+                                <button><a href="">Ứng tuyển ngay</a></button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col col-lg-2 col-md-2 col-12">
-                        <p><span>Hạn nộp : </span><span>31/12/2020</span></p>
-                    </div>
-                    <div class="col col-lg-2 col-md-2 col-12">
-                        <div class="btn-ungtuyen">
-                            <button><a href="">Ứng tuyển ngay</a></button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row mar0">
-                    <div class="col col-lg-4 col-md-4 col-12">
-                        <p><a href="">Trưởng phòng Marketing</a></p>
-                    </div>
-                    <div class="col col-lg-4 col-md-4 col-12">
-                        <div class="flex-job">
-                            <p><span><i class="fas fa-suitcase"></i></span> Marketing</p>
-                            <p><span><i class="fas fa-map-marker-alt"></i></span> Hà Nội</p>
-                        </div>
-                    </div>
-                    <div class="col col-lg-2 col-md-2 col-12">
-                        <p><span>Hạn nộp : </span><span>31/12/2020</span></p>
-                    </div>
-                    <div class="col col-lg-2 col-md-2 col-12">
-                        <div class="btn-ungtuyen">
-                            <button><a href="">Ứng tuyển ngay</a></button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row mar0">
-                    <div class="col col-lg-4 col-md-4 col-12">
-                        <p><a href="">Nhân viên Content</a> </p>
-                    </div>
-                    <div class="col col-lg-4 col-md-4 col-12">
-                        <div class="flex-job">
-                            <p><span><i class="fas fa-suitcase"></i></span> Marketing</p>
-                            <p><span><i class="fas fa-map-marker-alt"></i></span> Hà Nội</p>
-                        </div>
-                    </div>
-                    <div class="col col-lg-2 col-md-2 col-12">
-                        <p><span>Hạn nộp : </span><span>31/12/2020</span></p>
-                    </div>
-                    <div class="col col-lg-2 col-md-2 col-12">
-                        <div class="btn-ungtuyen">
-                            <button><a href="">Ứng tuyển ngay</a></button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
+                    <hr>
+                }
             </div>
         </div>
     </div>

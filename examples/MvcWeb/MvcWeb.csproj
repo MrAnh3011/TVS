@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\core\Piranha.Manager.Summernote\Piranha.Manager.Summernote.csproj" />
     <ProjectReference Include="..\..\core\Piranha\Piranha.csproj" />
     <ProjectReference Include="..\..\core\Piranha.AspNetCore\Piranha.AspNetCore.csproj" />
     <ProjectReference Include="..\..\core\Piranha.AttributeBuilder\Piranha.AttributeBuilder.csproj" />
