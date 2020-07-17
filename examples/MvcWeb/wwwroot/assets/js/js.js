@@ -640,15 +640,48 @@
 
     $("#send_recruit").click(function () {
         ShowLoadingScreen();
+        let ToMail = $("#mailReceiver").text();
+        let FromMail = $("#mailSender").text();
+        let FromPass = $("#mailSenderPass").text();
         let FullName = $("#hoten").val();
         let Sex = $("#gioitinh option:selected").text();
         let Phone = $("#sdt").val();
         let Email = $("#email").val();
         let Place = $("#diadiem option:selected").text();
         let Locate = $("#vitri option:selected").text();
-        let File = $("#fileupload").val();
-        console.log(File);
+        let File = $("#fileupload").get(0);
 
+        let cvupload = File.files;
+        let data = new FormData();
+
+        data.append(cvupload[0].name, cvupload[0]);
+        data.append("FullName", FullName);
+        data.append("Sex", Sex);
+        data.append("Phone", Phone);
+        data.append("Email", Email);
+        data.append("Place", Place);
+        data.append("Locate", Locate);
+        data.append("Receiver", ToMail);
+        data.append("Sender", FromMail);
+        data.append("SenderPass", FromPass);
+
+        $.ajax({
+            url: "/api/upload",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (response) {
+                HideLoadingScreen();
+                if (response.status == "success")
+                    alert("Ứng tuyển thành công");
+                else
+                    alert("Lỗi, vui lòng kiểm tra lại.")
+            },
+            error: function (responsse) {
+                alert("Lỗi, vui lòng kiểm tra lại.")
+            }
+        });
     });
 
     $("#search_pc").keyup(function (event) {
@@ -686,10 +719,13 @@
             success: function (response) {
                 if (response.status == "success") {
                     var username = response.data[0].userName;
+                    saveToken(username);
+                    window.location.href = "/";
+                }
+                else {
+                    alert(response.message);
                 }
                 HideLoadingScreen();
-                saveToken(username);
-                window.location.href = "/";
             },
             error: function (response) {
                 HideLoadingScreen();
@@ -815,6 +851,8 @@
     $("#btnRecruit").click(function () {
         $('html, body').animate({
             scrollTop: $("#labelRecruit").offset().top
-        },700);
+        }, 700);
     });
+
+
 });

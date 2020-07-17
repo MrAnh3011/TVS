@@ -1,183 +1,188 @@
 ﻿@model MvcWeb.Models.RecruitPage
 @{
-    ViewData["Title"] = "RecruitPage";
+    ViewBag.Title = Model.Title;
     string urlLang = ViewBag.urlLang;
+    var lstJob = ViewBag.lstJob;
     string lang = "";
     if (urlLang.Contains("/en"))
         lang = "en";
     else lang = "vi";
 }
 
-<section id="page">
-    <section id="page_bg" class="fw">
-        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
-        <div class="page_breadcrumb">
-            <h3>@Model.Banner.Title</h3>
-            <div>
-                <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Tuyển dụng" : "Recruit")</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="about-us fw ">
-        <div class="container text-center title-1">
-            <h5>@Model.JWMe.Title</h5>
-            <p>
-                @Model.JWMe.Description
-            </p>
-        </div>
-    </section>
-
-    <section class="img-td fw">
-        <div class="container">
-            <div class="row mar0">
-                <div class="col col-7">
-                    <div class="row mar0">
-                        <div class="pd col col-7">
-                            <img class="img-fluid" src="@(Model.JWMe.Pic1.Media.PublicUrl.Substring(1)??"")" alt="">
-                        </div>
-                        <div class=" pd col col-5">
-                            <img class="img-fluid" src="@(Model.JWMe.Pic2.Media.PublicUrl.Substring(1)??"")" alt="">
-                        </div>
-                    </div>
-                    <div class="row mar0">
-                        <div class="col col-5">
-                            <img class="img-fluid" src="@(Model.JWMe.Pic3.Media.PublicUrl.Substring(1)??"")" alt="">
-                        </div>
-                        <div class="col col-7">
-                            <img class="img-fluid" src="@(Model.JWMe.Pic4.Media.PublicUrl.Substring(1)??"")" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="pd-img col col-5">
-                    <img class="img-fluid" src="@(Model.JWMe.Pic5.Media.PublicUrl.Substring(1)??"")" alt="">
+    <section id="page">
+        <section id="page_bg" class="fw">
+            <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+            <div class="page_breadcrumb">
+                <h3>@Model.Banner.Title</h3>
+                <div>
+                    <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Tuyển dụng" : "Recruit")</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="job fw">
-        <div class="container new-job">
-            <div class=" title-2">
-                <h5>@(lang == "vi" ? "Các vị trí đang tuyển" : "Vacancies")</h5>
+        <section class="about-us fw ">
+            <div class="container text-center title-1">
+                <h5>@Model.JWMe.Title</h5>
+                <p>
+                    @Model.JWMe.Description
+                </p>
             </div>
-            <div class="content-job">
-                @foreach (var item in Model.Archive.Posts)
-                {
-                    <div class="row mar0">
-                        <div class="col col-lg-4 col-md-4 col-12">
-                            <p><a href="@item.Permalink">@item.Title</a></p>
-                        </div>
-                        <div class="col col-lg-4 col-md-4 col-12">
-                            <div class="flex-job">
-                                <p><span><i class="fas fa-suitcase"></i></span> @item.Category.Title</p>
-                                <p><span><i class="fas fa-map-marker-alt"></i></span>@item.Regions.Recruit.Location</p>
+        </section>
+
+        <section class="img-td fw">
+            <div class="container">
+                <div class="row mar0">
+                    <div class="col col-7">
+                        <div class="row mar0">
+                            <div class="pd col col-7">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic1.Media.PublicUrl.Substring(1)??"")" alt="">
+                            </div>
+                            <div class=" pd col col-5">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic2.Media.PublicUrl.Substring(1)??"")" alt="">
                             </div>
                         </div>
-                        <div class="col col-lg-2 col-md-2 col-12">
-                            <p><span>@(lang == "vi" ? "Hạn nộp" : "Deadline") : </span><span>@item.Regions.Recruit.EndDate.Value.ToString("dd/MM/yyyy")</span></p>
-                        </div>
-                        <div class="col col-lg-2 col-md-2 col-12">
-                            <div class="btn-ungtuyen">
-                                <button id="btnRecruit"><a>@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</a></button>
+                        <div class="row mar0">
+                            <div class="col col-5">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic3.Media.PublicUrl.Substring(1)??"")" alt="">
+                            </div>
+                            <div class="col col-7">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic4.Media.PublicUrl.Substring(1)??"")" alt="">
                             </div>
                         </div>
                     </div>
-                    <hr>
-                }
+                    <div class="pd-img col col-5">
+                        <img class="img-fluid" src="@(Model.JWMe.Pic5.Media.PublicUrl.Substring(1)??"")" alt="">
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-    </section>
-
-    <section class="form-recruiment fw">
-        <div class="container ">
-            <div class="title-recruiment text-center title-1">
-                <h5 id="labelRecruit">@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</h5>
-
+        <section class="job fw">
+            <div class="container new-job">
+                <div class=" title-2">
+                    <h5>@(lang == "vi" ? "Các vị trí đang tuyển" : "Vacancies")</h5>
+                </div>
+                <div class="content-job">
+                    @foreach (var item in Model.Archive.Posts)
+                    {
+                        <div class="row mar0">
+                            <div class="col col-lg-4 col-md-4 col-12">
+                                <p><a href="@item.Permalink">@item.Title</a></p>
+                            </div>
+                            <div class="col col-lg-4 col-md-4 col-12">
+                                <div class="flex-job">
+                                    <p><span><i class="fas fa-suitcase"></i></span> @item.Category.Title</p>
+                                    <p><span><i class="fas fa-map-marker-alt"></i></span> @item.Regions.Recruit.Location</p>
+                                </div>
+                            </div>
+                            <div class="col col-lg-2 col-md-2 col-12">
+                                <p><span>@(lang == "vi" ? "Hạn nộp" : "Deadline") : </span><span>@item.Regions.Recruit.EndDate.Value.ToString("dd/MM/yyyy")</span></p>
+                            </div>
+                            <div class="col col-lg-2 col-md-2 col-12">
+                                <div class="btn-ungtuyen">
+                                    <button id="btnRecruit"><a>@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</a></button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    }
+                </div>
             </div>
-            <div class="form-ut">
-                <div class="row mar0">
-                    <div class="col col-lg-6 col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Full name") <span>(*)</span></label>
-                            <input type="email" class="form-control " id="hoten" aria-describedby="emailHelp"
-                                   placeholder="@(lang == "vi" ? "Họ và tên" : "Full name")">
-                        </div>
-                    </div>
-                    <div class="col col-lg-6 col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="gioitinh">@(lang == "vi" ? "Giới tính" : "Sex") <span>(*)</span></label>
-                            <select name="cars" class=" form-control" id="gioitinh">
-                                <option selected>@(lang == "vi" ? "Giới tính" : "Sex")</option>
-                                <option value="nam">@(lang == "vi" ? "Nam" : "Male")</option>
-                                <option value="nu">@(lang == "vi" ? "Nữ" : "Female")</option>
-                            </select>
-                        </div>
-                    </div>
+
+        </section>
+
+        <section class="form-recruiment fw">
+            <div class="container ">
+                <div class="title-recruiment text-center title-1">
+                    <h5 id="labelRecruit">@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</h5>
+
                 </div>
-                <div class="row mar0">
-                    <div class="col col-lg-6 col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="sdt">@(lang == "vi" ? "Số điện thoại" : "Phone") <span>(*)</span></label>
-                            <input type="email" class="form-control" id="sdt" aria-describedby="emailHelp"
-                                   placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone") ">
+                <div class="form-ut">
+                    <div class="row mar0">
+                        <div class="col col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Full name") <span>(*)</span></label>
+                                <input type="text" class="form-control " id="hoten" aria-describedby="emailHelp"
+                                       placeholder="@(lang == "vi" ? "Họ và tên" : "Full name")">
+                            </div>
+                        </div>
+                        <div class="col col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="gioitinh">@(lang == "vi" ? "Giới tính" : "Sex") <span>(*)</span></label>
+                                <select name="cars" class=" form-control" id="gioitinh">
+                                    <option selected>@(lang == "vi" ? "Giới tính" : "Sex")</option>
+                                    <option value="nam">@(lang == "vi" ? "Nam" : "Male")</option>
+                                    <option value="nu">@(lang == "vi" ? "Nữ" : "Female")</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col col-lg-6 col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="email">Email <span>(*)</span></label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                                   placeholder="Email">
+                    <div class="row mar0">
+                        <div class="col col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="sdt">@(lang == "vi" ? "Số điện thoại" : "Phone") <span>(*)</span></label>
+                                <input type="text" class="form-control" id="sdt" aria-describedby="emailHelp"
+                                       placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone") ">
+                            </div>
+                        </div>
+                        <div class="col col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="email">Email <span>(*)</span></label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                       placeholder="Email">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mar0">
-                    <div class="col col-lg-6 col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="diadiem">@(lang == "vi" ? "Địa điểm ứng tuyển" : "Aplly location") <span>(*)</span></label>
-                            <select name="" class="form-control" id="diadiem">
-                                <option value="hanoi">Hà Nội</option>
-                                <option value="hochiminh">Hồ Chí Minh</option>
-                            </select>
+                    <div class="row mar0">
+                        <div class="col col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="diadiem">@(lang == "vi" ? "Địa điểm ứng tuyển" : "Aplly location") <span>(*)</span></label>
+                                <select name="" class="form-control" id="diadiem">
+                                    <option value="hanoi">Hà Nội</option>
+                                    <option value="hochiminh">Hồ Chí Minh</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="vitri">@(lang == "vi" ? "Vị trí ứng tuyển" : "Aplly Job") <span>(*)</span></label>
+                                <select name="" class=" form-control" id="vitri">
+                                    <option selected> @(lang == "vi" ? "Chọn vị trí ứng tuyển" : "Choose aplly job")</option>
+                                    @foreach (var item in lstJob)
+                                    {
+                                        <option value="@item.Title">@item.Title</option>
+                                    }
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col col-lg-6 col-md-6 col-12">
-                        <div class="form-group">
-                            <label for="vitri">@(lang == "vi" ? "Vị trí ứng tuyển" : "Aplly Job") <span>(*)</span></label>
-                            <select name="" class=" form-control" id="vitri">
-                                <option selected> @(lang == "vi" ? "Chọn vị trí ứng tuyển" : "Choose aplly job")</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="sales">Sales</option>
-                                <option value="developer">Developer</option>
-                            </select>
+                    <div class="row mar0">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="customFile">@(lang == "vi" ? "Tải lên CV" : "Upload CV") <span>(*)</span></label>
+                                <input type="file" name="cvupload" class="form-control" id="fileupload">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mar0">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="customFile">@(lang == "vi" ? "Tải lên CV" : "Upload CV") <span>(*)</span></label>
-                            <input type="file" class="form-control" id="fileupload">
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
+                            <div class="btn-contact">
+                                <button id="send_recruit">@(lang == "vi" ? "Gửi ngay" : "Send now")</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-md-center">
-                    <div class="col-md-auto">
-                        <div class="btn-contact">
-                            <button id="send_recruit">@(lang == "vi" ? "Gửi ngay" : "Send now")</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="note row mar0">
-                    <div class="col text-center">
-                        <p>
-                            @(lang == "vi" ? "Trong trường hợp chưa có vị trí tuyển dụng hoặc phù hợp với kinh nghiệm và sự quan tâm của bạn, chúng tôi vẫn khuyến khích bạn gửi hồ sơ của bạn(Sơ yếu lý lịch và Thư dự tuyển) đến vị trí mà bạn quan tâm để chúng tôi tham khảo trong tương lai." 
+                    <div class="note row mar0">
+                        <div class="col text-center">
+                            <p>
+                                @(lang == "vi" ? "Trong trường hợp chưa có vị trí tuyển dụng hoặc phù hợp với kinh nghiệm và sự quan tâm của bạn, chúng tôi vẫn khuyến khích bạn gửi hồ sơ của bạn(Sơ yếu lý lịch và Thư dự tuyển) đến vị trí mà bạn quan tâm để chúng tôi tham khảo trong tương lai."
                                 : "In the absence of a vacancy or suitable for your experience and interests, we still encourage you to send your resume (Curriculum vitae and cover letter) to the position of interest. For our future reference.")
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <span style="display:none" id="mailReceiver">@Model.MailReceiver</span>
+        <span style="display:none" id="mailSender">@Model.MailSender</span>
+        <span style="display:none" id="mailSenderPass">@Model.MailSenderPass</span>
     </section>
-</section>

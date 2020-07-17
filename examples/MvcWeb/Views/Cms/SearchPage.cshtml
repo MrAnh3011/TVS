@@ -1,6 +1,6 @@
 ﻿@model MvcWeb.Models.SearchPage
 @{
-    ViewData["Title"] = "SearchPage";
+    ViewBag.Title = Model.Title;
     string urlLang = ViewBag.urlLang;
     string lang = "";
     if (urlLang.Contains("/en"))

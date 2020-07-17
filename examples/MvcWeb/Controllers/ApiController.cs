@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Piranha;
@@ -27,6 +29,43 @@ namespace MvcWeb.Controllers
             _db = db;
             _loader = loader;
         }
+        [HttpPost]
+        [Route("upload")]
+        public JsonResult UploadFile()
+        {
+            var file = Request.Form.Files.First();
+            string fullName = Request.Form["FullName"].ToString();
+            string sex = Request.Form["Sex"].ToString();
+            string phone = Request.Form["Phone"].ToString();
+            string email = Request.Form["Email"].ToString();
+            string place = Request.Form["Place"].ToString();
+            string locate = Request.Form["Locate"].ToString();
+            string sender = Request.Form["Sender"].ToString();
+            string receiver = Request.Form["Receiver"].ToString();
+            string senderpass = Request.Form["SenderPass"].ToString();
+
+            string body = "";
+            body += "Họ và tên: " + fullName + "\n";
+            body += "Giới tính: " + sex + "\n";
+            body += "Điện thoại: " + phone + "\n";
+            body += "Email: " + email + "\n";
+            body += "Địa điểm ứng tuyển: " + place + "\n";
+            body += "Vị trí ứng tuyển: " + locate + "\n";
+
+            MailModel mm = new MailModel
+            {
+                To = receiver,
+                Subject = "Ứng tuyển TVS",
+                Body = body,
+                From = sender,
+                FromPass = senderpass,
+                File = file
+            };
+
+            var result = SendMail(mm);
+
+            return Json(new { status = "success", message = "success"});
+        }
 
         [HttpPost]
         [Route("sendmail")]
@@ -39,12 +78,10 @@ namespace MvcWeb.Controllers
             mm.From = new MailAddress(info.From);
             mm.IsBodyHtml = false;
 
-            if (info.MailPath != null)
+            if(info.File != null)
             {
-                Attachment attachment = new Attachment(info.MailPath);
-                mm.Attachments.Add(attachment);
+                mm.Attachments.Add(new Attachment(info.File.OpenReadStream(), info.File.FileName));
             }
-
             try
             {
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com");
@@ -148,7 +185,7 @@ namespace MvcWeb.Controllers
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
-        public string MailPath { get; set; }
+        public IFormFile File { get; set; }
     }
 
     public class LoginModel

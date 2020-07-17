@@ -1,6 +1,6 @@
 ﻿@model MvcWeb.Models.InvestbankPage
 @{
-    ViewData["Title"] = "InvestbankPage";
+    ViewBag.Title = Model.Title;
     string urlLang = ViewBag.urlLang;
     string lang = "";
     if (urlLang.Contains("/en"))

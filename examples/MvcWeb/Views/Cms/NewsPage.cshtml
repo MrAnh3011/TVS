@@ -1,6 +1,7 @@
 ﻿@model MvcWeb.Models.NewsPage
 @{
-    ViewData["Title"] = "NewsPage";
+    ViewBag.Title = Model.Title;
+    var cookie = ViewBag.cookie;
     var lstCategories = (List<Piranha.Models.Taxonomy>)ViewBag.lstCategory;
     string urlLang = ViewBag.urlLang;
     string lang = "";
@@ -28,16 +29,39 @@
                             <div class="row mar0 news_wrapper">
                                 @foreach (var item in Model.Archive.Posts)
                                 {
-                                    <div class="col-12 col-lg-6 news_div">
-                                        <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
-                                        <a class="news_title" href="@item.Permalink">
-                                            @item.Title
-                                        </a>
-                                        <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
-                                        <p class="news_excerpt">
-                                            @Html.Raw(item.Excerpt)
-                                        </p>
-                                    </div>
+                                    if (item.Regions.LoginOnly == "Yes")
+                                    {
+                                        if (cookie != null)
+                                        {
+                                            <div class="col-12 col-lg-6 news_div">
+                                                <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                                <a class="news_title" href="@item.Permalink">
+                                                    @item.Title
+                                                </a>
+                                                <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
+                                                <p class="news_excerpt">
+                                                    @Html.Raw(item.Excerpt)
+                                                </p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="col-12 col-lg-6 news_div">
+                                            <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                            <a class="news_title" href="@item.Permalink">
+                                                @item.Title
+                                            </a>
+                                            <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
+                                            <p class="news_excerpt">
+                                                @Html.Raw(item.Excerpt)
+                                            </p>
+                                        </div>
+                                    }
                                 }
                             </div>
                         </div>

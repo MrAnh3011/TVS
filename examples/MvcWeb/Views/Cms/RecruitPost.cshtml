@@ -1,6 +1,6 @@
 ﻿@model MvcWeb.Models.NewsPost
 @{
-    ViewData["Title"] = "RecruitPost";
+    ViewBag.Title = Model.Title;
     var lstJob = ViewBag.lstJob;
     var lstMayCare = ViewBag.lstMayCare;
     string urlLang = ViewBag.urlLang;
@@ -51,7 +51,7 @@
                                     <div class="col col-lg-6 col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Full Name") <span>(*)</span></label>
-                                            <input type="email" class="form-control " id="hoten"
+                                            <input type="text" class="form-control " id="hoten"
                                                    aria-describedby="emailHelp" placeholder="Họ và tên">
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                     <div class="col col-lg-6 col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="sdt">@(lang == "vi" ? "Điện thoại" : "Phone") <span>(*)</span></label>
-                                            <input type="email" class="form-control" id="sdt"
+                                            <input type="text" class="form-control" id="sdt"
                                                    aria-describedby="emailHelp" placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone") ">
                                         </div>
                                     </div>
@@ -110,14 +110,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="customFile">@(lang == "vi" ? "Tải lên CV" : "Upload CV") <span>(*)</span></label>
-                                            <input type="file" class="form-control" id="">
+                                            <input type="file" name="cvupload" class="form-control" id="fileupload">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-md-center">
                                     <div class="col-md-auto">
                                         <div class="btn-contact">
-                                            <button>@(lang == "vi" ? "Gửi ngay" : "Send")</button>
+                                            <button id="send_recruit">@(lang == "vi" ? "Gửi ngay" : "Send")</button>
                                         </div>
                                     </div>
                                 </div>
@@ -159,14 +159,27 @@
             <div class="content-job">
                 @foreach (var item in lstMayCare)
                 {
+                    string lnk = item.Permalink;                          //
+                    for (int i = 0; i < lnk.Length; i++)                  //
+                    {                                                     //
+                        if (lnk[i] == '/')                                 //
+                        {                                                 //
+                            lnk = lnk.Substring(1);                       //  This block for fix error dupplicate "/" in permalink
+                            i--;                                          //
+                        }                                                 //
+                        else                                              //
+                        {                                                 //
+                            break;                                        //
+                        }                                                 //
+                    }
                     <div class="row mar0">
                         <div class="col col-lg-4 col-md-4 col-12">
-                            <p><a href="@item.Permalink">@item.Title</a></p>
+                            <p><a href="/@lnk">@item.Title</a></p>
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="flex-job">
-                                <p><span><i class="fas fa-suitcase"></i></span> @item.Category.Title</p>
-                                <p><span><i class="fas fa-map-marker-alt"></i></span> @item.Recruit.Location</p>
+                                <p><span><i class="fas fa-suitcase"></i></span>&ensp; @item.Category.Title</p>
+                                <p><span><i class="fas fa-map-marker-alt"></i></span>&ensp; @item.Recruit.Location</p>
                             </div>
                         </div>
                         <div class="col col-lg-2 col-md-2 col-12">
@@ -184,3 +197,6 @@
         </div>
     </div>
 </section>
+<span style="display:none" id="mailReceiver">@ViewBag.MailReceiver</span>
+<span style="display:none" id="mailSender">@ViewBag.MailSender</span>
+<span style="display:none" id="mailSenderPass">@ViewBag.MailSenderPass</span>

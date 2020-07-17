@@ -34,17 +34,36 @@ namespace MvcWeb.Controllers
         }
 
         [HttpGet]
+        [Route("analyze")]
+        public async Task<IActionResult> AnalyzePage(Guid id, bool startpage = false, bool draft = false)
+        {
+            string urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<AnalyzePage>(id, HttpContext.User, draft);
+            if(!model.Permalink.Contains("/vi")|| !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
+            ViewBag.urlLang = urlLang;
+            model.Archive = await _api.Archives.GetByIdAsync(id);
+            var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
+            ViewBag.lstCategory = lstCategory;
+
+            ViewBag.cookie = Request.Cookies["SessionUser"];
+            return View(model);
+        }
+
+        [HttpGet]
         [Route("newspage")]
         public async Task<IActionResult> NewsPage(Guid id, bool startpage = false, bool draft = false)
         {
             string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<NewsPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
-
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
             ViewBag.urlLang = urlLang;
             model.Archive = await _api.Archives.GetByIdAsync(id);
             var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
             ViewBag.lstCategory = lstCategory;
+
+            ViewBag.cookie = Request.Cookies["SessionUser"];
             return View(model);
         }
 
@@ -54,9 +73,12 @@ namespace MvcWeb.Controllers
         {
             string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<RecruitPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            var lstJob = await _api.Posts.GetAllCategoriesAsync(id);
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
+            ViewBag.lstJob = lstJob;
             model.Archive = await _api.Archives.GetByIdAsync(id);
             return View(model);
         }
@@ -66,7 +88,8 @@ namespace MvcWeb.Controllers
         {
             string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<CategoryPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
@@ -96,10 +119,11 @@ namespace MvcWeb.Controllers
         {
             string urlLang = GetLangByPost(id);
             var model = await _loader.GetPostAsync<NewsPost>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
-            if (model.Permalink.Contains("tin-tuc") || model.Permalink.Contains("news"))
+            if (model.BlogId == new Guid("6C7BB046-F859-4596-9596-B3EC5DCABA6F") || model.BlogId == new Guid("857F38E9-B78B-42F6-9540-91C94EC56FB7"))
             {
                 var newsModel = await _api.Pages.GetByIdAsync<NewsPage>(model.BlogId);
                 var lstPostRelated = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
@@ -118,23 +142,37 @@ namespace MvcWeb.Controllers
 
                 return View(model);
             }
-            else
+            else if (model.BlogId == new Guid("83181007-710E-4C7E-9113-C65896199FBC") || model.BlogId == new Guid("96699AEC-EF34-4581-BFA1-D085C7052A53"))
             {
                 var newsModel = await _api.Pages.GetByIdAsync<RecruitPage>(model.BlogId);
                 var lstJob = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
-                var lstPostbyCat = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
+                var lstPostbyCat = _db.Posts.Where(x => x.CategoryId == model.Category.Id);
 
                 var lstMayCare = new List<NewsPost>();
                 foreach (var item in lstPostbyCat)
                 {
-                    var tmp = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
+                    if (item.Id == model.Id)
+                        continue;
+                    var tmp = await _api.Posts.GetByIdAsync<NewsPost>(item.Id);
                     lstMayCare.Add(tmp);
                 }
 
+                ViewBag.MailReceiver = newsModel.MailReceiver;
+                ViewBag.MailSender = newsModel.MailSender;
+                ViewBag.MailSenderPass = newsModel.MailSenderPass;
                 ViewBag.lstMayCare = lstMayCare;
                 ViewBag.banner = newsModel.Banner;
                 ViewBag.lstJob = lstJob;
                 return View("RecruitPost", model);
+            }
+            else
+            {
+                var newsModel = await _api.Pages.GetByIdAsync<AnalyzePage>(model.BlogId);
+                var lstPostRelated = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
+                var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
+
+                ViewBag.lstCategory = lstCategory;
+                return View("AnalyzePost", model);
             }
         }
 
@@ -144,7 +182,8 @@ namespace MvcWeb.Controllers
         {
             string urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<TeaserPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View("startpage", model);
@@ -156,7 +195,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<RelationPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -168,7 +208,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<ContactPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -180,7 +221,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<IntroPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -200,7 +242,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<InvestbankPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -212,7 +255,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<AgencyPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -233,7 +277,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<LoginPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -245,7 +290,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<RegisterPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);
@@ -256,7 +302,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<SearchPage>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
             var listPost = _db.Posts.Where(x => x.Title.Contains(keyword)).ToList();
             var newsPosts = new List<NewsPost>();
             foreach (var item in listPost)
@@ -275,7 +322,8 @@ namespace MvcWeb.Controllers
         {
             var urlLang = GetLangByPage(id);
             var model = await _loader.GetPageAsync<ForgotPassword>(id, HttpContext.User, draft);
-            model.Permalink = urlLang + model.Permalink;
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
 
             ViewBag.urlLang = urlLang;
             return View(model);

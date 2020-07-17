@@ -1,7 +1,6 @@
 ﻿@model MvcWeb.Models.AgencyPage
 @{
-    ViewData["Title"] = "AgencyPage";
-    ViewData["Title"] = "RelationPage";
+    ViewBag.Title = Model.Title;
     string urlLang = ViewBag.urlLang;
     string lang = "";
     if (urlLang.Contains("/en"))

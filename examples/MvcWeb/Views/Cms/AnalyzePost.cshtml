@@ -1,0 +1,48 @@
+﻿@model MvcWeb.Models.NewsPost
+@{
+    ViewBag.Title = Model.Title;
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+    var lstCategories = ViewBag.lstCategory;
+}
+
+    <section id="page">
+        <section id="page_content" class="fw">
+            <div class="container">
+                <div id="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/phan-tich" : "/analyze")">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
+                        <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/danh-muc/" : "/category/")@Model.Category.Slug">@Model.Category.Title</a></li>
+                        <li class="breadcrumb-item">@(lang == "vi" ? "Chi tiết phân tích" : "Analyze Detail")</li>
+                    </ol>
+                </div>
+                <div class="row mar0">
+                    <div class="col-12 col-lg-9 page_content">
+                        @Html.DisplayFor(m => m.Blocks)
+                    </div>
+                    <div class="col-12 col-lg-3 pad0">
+                        <div class="page_category">
+                            <div class="title_row">
+                                <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <div class="row_category">
+                                @foreach (var item in lstCategories)
+                                {
+                                    <div class="row_category_div">
+                                        <a href="/@(lang == "vi" ? "danh-muc" : "category")/@item.Slug">@item.Title</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>

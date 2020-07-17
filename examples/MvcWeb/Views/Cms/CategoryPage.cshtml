@@ -1,6 +1,6 @@
 ﻿@model MvcWeb.Models.CategoryPage
 @{
-    ViewData["Title"] = "CategoryPage";
+    ViewBag.Title = Model.Title;
     var listPost = ViewBag.listPost;
     var lstCategories = ViewBag.listCategory;
     var listHighlight = ViewBag.listHighLight;
@@ -30,9 +30,22 @@
                             <div class="row mar0 news_wrapper">
                                 @foreach (var item in listPost)
                                 {
+                                    string lnk = item.Permalink;
+                                    for (int i = 0; i < lnk.Length; i++)
+                                    {
+                                        if (lnk[i] == '/')
+                                        {
+                                            lnk = lnk.Substring(1);
+                                            i--;
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
                                     <div class="col-12 col-lg-6 news_div">
                                         <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
-                                        <a class="news_title" href="@item.Permalink">
+                                        <a class="news_title" href="/@lnk">
                                             @item.Title
                                         </a>
                                         <p class="news_date"><i class="far fa-clock"></i> 01/01/2020</p>

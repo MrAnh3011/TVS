@@ -1,6 +1,6 @@
 ﻿@model MvcWeb.Models.RegisterPage
 @{
-    ViewData["Title"] = "RegisterPage";
+    ViewBag.Title = Model.Title;
     string urlLang = ViewBag.urlLang;
     string lang = "";
     if (urlLang.Contains("/en"))

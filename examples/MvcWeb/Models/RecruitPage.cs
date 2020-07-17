@@ -1,6 +1,7 @@
 ﻿using MvcWeb.Models.Regions;
 using Piranha.AttributeBuilder;
 using Piranha.Extend;
+using Piranha.Extend.Fields;
 using Piranha.Models;
 using System;
 using System.Collections.Generic;
@@ -23,5 +24,16 @@ namespace MvcWeb.Models
 
         [Region(Display = RegionDisplayMode.Full, Title = "Vị trí đang tuyển", ListTitle = "Vị trí đang tuyển", ListPlaceholder = "Vị trí đang tuyển")]
         public PostArchive<DynamicPost> Archive { get; set; }
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Người nhận mail", ListTitle = "Người nhận mail", ListPlaceholder = "Người nhận mail")]
+        public StringField MailReceiver { get; set; }
+
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Người gửi mail", ListTitle = "Người gửi mail", ListPlaceholder = "Người gửi mail")]
+        public StringField MailSender { get; set; }
+
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Mật khẩu mail", ListTitle = "Mật khẩu mail", ListPlaceholder = "Mật khẩu mail")]
+        public StringField MailSenderPass { get; set; }
     }
 }
