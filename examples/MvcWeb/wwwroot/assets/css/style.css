@@ -532,6 +532,7 @@ a:hover {
   transition: all 0.5s;
   -webkit-filter: brightness(0.5);
   height: 100%;
+  width: 100%;
 }
 
 #content #news .big_news .news_title,
@@ -725,7 +726,7 @@ a:hover {
 }
 
 #page_content .page_content img{
-    width: 100%;
+    width: 100% !important;
 }
 
 #page_content .page_category {
@@ -976,6 +977,8 @@ a:hover {
 
 #page_content .page_content .table_wrapper .bank_table tbody tr td img {
   margin: 0 !important;
+  width: 36px !important;
+  height: 24px;
 }
 
 #page_content .page_content .partner .partner_div {
@@ -1601,7 +1604,6 @@ a:hover {
   }
 
   #header .login .small-logo a,img {
-      width:100%;
       height: auto;
   }
 

@@ -1,9 +1,8 @@
-﻿@model MvcWeb.Models.CategoryPage
+﻿@model MvcWeb.Models.CategoryAnalyze;
 @{
-    ViewBag.Title = Model.Title;
+    Model.Title = ViewBag.Title;
     var listPost = ViewBag.listPost;
     var lstCategories = ViewBag.listCategory;
-    var listHighlight = ViewBag.listHighLight;
     string categoryname = ViewBag.categoryName;
     string urlLang = ViewBag.urlLang;
     string lang = "";
@@ -67,21 +66,6 @@
                             {
                                 <div class="row_category_div">
                                     <a href="@item.Slug">@item.Title</a>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div class="page_category">
-                        <div class="title_row">
-                            <h2 class="title">Tin nổi bật</h2>
-                            <p class="title_line"></p>
-                        </div>
-                        <div class="hot_news">
-                            @foreach (var item in listHighlight)
-                            {
-                                <div class="col-lg-12 hot_news_div">
-                                    <a href="@item.Post.Permalink">@item.Post.Title</a>
-                                    <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
                                 </div>
                             }
                         </div>

@@ -88,27 +88,13 @@
                                     }
                                     @if (item.Items.Any())
                                     {
-                                        @if (item.Permalink == "/dich-vu")
-                                        {
-                                            <a>@item.MenuTitle</a>
-                                            <ul>
-                                                <li><a href="https://www.tvam.vn/vi" target="_blank">Quản lý quỹ</a></li>
-                                                @foreach (var sub in item.Items)
-                                                {
-                                                    <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
-                                                }
-                                            </ul>
-                                        }
-                                        else
-                                        {
-                                            <a href="@item.Permalink">@item.MenuTitle</a>
-                                            <ul>
-                                                @foreach (var sub in item.Items)
-                                                {
-                                                    <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
-                                                }
-                                            </ul>
-                                        }
+                                        <a href="@item.Permalink">@item.MenuTitle</a>
+                                        <ul>
+                                            @foreach (var sub in item.Items)
+                                            {
+                                                <li><a href="@sub.Permalink">@sub.MenuTitle</a></li>
+                                            }
+                                        </ul>
                                     }
                                     else
                                     {

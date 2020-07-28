@@ -1,0 +1,48 @@
+﻿@model MvcWeb.Models.NewsPost
+@{
+    ViewBag.Title = Model.Title;
+
+    var lstArchive = ViewBag.lstArchive;
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+}
+
+<section id="page">
+    <section id="page_bg" class="fw">
+        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <div class="page_breadcrumb">
+            <h3>@Model.Banner.Title</h3>
+            <div>
+                <a href="#">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@(lang == "vi" ? "Giới thiệu" : "Introduction")</a>
+            </div>
+        </div>
+    </section>
+    <section id="page_content" class="fw">
+        <div class="container">
+            <div class="row mar0">
+                <div class="col-12 col-lg-9 page_content">
+                    @Html.DisplayFor(m => m.Blocks)
+                </div>
+                <div class="col-12 col-lg-3 page_category">
+                    <div class="title_row">
+                        <h2 class="title">@(lang == "vi" ? "Dịch vụ khác" : "Other Services")</h2>
+                        <p class="title_line"></p>
+                    </div>
+                    <nav>
+                        <div class="nav" id="nav-tab" role="tablist">
+                            @foreach (var item in lstArchive.Posts)
+                            {
+                                <a class="nav-item nav-link" id="nav-home-tab" href="@item.Permalink" role="tab">
+                                    @item.Title
+                                </a>
+                            }
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

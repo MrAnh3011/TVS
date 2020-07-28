@@ -68,6 +68,21 @@ namespace MvcWeb.Controllers
         }
 
         [HttpGet]
+        [Route("otherservicespage")]
+        public async Task<IActionResult> OtherServicesPage(Guid id, bool startpage = false, bool draft = false)
+        {
+            string urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<OtherServicesPage>(id, HttpContext.User, draft);
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
+            model.Archive = await _api.Archives.GetByIdAsync(id);
+
+            return View(model);
+        }
+
+        [HttpGet]
         [Route("recruitpage")]
         public async Task<IActionResult> RecruitPage(Guid id, bool startpage = false, bool draft = false)
         {
@@ -112,6 +127,35 @@ namespace MvcWeb.Controllers
             ViewBag.listHighLight = modelPage.lstHighlight;
             return View(model);
         }
+
+        [Route("categoryanalyze/{keyword?}")]
+        public async Task<IActionResult> CategoryAnalyze(Guid id, string keyword, bool startpage = false, bool draft = false)
+        {
+            string urlLang = GetLangByPage(id);
+            var model = await _loader.GetPageAsync<CategoryAnalyze>(id, HttpContext.User, draft);
+            if (!model.Permalink.Contains("/vi") || !model.Permalink.Contains("/en"))
+                model.Permalink = urlLang + model.Permalink;
+
+            ViewBag.urlLang = urlLang;
+            var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
+            var categoryName = categoryId[0].Title;
+            var listPost = _db.Posts.Where(x => x.CategoryId == categoryId[0].Id).ToList();
+            var lstPostInfo = new List<NewsPost>();
+            foreach (var item in listPost)
+            {
+                var tmpPost = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
+                lstPostInfo.Add(tmpPost);
+            }
+            var blogId = listPost[0].BlogId;
+
+            var listCategory = await _api.Posts.GetAllCategoriesAsync(blogId);
+
+            ViewBag.categoryName = categoryName;
+            ViewBag.listPost = lstPostInfo;
+            ViewBag.listCategory = listCategory;
+            return View(model);
+        }
+
 
         [HttpGet]
         [Route("post")]
@@ -164,6 +208,14 @@ namespace MvcWeb.Controllers
                 ViewBag.banner = newsModel.Banner;
                 ViewBag.lstJob = lstJob;
                 return View("RecruitPost", model);
+            }
+            //else if (model.BlogId == new Guid("22B4F691-1533-445A-89AA-A49EEECD30DA") || model.BlogId == new Guid("DA0AFB15-E43C-4CE4-B607-039BCF2FB09D"))
+            else if (model.BlogId == new Guid("A9C65A73-21F5-4DFC-BD7B-7F23C98C7A13") || model.BlogId == new Guid("896AF277-66BE-4F0A-8746-0534F8329D25"))
+            {
+                var servicesModel = await _api.Pages.GetByIdAsync<OtherServicesPage>(model.BlogId);
+
+                ViewBag.lstArchive = servicesModel.Archive;
+                return View("OtherServicesPost", model);
             }
             else
             {
