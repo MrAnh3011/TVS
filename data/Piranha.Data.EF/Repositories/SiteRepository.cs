@@ -330,6 +330,12 @@ namespace Piranha.Repositories
                 item.PageTypeName = App.PageTypes.First(t => t.Id == page.PageTypeId).Title;
                 item.Items = Sort(pages, page.Id, level + 1);
 
+                //use for multilanguage - anhpt
+                Guid siteId = _db.Pages.SingleOrDefault(x => x.Id == item.Id).SiteId;
+                string hostName = _db.Sites.SingleOrDefault(x => x.Id == siteId).Hostnames;
+                string urlName = hostName.Substring(hostName.Length - 3, 3);
+                item.Permalink = urlName + item.Permalink;
+
                 result.Add(item);
             }
             return result;

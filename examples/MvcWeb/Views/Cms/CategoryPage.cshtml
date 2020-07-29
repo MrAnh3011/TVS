@@ -18,7 +18,7 @@
             <div id="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page"><a href="/home">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="/tin-tuc">Tin tức</a></li>
+                    <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/thong-tin" : "/information")">@(lang == "vi" ? "Thông tin" : "Information")</a></li>
                     <li class="breadcrumb-item">@categoryname</li>
                 </ol>
             </div>
@@ -30,7 +30,19 @@
                             <div class="row mar0 news_wrapper">
                                 @foreach (var item in listPost)
                                 {
+
                                     string lnk = item.Permalink;
+                                    for (int i = 0; i < lnk.Length; i++)
+                                    {
+                                        if (lnk[i] == '/')
+                                        {
+                                            lnk = lnk.Substring(1);
+                                            i--;
+                                        }
+                                        else
+                                            break;
+                                    }
+                                    lnk = "/" + lnk;
                                     if (lnk.Contains("/vi"))
                                     {
                                         lnk = lnk.Replace("/vi", "");

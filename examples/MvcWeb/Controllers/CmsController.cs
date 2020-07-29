@@ -209,8 +209,8 @@ namespace MvcWeb.Controllers
                 ViewBag.lstJob = lstJob;
                 return View("RecruitPost", model);
             }
-            //else if (model.BlogId == new Guid("22B4F691-1533-445A-89AA-A49EEECD30DA") || model.BlogId == new Guid("DA0AFB15-E43C-4CE4-B607-039BCF2FB09D"))
-            else if (model.BlogId == new Guid("A9C65A73-21F5-4DFC-BD7B-7F23C98C7A13") || model.BlogId == new Guid("896AF277-66BE-4F0A-8746-0534F8329D25"))
+            else if (model.BlogId == new Guid("22B4F691-1533-445A-89AA-A49EEECD30DA") || model.BlogId == new Guid("DA0AFB15-E43C-4CE4-B607-039BCF2FB09D"))
+            //else if (model.BlogId == new Guid("A9C65A73-21F5-4DFC-BD7B-7F23C98C7A13") || model.BlogId == new Guid("896AF277-66BE-4F0A-8746-0534F8329D25"))
             {
                 var servicesModel = await _api.Pages.GetByIdAsync<OtherServicesPage>(model.BlogId);
 

@@ -1,7 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Hosting
 @inject IWebHostEnvironment Env
-
+@{
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+}
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +31,7 @@
 
     @if (Model is Piranha.Models.IMeta)
     {
-        <partial name="Partial/_Meta.cshtml" />
+    <partial name="Partial/_Meta.cshtml" />
     }
 
     @RenderSection("head", required: false)
@@ -47,23 +53,22 @@
             <div class="container">
                 <div class="row mar0">
                     <div class="col-12 col-lg-4">
-                        <p>GP hoạt động kinh doanh chứng khoán số 36/UBCK-GPHĐKD do UBCK cấp ngày 25/12/2006</p>
+                        <p>@(lang == "vi" ? "GP hoạt động kinh doanh chứng khoán số 36/UBCK-GPHĐKD do UBCK cấp ngày 25/12/2006" : "Securities business license No. 36 / UBCK-GPHĐKD issued by the State Securities Commission on December 25, 2006")</p>
                     </div>
                     <div class="col-12 col-lg-4">
-                        <h5>Hà nội</h5>
+                        <h5>@(lang == "vi" ? "Hà Nội" : "Ha Noi")</h5>
                         <p><i class="fas fa-phone-alt"></i> +84 24 3248 4820</p>
                         <p><i class="fas fa-fax"></i> +84 24 3248 4821</p>
                         <p>
-                            <i class="fas fa-map-marker"></i> Phòng 402, Tòa nhà TĐL, 22 Láng Hạ, Quận Đống Đa, Hà Nội
+                            <i class="fas fa-map-marker"></i>@(lang == "vi" ? " Phòng 402, Tòa nhà TĐL, 22 Láng Hạ, Quận Đống Đa, Hà Nội" : " Room 402, TĐL Building, 22 Lang Ha, Dong Da District, Hanoi")
                         </p>
                     </div>
                     <div class="col-12 col-lg-4">
-                        <h5>Hồ Chí Minh</h5>
+                        <h5>@(lang == "vi" ? "Hồ Chí Minh" : "Ho Chi Minh")</h5>
                         <p><i class="fas fa-phone-alt"></i> +84 28 6299 2099</p>
                         <p><i class="fas fa-fax"></i> +84 28 6299 2088</p>
                         <p>
-                            <i class="fas fa-map-marker"></i> Lầu 9, Tòa nhà Bitexco Nam Long, 63A Võ Văn Tần, Quận 3, Hồ
-                            Chí Minh
+                            <i class="fas fa-map-marker"></i>@(lang == "vi" ? " Lầu 9, Tòa nhà Bitexco Nam Long, 63A Võ Văn Tần, Quận 3, Hồ Chí Minh" : "9th Floor, Bitexco Nam Long Building, 63A Vo Van Tan, District 3, Ho Chi Minh")
                         </p>
                     </div>
                 </div>

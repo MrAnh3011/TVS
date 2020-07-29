@@ -1,4 +1,11 @@
-﻿<div class="login">
+﻿@{
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
+}
+<div class="login">
     <div class="container">
         <div class="row mar0">
             <div class="col-3 small-logo">
@@ -6,13 +13,13 @@
             </div>
             <div class="col-9 col-lg-12 pad0">
                 <ul class="fw">
-                    <li id="logintext"><a href="/dang-nhap">Đăng nhập</a></li>
+                    <li id="logintext"><a href="/dang-nhap">@(lang == "vi" ? "Đăng nhập" : "Login")</a></li>
                     <li id="itemresultLog" style="display:none; color:white;">
-                        <span>Xin chào, </span>
+                        <span>@(lang == "vi" ? "Xin chào, " : "Hello, ")</span>
                         <span id="usernameLog"></span>
-                        <a href="#" id="logOut">Thoát</a>
+                        <a href="#" id="logOut">@(lang == "vi" ? "Thoát" : "Sign out")</a>
                     </li>
-                    <li><a href="/yeu-cau-mo-tk">Gửi yêu cầu mở tài khoản</a></li>
+                    <li><a href="/yeu-cau-mo-tk">@(lang == "vi" ? "Gửi yêu cầu mở tài khoản" : "Request open account")</a></li>
                 </ul>
             </div>
         </div>

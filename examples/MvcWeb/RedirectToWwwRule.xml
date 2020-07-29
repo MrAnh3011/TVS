@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rewrite>
+  <rules>
+    <rule name="CanonicalHostNameRule">
+      <match url="(.*)" />
+      <conditions>
+        <add input="{HTTP_HOST}" pattern="^demo\.gosmac\.vn" negate="true" />
+      </conditions>
+      <action type="Redirect" url="http://demo.gosmac.vn/{R:1}" />
+    </rule>
+  </rules>
+</rewrite>

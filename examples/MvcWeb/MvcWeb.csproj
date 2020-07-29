@@ -26,4 +26,10 @@
     <ProjectReference Include="..\..\data\Piranha.Data.EF.SQLServer\Piranha.Data.EF.SQLServer.csproj" />
     <ProjectReference Include="..\..\identity\Piranha.AspNetCore.Identity.SQLServer\Piranha.AspNetCore.Identity.SQLServer.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="RedirectToWwwRule.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

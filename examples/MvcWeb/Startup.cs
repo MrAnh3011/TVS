@@ -19,6 +19,7 @@ using Piranha.Data.EF.SQLServer;
 using Microsoft.Extensions.Configuration;
 using Piranha.AspNetCore.Identity.SQLServer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace MvcWeb
 {
@@ -147,6 +148,10 @@ namespace MvcWeb
                 endpoints.MapPiranhaManager();
             });
 
+            app.UseRewriter(new RewriteOptions()
+                .AddIISUrlRewrite(env.ContentRootFileProvider, "RedirectToWwwRule.xml")
+                .AddRedirectToHttps()
+            );
             //Seed.RunAsync(api).GetAwaiter().GetResult();
         }
     }
