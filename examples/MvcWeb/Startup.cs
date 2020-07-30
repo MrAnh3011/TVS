@@ -148,10 +148,10 @@ namespace MvcWeb
                 endpoints.MapPiranhaManager();
             });
 
-            app.UseRewriter(new RewriteOptions()
-                .AddIISUrlRewrite(env.ContentRootFileProvider, "RedirectToWwwRule.xml")
-                .AddRedirectToHttps()
-            );
+            //app.UseRewriter(new RewriteOptions()
+            //    .AddIISUrlRewrite(env.ContentRootFileProvider, "RedirectToWwwRule.xml")
+            //    .AddRedirectToHttps()
+            //);
             //Seed.RunAsync(api).GetAwaiter().GetResult();
         }
     }
