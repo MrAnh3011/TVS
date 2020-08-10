@@ -1,6 +1,6 @@
 ﻿@model MvcWeb.Models.NewsPost
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = ViewBag.Page.Title;
 
     var lstArchive = ViewBag.lstArchive;
     string urlLang = ViewBag.urlLang;
@@ -16,7 +16,7 @@
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
-                <a href="#">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@Model.Title</a>
+                <a href="#">@(lang == "vi" ? "Trang chủ" : "Home")</a> <span>/</span> <a href="#">@ViewBag.Page.Title</a>
             </div>
         </div>
     </section>
@@ -24,11 +24,15 @@
         <div class="container">
             <div class="row mar0">
                 <div class="col-12 col-lg-9 page_content">
-                    @Html.DisplayFor(m => m.Blocks)
+                    <div class="detail_content ">
+                        <div class="news_detail_content">
+                            @Html.DisplayFor(m => m.Blocks)
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-lg-3 page_category">
                     <div class="title_row">
-                        <h2 class="title">@ViewBag.PageTitle</h2>
+                        <h2 class="title">@ViewBag.Page.Title</h2>
                         <p class="title_line"></p>
                     </div>
                     <nav>

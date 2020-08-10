@@ -35,14 +35,15 @@ namespace MvcWeb.Controllers
 
         [HttpGet]
         [Route("analyze")]
-        public async Task<IActionResult> AnalyzePage(Guid id, bool startpage = false, bool draft = false)
+        public async Task<IActionResult> AnalyzePage(Guid id, int? year = null, int? month = null, int? page = null,
+            Guid? category = null, Guid? tag = null)
         {
             string urlLang = GetLangByPage(id);
-            var model = await _loader.GetPageAsync<AnalyzePage>(id, HttpContext.User, draft);
+            var model = await _api.Pages.GetByIdAsync<AnalyzePage>(id);
             if (!model.Permalink.Contains(urlLang))
                 model.Permalink = urlLang + model.Permalink;
             ViewBag.urlLang = urlLang;
-            model.Archive = await _api.Archives.GetByIdAsync(id);
+            model.Archive = await _api.Archives.GetByIdAsync(id, page, category, tag, year, month, 6);
             var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
             ViewBag.lstCategory = lstCategory;
 
@@ -52,14 +53,15 @@ namespace MvcWeb.Controllers
 
         [HttpGet]
         [Route("newspage")]
-        public async Task<IActionResult> NewsPage(Guid id, bool startpage = false, bool draft = false)
+        public async Task<IActionResult> NewsPage(Guid id, int? year = null, int? month = null, int? page = null,
+            Guid? category = null, Guid? tag = null)
         {
             string urlLang = GetLangByPage(id);
-            var model = await _loader.GetPageAsync<NewsPage>(id, HttpContext.User, draft);
+            var model = await _api.Pages.GetByIdAsync<NewsPage>(id);
             if (!model.Permalink.Contains(urlLang))
                 model.Permalink = urlLang + model.Permalink;
             ViewBag.urlLang = urlLang;
-            model.Archive = await _api.Archives.GetByIdAsync(id);
+            model.Archive = await _api.Archives.GetByIdAsync(id, page, category, tag, year, month, 6);
             var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
             ViewBag.lstCategory = lstCategory;
 
@@ -224,7 +226,7 @@ namespace MvcWeb.Controllers
             {
                 var servicesModel = await _api.Pages.GetByIdAsync<OtherServicesPage>(model.BlogId);
 
-                ViewBag.PageTitle = servicesModel.Title;
+                ViewBag.Page = servicesModel;
                 ViewBag.lstArchive = servicesModel.Archive;
                 return View("OtherServicesPost", model);
             }
