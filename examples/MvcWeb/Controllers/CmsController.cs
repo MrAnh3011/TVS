@@ -184,12 +184,19 @@ namespace MvcWeb.Controllers
             if (!model.Permalink.Contains(urlLang))
                 model.Permalink = urlLang + model.Permalink;
 
-            foreach (var item in model.lstNews)
+            Guid idNews;
+            if (urlLang.Contains("/en"))
             {
-                if (!item.Post.Permalink.Contains(urlLang))
-                    item.Post.Permalink = urlLang + item.Post.Permalink;
+                idNews = new Guid("857F38E9-B78B-42F6-9540-91C94EC56FB7");
+            }
+            else
+            {
+                idNews = new Guid("6C7BB046-F859-4596-9596-B3EC5DCABA6F");
             }
 
+            var lstPost = (await _api.Posts.GetAllAsync(idNews)).OrderByDescending(x => x.Published).Take(3);
+
+            ViewBag.lstNews = lstPost.ToList();
             ViewBag.urlLang = urlLang;
             return View("startpage", model);
         }
