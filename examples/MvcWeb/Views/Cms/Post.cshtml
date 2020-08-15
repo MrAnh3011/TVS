@@ -4,6 +4,7 @@
     var lstCategories = (List<Piranha.Models.Taxonomy>)ViewBag.lstCategory;
     var lstHightLight = (List<Piranha.Extend.Fields.PostField>)ViewBag.lstHightLight;
     var lstRelated = ViewBag.lstRelated;
+    string blogLink = ViewBag.BlogLink;
 
     string urlLang = ViewBag.urlLang;
     string lang = "";
@@ -20,8 +21,8 @@
                     <li class="breadcrumb-item active" aria-current="page">
                         <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/thong-tin" : "/information")">@(lang == "vi" ? "Thông tin" : "Information")</a></li>
-                    <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/danh-muc/" : "/category/")@Model.Category.Slug">@Model.Category.Title</a></li>
+                    <li class="breadcrumb-item"><a href="@blogLink">@(lang == "vi" ? "Thông tin" : "Information")</a></li>
+                    <li class="breadcrumb-item"><a href="@blogLink/category/@Model.Category.Slug">@Model.Category.Title</a></li>
                     <li class="breadcrumb-item">@(lang == "vi" ? "Chi tiết tin tức" : "News Detail")</li>
                 </ol>
             </div>
@@ -43,28 +44,31 @@
                             @foreach (var item in lstCategories)
                             {
                                 <div class="row_category_div">
-                                    <a href="/@(lang == "vi" ? "danh-muc" : "category")/@item.Slug">@item.Title</a>
+                                    <a href="@blogLink/category/@item.Slug">@item.Title</a>
                                 </div>
                             }
                         </div>
                     </div>
-                    <div class="page_category">
-                        <div class="title_row">
-                            <h2 class="title">@(lang == "vi" ? "Tin nổi bật" : "Hot news")</h2>
-                            <p class="title_line"></p>
+                    @if (lstHightLight.Count > 0)
+                    {
+                        <div class="page_category">
+                            <div class="title_row">
+                                <h2 class="title">@(lang == "vi" ? "Tin nổi bật" : "Hot news")</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <div class="hot_news">
+                                @foreach (var item in lstHightLight)
+                                {
+                                    <div class="col-lg-12 hot_news_div">
+                                        <a href="@item.Post.Permalink">
+                                            @item.Post.Title
+                                        </a>
+                                        <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
+                                    </div>
+                                }
+                            </div>
                         </div>
-                        <div class="hot_news">
-                            @foreach (var item in lstHightLight)
-                            {
-                                <div class="col-lg-12 hot_news_div">
-                                    <a href="@item.Post.Permalink">
-                                        @item.Post.Title
-                                    </a>
-                                    <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
-                                </div>
-                            }
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
             <div class="row mar0 related_news">

@@ -7,6 +7,8 @@
         lang = "en";
     else lang = "vi";
     var lstCategories = ViewBag.lstCategory;
+
+    string blogLink = ViewBag.BlogLink;
 }
 
     <section id="page">
@@ -17,8 +19,8 @@
                         <li class="breadcrumb-item active" aria-current="page">
                             <a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/phan-tich" : "/analyze")">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
-                        <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/danhmuc-phantich/" : "/category/")@Model.Category.Slug">@Model.Category.Title</a></li>
+                        <li class="breadcrumb-item"><a href="@blogLink">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
+                        <li class="breadcrumb-item"><a href="@blogLink/category/@Model.Category.Slug">@Model.Category.Title</a></li>
                         <li class="breadcrumb-item">@(lang == "vi" ? "Chi tiết phân tích" : "Analyze Detail")</li>
                     </ol>
                 </div>
@@ -40,7 +42,7 @@
                                 @foreach (var item in lstCategories)
                                 {
                                     <div class="row_category_div">
-                                        <a href="/@(lang == "vi" ? "danhmuc-phantich" : "category-analyze")/@item.Slug">@item.Title</a>
+                                        <a href="@blogLink/category/@item.Slug">@item.Title</a>
                                     </div>
                                 }
                             </div>

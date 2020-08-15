@@ -76,13 +76,13 @@
                                 </ul>
                                 continue;
                             }
-                            @if (item.Permalink.Contains("/intro"))
+                            @if (item.Permalink.Contains("/our-firm"))
                             {
                                 <a>@item.MenuTitle</a>
                                 <ul>
-                                    <li><a href="/en/intro/about-us">About us</a></li>
-                                    <li><a href="/en/intro/administrative-concil">Administrative Council</a></li>
-                                    <li><a href="/en/intro/executive-board">Executive Board</a></li>
+                                    <li><a href="/en/our-firm/about-us">About us</a></li>
+                                    <li><a href="/en/our-firm/administrative-concil">Administrative Council</a></li>
+                                    <li><a href="/en/our-firm/executive-board">Executive Board</a></li>
                                     @if (item.Items.Any())
                                     {
                                         foreach (var sub in item.Items)

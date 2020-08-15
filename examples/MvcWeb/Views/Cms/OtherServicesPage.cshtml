@@ -3,7 +3,9 @@
     ViewBag.Title = Model.Title;
     var lstitem = Model.Archive.Posts.ToList();
     var item = lstitem[0];
+
+    string urlLang = ViewBag.urlLang;
 }
 <script>
-    window.location.href = "@item.Permalink";
+    window.location.href = "@urlLang@item.Permalink";
 </script>

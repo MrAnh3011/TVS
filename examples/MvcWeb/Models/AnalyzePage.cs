@@ -19,5 +19,8 @@ namespace MvcWeb.Models
 
         [Region(Display = RegionDisplayMode.Full, Title = "Phân tích", ListTitle = "Phân tích", ListPlaceholder = "Phân tích")]
         public PostArchive<DynamicPost> Archive { get; set; }
+
+        [Region(Display = RegionDisplayMode.Full, Title = "Tin nổi bật", ListTitle = "Tin nổi bật", ListPlaceholder = "Tin nổi bật")]
+        public IList<Piranha.Extend.Fields.PostField> lstHighlight { get; set; }
     }
 }

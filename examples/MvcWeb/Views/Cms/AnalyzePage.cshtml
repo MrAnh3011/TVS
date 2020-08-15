@@ -24,7 +24,7 @@
                 <div id="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page"><a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a></li>
-                        <li class="breadcrumb-item"><a href="@(lang == "vi" ? "/phan-tich" : "/analyze")">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
+                        <li class="breadcrumb-item"><a href="@BlogLink()">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
                         <li class="breadcrumb-item"></li>
                     </ol>
                 </div>
@@ -42,7 +42,7 @@
                                             {
                                                 <div class="col-12 col-lg-6 news_div">
                                                     <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
-                                                    <a class="news_title" href="@item.Permalink">
+                                                    <a class="news_title" href="@urlLang@item.Permalink">
                                                         @item.Title
                                                     </a>
                                                     <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
@@ -60,7 +60,7 @@
                                         {
                                             <div class="col-12 col-lg-6 news_div">
                                                 <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
-                                                <a class="news_title" href="@item.Permalink">
+                                                <a class="news_title" href="@urlLang@item.Permalink">
                                                     @item.Title
                                                 </a>
                                                 <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
@@ -124,11 +124,29 @@
                                 @foreach (var item in lstCategories)
                                 {
                                     <div class="row_category_div">
-                                        <a href="@(lang == "vi" ? "danhmuc-phantich" : "category-analyze")/@item.Slug">@item.Title</a>
+                                        <a href="@urlLang/@Model.Slug/category/@item.Slug">@item.Title</a>
                                     </div>
                                 }
                             </div>
                         </div>
+                        @if (Model.lstHighlight.Count > 0)
+                        {
+                            <div class="page_category">
+                                <div class="title_row">
+                                    <h2 class="title">@(lang == "vi" ? "Tin nổi bật" : "Highlight")</h2>
+                                    <p class="title_line"></p>
+                                </div>
+                                <div class="hot_news">
+                                    @foreach (var item in Model.lstHighlight)
+                                    {
+                                        <div class="col-lg-12 hot_news_div">
+                                            <a href="@urlLang@item.Post.Permalink">@item.Post.Title</a>
+                                            <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

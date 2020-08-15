@@ -39,7 +39,7 @@
                         <div class="nav" id="nav-tab" role="tablist">
                             @foreach (var item in lstArchive.Posts)
                             {
-                                <a class="nav-item nav-link" id="nav-home-tab" href="@item.Permalink" role="tab">
+                                <a class="nav-item nav-link" id="nav-home-tab" href="@urlLang@item.Permalink" role="tab">
                                     @item.Title
                                 </a>
                             }

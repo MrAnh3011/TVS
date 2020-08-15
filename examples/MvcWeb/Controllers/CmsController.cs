@@ -100,65 +100,6 @@ namespace MvcWeb.Controllers
             return View(model);
         }
 
-        [Route("categorypage/{keyword?}")]
-        public async Task<IActionResult> CategoryPage(Guid id, string keyword, bool startpage = false, bool draft = false)
-        {
-            string urlLang = GetLangByPage(id);
-            var model = await _loader.GetPageAsync<CategoryPage>(id, HttpContext.User, draft);
-            if (!model.Permalink.Contains(urlLang))
-                model.Permalink = urlLang + model.Permalink;
-
-            ViewBag.urlLang = urlLang;
-            var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
-            var categoryName = categoryId[0].Title;
-            var listPost = _db.Posts.Where(x => x.CategoryId == categoryId[0].Id).ToList();
-            var lstPostInfo = new List<NewsPost>();
-            foreach (var item in listPost)
-            {
-                var tmpPost = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
-                lstPostInfo.Add(tmpPost);
-            }
-            var blogId = listPost[0].BlogId;
-
-            var modelPage = await _loader.GetPageAsync<NewsPage>(blogId, HttpContext.User, draft);
-            var listCategory = await _api.Posts.GetAllCategoriesAsync(blogId);
-
-            ViewBag.categoryName = categoryName;
-            ViewBag.listPost = lstPostInfo;
-            ViewBag.listCategory = listCategory;
-            ViewBag.listHighLight = modelPage.lstHighlight;
-            return View(model);
-        }
-
-        [Route("categoryanalyze/{keyword?}")]
-        public async Task<IActionResult> CategoryAnalyze(Guid id, string keyword, bool startpage = false, bool draft = false)
-        {
-            string urlLang = GetLangByPage(id);
-            var model = await _loader.GetPageAsync<CategoryAnalyze>(id, HttpContext.User, draft);
-            if (!model.Permalink.Contains(urlLang))
-                model.Permalink = urlLang + model.Permalink;
-
-            ViewBag.urlLang = urlLang;
-            var categoryId = _db.Categories.Where(x => x.Slug == keyword).ToList();
-            var categoryName = categoryId[0].Title;
-            var listPost = _db.Posts.Where(x => x.CategoryId == categoryId[0].Id).ToList();
-            var lstPostInfo = new List<NewsPost>();
-            foreach (var item in listPost)
-            {
-                var tmpPost = await _loader.GetPostAsync<NewsPost>(item.Id, HttpContext.User, false);
-                lstPostInfo.Add(tmpPost);
-            }
-            var blogId = listPost[0].BlogId;
-
-            var listCategory = await _api.Posts.GetAllCategoriesAsync(blogId);
-
-            ViewBag.categoryName = categoryName;
-            ViewBag.listPost = lstPostInfo;
-            ViewBag.listCategory = listCategory;
-            return View(model);
-        }
-
-
         [HttpGet]
         [Route("post")]
         public async Task<IActionResult> Post(Guid id, bool draft = false)
@@ -184,6 +125,7 @@ namespace MvcWeb.Controllers
                     lstRelated.Add(res);
                 }
 
+                ViewBag.BlogLink = newsModel.Permalink;
                 ViewBag.lstCategory = lstCategory;
                 ViewBag.lstHightLight = newsModel.lstHighlight;
                 ViewBag.lstRelated = lstRelated;
@@ -219,6 +161,7 @@ namespace MvcWeb.Controllers
                 var lstPostRelated = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
                 var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
 
+                ViewBag.BlogLink = newsModel.Permalink;
                 ViewBag.lstCategory = lstCategory;
                 return View("AnalyzePost", model);
             }
