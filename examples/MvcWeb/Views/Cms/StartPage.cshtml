@@ -90,7 +90,7 @@
                     <img class="img-fluid" src="@(items[0].PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
                     <div class="news_title">
                         <a href="@urlLang@items[0].Permalink">
-                            @Html.Raw(items[0].Excerpt)
+                            @Html.Raw(items[0].Title)
                         </a>
                         <p> <i class="fas fa-clock"></i>@(DateTime.Now.Hour - items[0].Published?.Hour) @ago</p>
                     </div>
@@ -100,7 +100,7 @@
                         <img class="img-fluid" src="@(items[1].PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
                         <div class="news_title">
                             <a href="@urlLang@items[1].Permalink">
-                                @Html.Raw(items[1].Excerpt)
+                                @Html.Raw(items[1].Title)
                             </a>
                             <p> <i class="fas fa-clock"></i>@(DateTime.Now.Hour - items[1].Published?.Hour) @ago</p>
                         </div>
@@ -109,7 +109,7 @@
                         <img class="img-fluid" src="@(items[2].PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
                         <div class="news_title">
                             <a href="@urlLang@items[2].Permalink">
-                                @Html.Raw(items[2].Excerpt)
+                                @Html.Raw(items[2].Title)
                             </a>
                             <p> <i class="fas fa-clock"></i>@(DateTime.Now.Hour - items[2].Published?.Hour) @ago</p>
                         </div>

@@ -597,7 +597,7 @@ a:hover {
   z-index: 15;
   background: #3f3b3b;
   border-radius: 4px;
-  width: 82.4%;
+  width: 81.2%;
 }
 
 #content #index .index_bg .index_div {
@@ -2299,7 +2299,7 @@ a:hover {
 /*-------Larger-------*/
 @media only screen and (min-width: 1400px) {
   #content #index .index_bg {
-    width: 1140px;
+    width: 1110px;
   }
 }
 

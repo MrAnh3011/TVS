@@ -1,46 +1,51 @@
 ﻿@model MvcWeb.Models.RequestOpenAccPage
 @{
     ViewBag.Title = Model.Title;
+    string urlLang = ViewBag.urlLang;
+    string lang = "";
+    if (urlLang.Contains("/en"))
+        lang = "en";
+    else lang = "vi";
 }
 
 <section id="open_account" class="fw">
     <div class="container">
-        <h5>Gửi yêu cầu mở tài khoản</h5>
+        <h5>@(lang == "vi" ? "Gửi yêu cầu mở tài khoản" : "Send request open account")</h5>
         <div class="account_form">
             <form action="">
                 <div class="account_title">
-                    <h6>I. Thông tin chung</h6>
+                    <h6>@(lang == "vi" ? "I. Thông tin chung" : "I. General information")</h6>
                     <div class="row mar0">
                         <div class="col-lg-6">
-                            <p>1. Mở tài khoản cho</p>
+                            <p>@(lang == "vi" ? "1. Mở tài khoản cho" : "I. Open account for")</p>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="openfor" value="Cá nhân" checked>
-                                    <span class="radio_text">Cá nhân</span>
+                                    <span class="radio_text">@(lang == "vi" ? "Cá nhân" : "Personal")</span>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="openfor" value="Doanh nghiệp">
-                                    <span class="radio_text">Doanh nghiệp</span>
+                                    <span class="radio_text">@(lang == "vi" ? "Doanh nghiệp" : "Enterprise")</span>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <p>2. Quốc tịch</p>
+                            <p>@(lang == "vi" ? "2. Quốc tịch" : "2. Nationality")</p>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="nationality" value="Việt Nam" checked>
-                                    <span class="radio_text">Việt Nam</span>
+                                    <span class="radio_text">@(lang == "vi" ? "Việt Nam" : "Viet Nam")</span>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="nationality" value="Nước ngoài">
-                                    <span class="radio_text">Nước ngoài</span>
+                                    <span class="radio_text">@(lang == "vi" ? "Nước ngoài" : "Foreign")</span>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -48,69 +53,69 @@
                     </div>
                 </div>
                 <div class="account_title">
-                    <h6>II. Thông tin cá nhân</h6>
+                    <h6>@(lang == "vi" ? "II. Thông tin cá nhân" : "II. Personal information")</h6>
                     <div class="row mar0">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="inpNameAcc">Họ và tên <span>(*)</span></label>
-                                <input id="inpNameAcc" class="form-control" placeholder="Họ và tên" type="text"
+                                <label for="inpNameAcc">@(lang == "vi" ? "Họ và tên " : "Fullname ")<span>(*)</span></label>
+                                <input id="inpNameAcc" class="form-control" placeholder="@(lang == "vi" ? "Họ và tên " : "Fullname")" type="text"
                                        name="">
                             </div>
                             <div class="form-group">
-                                <label>Giới tính <span>(*)</span></label>
+                                <label>@(lang == "vi" ? "Giới tính" : "Sex") <span>(*)</span></label>
                                 <select name="" id="accSex" class="form-control">
-                                    <option value="-1">Vui lòng chọn</option>
-                                    <option value="0">Nam</option>
-                                    <option value="1">Nữ</option>
+                                    <option value="-1">@(lang == "vi" ? "Vui lòng chọn" : "Choose")</option>
+                                    <option value="0">@(lang == "vi" ? "Nam" : "Male")</option>
+                                    <option value="1">@(lang == "vi" ? "Nữ" : "Female")</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="accDateProvide">Ngày cấp <span>(*)</span></label>
-                                <input id="accDateProvide" class="form-control" placeholder="Ngày cấp"
+                                <label for="accDateProvide">@(lang == "vi" ? "Ngày cấp" : "Date of issue") <span>(*)</span></label>
+                                <input id="accDateProvide" class="form-control" placeholder="@(lang == "vi" ? "Ngày cấp" : "Date of issue")"
                                        type="text" name="">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="accDateBirth">Ngày sinh <span>(*)</span></label>
+                                <label for="accDateBirth">@(lang == "vi" ? "Ngày sinh" : "Date of birth") <span>(*)</span></label>
                                 <input id="accDateBirth" class="form-control" placeholder="dd/mm/yyyy" type="text"
                                        name="">
                             </div>
                             <div class="form-group">
-                                <label for="accIDcard">Số CMT / CCCD / Hộ chiếu <span>(*)</span></label>
+                                <label for="accIDcard">@(lang == "vi" ? "Số CMT / CCCD / Hộ chiếu" : "ID card") <span>(*)</span></label>
                                 <input id="accIDcard" class="form-control"
-                                       placeholder="Số CMT / CCCD / Hộ chiếu" type="text" name="">
+                                       placeholder="@(lang == "vi" ? "Số CMT / CCCD / Hộ chiếu" : "ID card")" type="text" name="">
                             </div>
                             <div class="form-group">
-                                <label for="accLocatProvide">Nơi cấp <span>(*)</span></label>
-                                <input id="accLocatProvide" class="form-control" placeholder="Nơi cấp" type="text"
+                                <label for="accLocatProvide">@(lang == "vi" ? "Nơi cấp" : "Place of issue") <span>(*)</span></label>
+                                <input id="accLocatProvide" class="form-control" placeholder="@(lang == "vi" ? "Nơi cấp" : "Place of issue")" type="text"
                                        name="">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="account_title">
-                    <h6>III. Thông tin liên lạc</h6>
+                    <h6>@(lang == "vi" ? "III. Thông tin liên lạc" : "III. Contact info")</h6>
                     <div class="row mar0">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="accPhoneNum">Số điện thoại <span>(*)</span></label>
-                                <input id="accPhoneNum" class="form-control" placeholder="Số điện thoại"
+                                <label for="accPhoneNum">@(lang == "vi" ? "Số điện thoại" : "Phone") <span>(*)</span></label>
+                                <input id="accPhoneNum" class="form-control" placeholder="@(lang == "vi" ? "Số điện thoại" : "Phone")"
                                        type="text" name="">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="accMail">Mail <span>(*)</span></label>
-                                <input id="accMail" class="form-control" placeholder="Mail của bạn"
+                                <input id="accMail" class="form-control" placeholder="Mail"
                                        type="text" name="">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="accAddress">Địa chỉ <span>(*)</span></label>
-                            <input id="accAddress" class="form-control" placeholder="Địa chỉ" type="text"
+                            <label for="accAddress">@(lang == "vi" ? "Địa chỉ" : "Address") <span>(*)</span></label>
+                            <input id="accAddress" class="form-control" placeholder="@(lang == "vi" ? "Địa chỉ" : "Address")" type="text"
                                    name="">
                         </div>
                     </div>
@@ -118,21 +123,21 @@
                 <div class="account_title">
                     <div class="row mar0 contract">
                         <div class="col-lg-6">
-                            <p>Bạn có cần in sẵn hợp đồng không?</p>
+                            <p>@(lang == "vi" ? "Bạn có cần in sẵn hợp đồng không?" : "Do you need to print the contract?")</p>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" data-id="need_contract" class="form-check-input"
                                            name="contract" value="Cần in sẵn thông tin hợp đồng" checked>
-                                    <span class="radio_text">Cần in sẵn thông tin hợp đồng</span>
+                                    <span class="radio_text">@(lang == "vi" ? "Cần in sẵn thông tin hợp đồng" : "Print the contract")</span>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" data-id="no_need_contract" name="contract" value="Không cần">
-                                    <span class="radio_text">Không cần</span>
+                                    <span class="radio_text">@(lang == "vi" ? "Không cần" : "Needless")</span>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -141,100 +146,99 @@
                 </div>
                 <div id="abcd">
                     <div class="account_title">
-                        <h6>IV. Thông tin nơi ở</h6>
+                        <h6>@(lang == "vi" ? "IV. Thông tin nơi ở" : "IV. Accommodation information")</h6>
                         <div class="row mar0">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Quốc gia <span>(*)</span></label>
+                                    <label>@(lang == "vi" ? "Quốc gia" : "Nation") <span>(*)</span></label>
                                     <select name="" id="selCountries" class="form-control">
-                                        <option value="-1">Quốc gia</option>
+                                        <option value="-1">@(lang == "vi" ? "Quốc gia" : "Nation")</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="accCity">Thành phố <span>(*)</span></label>
-                                    <input id="accCity" class="form-control" placeholder="Thành phố"
+                                    <label for="accCity">@(lang == "vi" ? "Thành phố" : "City") <span>(*)</span></label>
+                                    <input id="accCity" class="form-control" placeholder="@(lang == "vi" ? "Thành phố" : "City")"
                                            type="text" name="">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="account_title">
-                        <h6>V. Thông tin nghề nghiệp</h6>
+                        <h6>@(lang == "vi" ? "V. Thông tin nghề nghiệp" : "V. Job info")</h6>
                         <div class="row mar0">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="accCompany">Công ty làm việc</label>
-                                    <input id="accCompany" class="form-control" placeholder="Công ty làm việc"
+                                    <label for="accCompany">@(lang == "vi" ? "Công ty làm việc" : "Company")</label>
+                                    <input id="accCompany" class="form-control" placeholder="@(lang == "vi" ? "Công ty làm việc" : "Company")"
                                            type="text" name="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="accCompanyPhone">Số điện thoại công ty</label>
+                                    <label for="accCompanyPhone">@(lang == "vi" ? "Số điện thoại công ty" : "Company phone")</label>
                                     <input id="accCompanyPhone" class="form-control"
-                                           placeholder="Số điện thoại công ty" type="text" name="">
+                                           placeholder="@(lang == "vi" ? "Số điện thoại công ty" : "Company phone")" type="text" name="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="accPosition">Vị trí làm việc</label>
-                                    <input id="accPosition" class="form-control" placeholder="Vị trí làm việc" type="text" name="">
+                                    <label for="accPosition">@(lang == "vi" ? "Vị trí làm việc" : "Job position")</label>
+                                    <input id="accPosition" class="form-control" placeholder="@(lang == "vi" ? "Vị trí làm việc" : "Job position")" type="text" name="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="accFax">Fax công ty</label>
-                                    <input id="accFax" class="form-control" placeholder="Fax công ty" type="text" name="">
+                                    <label for="accFax">@(lang == "vi" ? "Fax công ty" : "Company fax")</label>
+                                    <input id="accFax" class="form-control" placeholder="@(lang == "vi" ? "Fax công ty" : "Company fax")" type="text" name="">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="account_title">
-                        <h6>VI. Tài khoản ngân hàng</h6>
+                        <h6>@(lang == "vi" ? "VI. Tài khoản ngân hàng" : "VI. Bank account")</h6>
                         <div class="row mar0">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="accBanknum">Số tài khoản</label>
-                                    <input id="accBanknum" class="form-control" placeholder="Số tài khoản"
+                                    <label for="accBanknum">@(lang == "vi" ? "Số tài khoản" : "Account number")</label>
+                                    <input id="accBanknum" class="form-control" placeholder="@(lang == "vi" ? "Số tài khoản" : "Account number")"
                                            type="text" name="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="accBankManger">Người quản lý tài khoản</label>
+                                    <label for="accBankManger">@(lang == "vi" ? "Người quản lý tài khoản" : "Account manager")</label>
                                     <input id="accBankManger" class="form-control"
-                                           placeholder="Người quản lý tài khoản" type="text" name="">
+                                           placeholder="@(lang == "vi" ? "Người quản lý tài khoản" : "Account manager")" type="text" name="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="accBankname">Ngân hàng</label>
-                                    <input id="accBankname" class="form-control" placeholder="Ngân hàng"
+                                    <label for="accBankname">@(lang == "vi" ? "Ngân hàng" : "Bank")</label>
+                                    <input id="accBankname" class="form-control" placeholder="@(lang == "vi" ? "Ngân hàng" : "Bank")"
                                            type="text" name="">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="account_title">
-                        <h6>VII. Thông tin khác</h6>
+                        <h6>@(lang == "vi" ? "VII. Thông tin khác" : "VII. Other info")</h6>
                         <div class="row mar0">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="accCompanyManager">Tên công ty đại chúng bạn đang quản lý</label>
-                                    <input id="accCompanyManager" class="form-control" placeholder="Tên công ty"
+                                    <label for="accCompanyManager">@(lang == "vi" ? "Tên công ty đại chúng bạn đang quản lý" : "The name of the company you are managing")</label>
+                                    <input id="accCompanyManager" class="form-control" placeholder="@(lang == "vi" ? "Tên công ty đại chúng bạn đang quản lý" : "The name of the company you are managing")"
                                            type="text" name="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="accCompanySpent">
-                                        Công ty đại chúng bạn đang giữ hơn 5% vốn điều
-                                        lệ
+                                        @(lang == "vi" ? "Công ty đại chúng bạn đang giữ hơn 5% vốn điều lệ" : "Company you are holding more than 5% of charter capital")
                                     </label>
-                                    <input id="accCompanySpent" class="form-control" placeholder="Tên công ty"
+                                    <input id="accCompanySpent" class="form-control" placeholder="@(lang == "vi" ? "Tên công ty" : "Company name")"
                                            type="text" name="">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="button" id="openAcc" class="btn btn-primary" value="Mở tài khoản" />
+                <input type="button" id="openAcc" class="btn btn-primary" value="@(lang == "vi" ? "Mở tài khoản" : "Open account")" />
             </form>
             <span style="display:none" id="mailReceiv">@Model.ReceiverEmail</span>
             <span style="display:none" id="mailSender">@Model.SenderEmail</span>
