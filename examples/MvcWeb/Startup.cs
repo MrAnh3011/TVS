@@ -20,6 +20,9 @@ using Microsoft.Extensions.Configuration;
 using Piranha.AspNetCore.Identity.SQLServer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace MvcWeb
 {
@@ -130,7 +133,18 @@ namespace MvcWeb
              */
 
             // Register middleware
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    var headers = ctx.Context.Response.GetTypedHeaders();
+                    headers.CacheControl = new CacheControlHeaderValue
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromDays(3)
+                    };
+                }
+            });
             app.UsePiranha();
             app.UseRouting();
             app.UseAuthentication();

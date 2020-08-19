@@ -162,7 +162,7 @@
   border-radius: 6px;
   height: 45px;
   border: none;
-  color: #bbbbbb;
+  color: #000;
 }
 
 .form-contact .container .bg-form .form-group label {
@@ -171,7 +171,7 @@
 
 .form-contact .container .bg-form textarea {
   background-color: #f4f4f4;
-  color: #bbbbbb;
+  color: #000;
   border-radius: 6px;
   border: none;
 }

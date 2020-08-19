@@ -63,7 +63,6 @@ namespace MvcWeb.Controllers
             };
 
             var result = SendMail(mm);
-
             return Json(new { status = "success", message = "success"});
         }
 

@@ -61,6 +61,15 @@
                                 <input id="inpNameAcc" class="form-control" placeholder="@(lang == "vi" ? "Họ và tên " : "Fullname")" type="text"
                                        name="">
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="accDateBirth">@(lang == "vi" ? "Ngày sinh" : "Date of birth") <span>(*)</span></label>
+                                <input id="accDateBirth" class="form-control" placeholder="dd/mm/yyyy" type="text"
+                                       name="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label>@(lang == "vi" ? "Giới tính" : "Sex") <span>(*)</span></label>
                                 <select name="" id="accSex" class="form-control">
@@ -69,6 +78,15 @@
                                     <option value="1">@(lang == "vi" ? "Nữ" : "Female")</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="accIDcard">@(lang == "vi" ? "Số CMT / CCCD / Hộ chiếu" : "ID card") <span>(*)</span></label>
+                                <input id="accIDcard" class="form-control"
+                                       placeholder="@(lang == "vi" ? "Số CMT / CCCD / Hộ chiếu" : "ID card")" type="text" name="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="accDateProvide">@(lang == "vi" ? "Ngày cấp" : "Date of issue") <span>(*)</span></label>
                                 <input id="accDateProvide" class="form-control" placeholder="@(lang == "vi" ? "Ngày cấp" : "Date of issue")"
@@ -76,16 +94,6 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="accDateBirth">@(lang == "vi" ? "Ngày sinh" : "Date of birth") <span>(*)</span></label>
-                                <input id="accDateBirth" class="form-control" placeholder="dd/mm/yyyy" type="text"
-                                       name="">
-                            </div>
-                            <div class="form-group">
-                                <label for="accIDcard">@(lang == "vi" ? "Số CMT / CCCD / Hộ chiếu" : "ID card") <span>(*)</span></label>
-                                <input id="accIDcard" class="form-control"
-                                       placeholder="@(lang == "vi" ? "Số CMT / CCCD / Hộ chiếu" : "ID card")" type="text" name="">
-                            </div>
                             <div class="form-group">
                                 <label for="accLocatProvide">@(lang == "vi" ? "Nơi cấp" : "Place of issue") <span>(*)</span></label>
                                 <input id="accLocatProvide" class="form-control" placeholder="@(lang == "vi" ? "Nơi cấp" : "Place of issue")" type="text"
@@ -174,6 +182,14 @@
                                     <input id="accCompany" class="form-control" placeholder="@(lang == "vi" ? "Công ty làm việc" : "Company")"
                                            type="text" name="">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accPosition">@(lang == "vi" ? "Vị trí làm việc" : "Job position")</label>
+                                    <input id="accPosition" class="form-control" placeholder="@(lang == "vi" ? "Vị trí làm việc" : "Job position")" type="text" name="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="accCompanyPhone">@(lang == "vi" ? "Số điện thoại công ty" : "Company phone")</label>
                                     <input id="accCompanyPhone" class="form-control"
@@ -181,10 +197,6 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="accPosition">@(lang == "vi" ? "Vị trí làm việc" : "Job position")</label>
-                                    <input id="accPosition" class="form-control" placeholder="@(lang == "vi" ? "Vị trí làm việc" : "Job position")" type="text" name="">
-                                </div>
                                 <div class="form-group">
                                     <label for="accFax">@(lang == "vi" ? "Fax công ty" : "Company fax")</label>
                                     <input id="accFax" class="form-control" placeholder="@(lang == "vi" ? "Fax công ty" : "Company fax")" type="text" name="">
@@ -201,6 +213,8 @@
                                     <input id="accBanknum" class="form-control" placeholder="@(lang == "vi" ? "Số tài khoản" : "Account number")"
                                            type="text" name="">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="accBankManger">@(lang == "vi" ? "Người quản lý tài khoản" : "Account manager")</label>
                                     <input id="accBankManger" class="form-control"

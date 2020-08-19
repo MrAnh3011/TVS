@@ -506,7 +506,7 @@
         let tencty = "Tên công ty: " + $("#ctptencongty").val();
         let chucdanh = "Chức danh: " + $("#ctpchucdanh").val();
         let fax = "Số fax: " + $("#ctpsofax").val();
-        let email = "E-mail" + $("#ctpemail").val();
+        let email = "E-mail: " + $("#ctpemail").val();
         let phone = "Số điện thoại: " + $("#ctpphone").val();
         let thongtin = "Thông tin cần tư vấn: " + $("#ctpthongtin").val();
 
@@ -528,8 +528,10 @@
             contentType: "application/json",
             success: function (response) {
                 HideLoadingScreen();
-                if (response.status == "success")
+                if (response.status == "success") {
                     alert("Gửi thông tin thành công");
+                    location.reload(true);
+                }
                 else alert("Gửi thông tin không thành công, vui lòng kiểm tra lại.");
             },
             error: function (response) {
@@ -627,8 +629,10 @@
             contentType: "application/json",
             success: function (response) {
                 HideLoadingScreen();
-                if (response.status == "success")
+                if (response.status == "success") {
                     alert("Gửi thông tin thành công");
+                    location.reload(true);
+                }
                 else alert("Gửi thông tin không thành công, vui lòng kiểm tra lại.");
             },
             error: function (response) {
@@ -673,8 +677,10 @@
             data: data,
             success: function (response) {
                 HideLoadingScreen();
-                if (response.status == "success")
+                if (response.status == "success") {
                     alert("Ứng tuyển thành công");
+                    location.reload(true);
+                }
                 else
                     alert("Lỗi, vui lòng kiểm tra lại.")
             },
@@ -854,5 +860,17 @@
         }, 700);
     });
 
-
+    $(window).scroll(function () {
+        var height = $(window).scrollTop();
+        if (height > 100) {
+            $('#btnBackToTop').fadeIn();
+        } else {
+            $('#btnBackToTop').fadeOut();
+        }
+    });
+    $("#btnBackToTop").click(function (event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
 });
