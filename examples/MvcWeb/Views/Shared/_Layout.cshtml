@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" type="image/ico" href ="/favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
     <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/css/all.min.css">
     <link rel="stylesheet" href="~/assets/css/slick.css">
@@ -28,11 +28,13 @@
     <link rel="stylesheet" href="~/assets/css/contact-responsive.css">
     <link rel="stylesheet" href="~/assets/css/animate.min.css" />
     <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <title>@ViewBag.Title</title>
 
     @if (Model is Piranha.Models.IMeta)
     {
-    <partial name="Partial/_Meta.cshtml" />
+        <partial name="Partial/_Meta.cshtml" />
     }
 
     @RenderSection("head", required: false)

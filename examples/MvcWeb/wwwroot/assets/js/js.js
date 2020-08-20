@@ -496,7 +496,6 @@
         $("#nav-home-tab").click();
     }
 
-
     $("#btnContactPage").click(function () {
         ShowLoadingScreen();
         let ToMail = $("#mailReceiver").text();
@@ -509,6 +508,13 @@
         let email = "E-mail: " + $("#ctpemail").val();
         let phone = "Số điện thoại: " + $("#ctpphone").val();
         let thongtin = "Thông tin cần tư vấn: " + $("#ctpthongtin").val();
+        let captcha = grecaptcha.getResponse();
+
+        if (!hoten || !phone || !thongtin || !captcha) {
+            alert("Bạn cần nhập đủ thông tin.");
+            HideLoadingScreen();
+            return;
+        }
 
         let body = hoten + "\n" + tencty + "\n" + chucdanh + "\n" + fax + "\n" + email + "\n" + phone + "\n" + thongtin;
 
@@ -516,8 +522,9 @@
             From: FromMail,
             FromPass: FromPass,
             To: ToMail,
-            Subject: "TVS - Nhận thông tin hàng quý",
-            Body: body
+            Subject: "Liên hệ, yêu cầu tư vấn",
+            Body: body,
+            Captcha: captcha
         });
 
         $.ajax({
@@ -654,6 +661,14 @@
         let Place = $("#diadiem option:selected").text();
         let Locate = $("#vitri option:selected").text();
         let File = $("#fileupload").get(0);
+        let captcha = grecaptcha.getResponse();
+
+        if (!FullName || $("#gioitinh option:selected").val() == "-1" || !Phone || !Email
+            || $("#vitri option:selected").val() == "-1" || File.files.length === 0 || !captcha) {
+            alert("Bạn cần nhập đủ thông tin");
+            HideLoadingScreen();
+            return;
+        }
 
         let cvupload = File.files;
         let data = new FormData();
@@ -668,6 +683,7 @@
         data.append("Receiver", ToMail);
         data.append("Sender", FromMail);
         data.append("SenderPass", FromPass);
+        data.append("Captcha", captcha);
 
         $.ajax({
             url: "/api/upload",
@@ -873,4 +889,5 @@
         $("html, body").animate({ scrollTop: 0 }, "slow");
         return false;
     });
+
 });

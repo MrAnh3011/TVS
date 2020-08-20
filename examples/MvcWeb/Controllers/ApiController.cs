@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace MvcWeb.Controllers
             _db = db;
             _loader = loader;
         }
+
         [HttpPost]
         [Route("upload")]
         public JsonResult UploadFile()
@@ -76,6 +78,19 @@ namespace MvcWeb.Controllers
             mm.Body = info.Body;
             mm.From = new MailAddress(info.From);
             mm.IsBodyHtml = false;
+
+            if(info.Captcha != null)
+            {
+                var client = new WebClient();
+                var reply = client.DownloadString(
+                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", 
+                    "6LfOQcEZAAAAAH02-OafulPuYOl_D-6PHqrC7lhj", info.Captcha));
+
+                if (!reply.Contains("success"))
+                {
+                    return Json(new { status = "error", message = "error" });
+                }
+            }
 
             if(info.File != null)
             {
@@ -185,6 +200,7 @@ namespace MvcWeb.Controllers
         public string Subject { get; set; }
         public string Body { get; set; }
         public IFormFile File { get; set; }
+        public string Captcha { get; set; }
     }
 
     public class LoginModel

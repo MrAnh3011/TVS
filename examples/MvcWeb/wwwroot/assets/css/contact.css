@@ -44,10 +44,15 @@
   line-height: 21px;
 }
 
+.form-contact .container .bg-form div .g-recaptcha div {
+    margin: auto;
+    margin-bottom: 10px;
+}
+
 .contact-address .content-address {
-  padding: 60px 0px 209px;
-  position: relative;
-  background: #ffffff;
+    padding: 60px 0px 209px;
+    position: relative;
+    background: #ffffff;
 }
 
 .contact-address .content-address::before {
@@ -167,6 +172,10 @@
 
 .form-contact .container .bg-form .form-group label {
   font-weight: bold;
+}
+
+.form-contact .container .bg-form .form-group label span {
+    color: red;
 }
 
 .form-contact .container .bg-form textarea {
@@ -480,6 +489,10 @@
 .form-ut {
   padding-top: 24px;
   z-index: 1;
+}
+
+.form-ut .g-recaptcha div{
+    margin: auto;
 }
 
 .form-ut .row .col .form-group label {

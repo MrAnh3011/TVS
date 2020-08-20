@@ -8,7 +8,6 @@
     else lang = "vi";
 }
 
-
 <section id="page">
     <section id="page_bg" class="fw">
         <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
@@ -62,7 +61,7 @@
                     <div class="row">
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Name")</label>
+                                <label for="hoten">@(lang == "vi" ? "Họ và tên" : "Name") <span>(*)</span></label>
                                 <input type="text" class="form-control" id="ctphoten" aria-describedby="emailHelp"
                                        placeholder="@(lang == "vi" ? "Nhập đầy đủ họ và tên" : "Input name")">
                             </div>
@@ -99,17 +98,18 @@
                         </div>
                         <div class="col col-lg-4 col-md-4 col-12">
                             <div class="form-group">
-                                <label for="phone">@(lang == "vi" ? "Điện thoại" : "Phone")</label>
+                                <label for="phone">@(lang == "vi" ? "Điện thoại" : "Phone") <span>(*)</span></label>
                                 <input type="text" class="form-control" id="ctpphone" aria-describedby="emailHelp"
                                        placeholder="@(lang == "vi" ? "Điện thoại" : "Your phone number") ">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="diachi">@(lang == "vi" ? "Thông tin cần tư vấn" : "Information")</label>
+                        <label for="diachi">@(lang == "vi" ? "Thông tin cần tư vấn" : "Information") <span>(*)</span></label>
                         <textarea class="form-control" id="ctpthongtin" rows="4"
                                   placeholder="@(lang == "vi" ? "Thông tin cần tư vấn" : "Information")"></textarea>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6LfOQcEZAAAAAG59dOYAptAMxLIomMSFNHk7-VA8"></div>
                     <div class="btn-contact">
                         <button id="btnContactPage"><a>@(lang == "vi" ? "Gửi" : "Send")</a></button>
                     </div>

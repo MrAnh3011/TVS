@@ -110,7 +110,7 @@
                             <div class="form-group">
                                 <label for="gioitinh">@(lang == "vi" ? "Giới tính" : "Sex") <span>(*)</span></label>
                                 <select name="cars" class=" form-control" id="gioitinh">
-                                    <option selected>@(lang == "vi" ? "Giới tính" : "Sex")</option>
+                                    <option selected value="-1">@(lang == "vi" ? "Giới tính" : "Sex")</option>
                                     <option value="nam">@(lang == "vi" ? "Nam" : "Male")</option>
                                     <option value="nu">@(lang == "vi" ? "Nữ" : "Female")</option>
                                 </select>
@@ -147,7 +147,7 @@
                             <div class="form-group">
                                 <label for="vitri">@(lang == "vi" ? "Vị trí ứng tuyển" : "Aplly Job") <span>(*)</span></label>
                                 <select name="" class=" form-control" id="vitri">
-                                    <option selected> @(lang == "vi" ? "Chọn vị trí ứng tuyển" : "Choose aplly job")</option>
+                                    <option selected value="-1"> @(lang == "vi" ? "Chọn vị trí ứng tuyển" : "Choose aplly job")</option>
                                     @foreach (var item in lstJob)
                                     {
                                         <option value="@item.Title">@item.Title</option>
@@ -164,6 +164,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6LfOQcEZAAAAAG59dOYAptAMxLIomMSFNHk7-VA8"></div>
                     <div class="row justify-content-md-center">
                         <div class="col-md-auto">
                             <div class="btn-contact">
