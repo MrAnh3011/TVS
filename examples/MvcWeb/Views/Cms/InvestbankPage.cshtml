@@ -76,7 +76,7 @@
                         </div>
                         <div class="tab-pane fade shadow_content" id="nav-bank-business" role="tabpanel"
                              aria-labelledby="nav-contact-tab">
-                            <h5 class="text_bold">@(lang == "vi" ? "Các thương vụ tiêu biẻu" : "Consumer deals")</h5>
+                            <h5 class="text_bold">@(lang == "vi" ? "Các thương vụ tiêu biểu" : "Consumer deals")</h5>
                             <p>
                                 @Model.TypicalDeal
                             </p>
@@ -119,7 +119,7 @@
                             <div class="row mar0 partner_wrapper">
                                 @foreach (var item in Model.lstPartner)
                                 {
-                                    <div class="col-12 col-lg-4 partner_div">
+                                    <div class="col-12 col-lg-3 partner_div">
                                         <div class="partner_image">
                                             <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
                                         </div>

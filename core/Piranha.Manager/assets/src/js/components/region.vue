@@ -23,7 +23,7 @@
                         <div class="handle">
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
-                        {{ item.title }}
+                        {{ (item.fields[0]).model.value }}
                     </a>
                     <span class="actions float-right">
                         <a v-on:click.prevent="removeItem(item)" href="#" class="danger"><i class="fas fa-trash"></i></a>

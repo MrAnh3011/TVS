@@ -10,16 +10,16 @@ namespace MvcWeb.Models.Regions
 {
     public class ContactItem
     {
-        [Field]
-        public ImageField Image { get; set; }
-
-
         [Field(Options = FieldOption.HalfWidth)]
         public StringField Title { get; set; }
 
 
         [Field(Options = FieldOption.HalfWidth)]
         public StringField Phone { get; set; }
+
+
+        [Field]
+        public ImageField Image { get; set; }
 
 
         [Field(Options = FieldOption.HalfWidth)]

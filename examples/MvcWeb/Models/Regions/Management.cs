@@ -10,20 +10,20 @@ namespace MvcWeb.Models.Regions
 {
     public class Management
     {
-        [Field]
-        public ImageField SmallImage { get; set; }
-
-
-        [Field]
-        public ImageField BigImage { get; set; }
-
-
         [Field(Options = FieldOption.HalfWidth)]
         public StringField Name { get; set; }
 
 
         [Field(Options = FieldOption.HalfWidth)]
         public StringField Position { get; set; }
+
+
+        [Field]
+        public ImageField SmallImage { get; set; }
+
+
+        [Field]
+        public ImageField BigImage { get; set; }
 
 
         [Field]
