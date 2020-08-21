@@ -510,7 +510,7 @@
         let thongtin = "Thông tin cần tư vấn: " + $("#ctpthongtin").val();
         let captcha = grecaptcha.getResponse();
 
-        if (!hoten || !phone || !thongtin || !captcha) {
+        if (!$("#ctphoten").val() || !$("#ctpphone").val() || !$("#ctpthongtin").val() || !captcha) {
             alert("Bạn cần nhập đủ thông tin.");
             HideLoadingScreen();
             return;
