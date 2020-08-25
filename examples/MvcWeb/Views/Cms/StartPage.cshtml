@@ -13,7 +13,7 @@
     <div class="backgroundads">
         <div class="ads">
             <button type="button" id="closeads">&times;</button>
-            <img src="@(Model.Popup.Media.PublicUrl.Substring(1)??"")" />
+            <img src="@(Model.Popup.Media.PublicUrl.Substring(1))" />
         </div>
     </div>
 }
@@ -24,7 +24,7 @@
             @foreach (var item in Model.indexPicture)
             {
                 <div class="carousel-item @(Model.indexPicture.First() == item ?"active" : "")">
-                    <img class="d-block w-100" src="@(item.Media.PublicUrl.Substring(1)??"")" alt="">
+                    <img class="d-block w-100" src="@(item.HasValue ? item.Media.PublicUrl.Substring(1): "")" alt="">
                 </div>
             }
         </div>
@@ -38,7 +38,7 @@
                 {
                     <div class="col-6 col-lg-2 image_div">
                         <a href="@item.Link.Value">
-                            <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                            <img class="img-fluid" src="@(item.Image.HasValue ? item.Image.Media.PublicUrl.Substring(1) : "")" alt="">
                             <h6>@item.Title</h6>
                         </a>
                     </div>
@@ -62,7 +62,7 @@
 
                 <div class="col-6 col-lg-4 w30 services_div">
                     <a style="display: block;" @lnk>
-                        <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                        <img class="img-fluid" src="@(item.Image.HasValue ? item.Image.Media.PublicUrl.Substring(1) : "")" alt="">
                         <h6>@item.Title</h6>
                         <span class="services_div_line"></span>
                         <p>
@@ -87,7 +87,7 @@
                 string ago = lang == "vi" ? " giờ trước" : " hours ago";
                 var items = ViewBag.lstNews;
                 <div class="col-12 col-lg-8 big_news">
-                    <img class="img-fluid" src="@(items[0].PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                    <img class="img-fluid" src="@(items[0].PrimaryImage.HasValue ? items[0].PrimaryImage.Media.PublicUrl.Substring(1) : "")" alt="">
                     <div class="news_title">
                         <a href="@urlLang@items[0].Permalink">
                             @Html.Raw(items[0].Title)
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="col-12 col-lg-12 small_news">
-                        <img class="img-fluid" src="@(items[1].PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                        <img class="img-fluid" src="@(items[1].PrimaryImage.HasValue ? items[1].PrimaryImage.Media.PublicUrl.Substring(1) : "")" alt="">
                         <div class="news_title">
                             <a href="@urlLang@items[1].Permalink">
                                 @Html.Raw(items[1].Title)
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-12 small_news">
-                        <img class="img-fluid" src="@(items[2].PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                        <img class="img-fluid" src="@(items[2].PrimaryImage.HasValue ? items[2].PrimaryImage.Media.PublicUrl.Substring(1) : "")" alt="">
                         <div class="news_title">
                             <a href="@urlLang@items[2].Permalink">
                                 @Html.Raw(items[2].Title)
