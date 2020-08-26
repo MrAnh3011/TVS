@@ -10,7 +10,7 @@
 
 <section id="page">
     <section id="page_bg" class="fw">
-        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <img class="img-fluid" src="@(Model.Banner.Image.HasValue ? Model.Banner.Image.Media.PublicUrl.Substring(1):"")" alt="">
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
@@ -22,7 +22,7 @@
         <div class="container">
             <div class="col-lg-12 paradigm">
                 <h2>@Model.ManagementModel.Title</h2>
-                <img class="img-fluid" src="@(Model.ManagementModel.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                <img class="img-fluid" src="@(Model.ManagementModel.Image.HasValue ? Model.ManagementModel.Image.Media.PublicUrl.Substring(1):"")" alt="">
             </div>
         </div>
     </section>
@@ -52,7 +52,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
+                                    <td><a href="@(item.docFile.HasValue ? item.docFile.Media.PublicUrl.Substring(1):"")"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -86,7 +86,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
+                                    <td><a href="@(item.docFile.HasValue ? item.docFile.Media.PublicUrl.Substring(1): "")"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -120,7 +120,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
+                                    <td><a href="@(item.docFile.HasValue ? item.docFile.Media.PublicUrl.Substring(1):"")"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -154,7 +154,7 @@
                                 <tr>
                                     <td>@item.docName</td>
                                     <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                    <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
+                                    <td><a href="@(item.docFile.HasValue ? item.docFile.Media.PublicUrl.Substring(1): "")"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                     <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                                 </tr>
                             }
@@ -188,7 +188,7 @@
                             <tr>
                                 <td>@item.docName</td>
                                 <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
+                                <td><a href="@(item.docFile.HasValue ? item.docFile.Media.PublicUrl.Substring(1): "")"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                 <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                             </tr>
                             }
@@ -222,7 +222,7 @@
                             <tr>
                                 <td>@item.docName</td>
                                 <td>@item.uploadTime.Value?.ToString("dd/MM/yyyy")</td>
-                                <td><a href="@item.docFile.Media.PublicUrl.Substring(1)"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
+                                <td><a href="@(item.docFile.HasValue ? item.docFile.Media.PublicUrl.Substring(1): "")"><i class="fas fa-file-pdf"></i> @(lang == "vi" ? "Tải về" : "Download") </a></td>
                                 <td>@item.uploadTime.Value?.ToString("yyyy")</td>
                             </tr>
                             }

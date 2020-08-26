@@ -11,7 +11,7 @@
 
     <section id="page">
         <section id="page_bg" class="fw">
-            <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+            <img class="img-fluid" src="@(Model.Banner.Image.HasValue ? Model.Banner.Image.Media.PublicUrl.Substring(1):"")" alt="">
             <div class="page_breadcrumb">
                 <h3>@Model.Banner.Title</h3>
                 <div>
@@ -35,23 +35,23 @@
                     <div class="col col-7">
                         <div class="row mar0">
                             <div class="pd col col-7">
-                                <img class="img-fluid" src="@(Model.JWMe.Pic1.Media.PublicUrl.Substring(1)??"")" alt="">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic1.HasValue ? Model.JWMe.Pic1.Media.PublicUrl.Substring(1):"")" alt="">
                             </div>
                             <div class=" pd col col-5">
-                                <img class="img-fluid" src="@(Model.JWMe.Pic2.Media.PublicUrl.Substring(1)??"")" alt="">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic2.HasValue ? Model.JWMe.Pic2.Media.PublicUrl.Substring(1):"")" alt="">
                             </div>
                         </div>
                         <div class="row mar0">
                             <div class="col col-5">
-                                <img class="img-fluid" src="@(Model.JWMe.Pic3.Media.PublicUrl.Substring(1)??"")" alt="">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic3.HasValue ? Model.JWMe.Pic3.Media.PublicUrl.Substring(1):"")" alt="">
                             </div>
                             <div class="col col-7">
-                                <img class="img-fluid" src="@(Model.JWMe.Pic4.Media.PublicUrl.Substring(1)??"")" alt="">
+                                <img class="img-fluid" src="@(Model.JWMe.Pic4.HasValue ? Model.JWMe.Pic4.Media.PublicUrl.Substring(1):"")" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="pd-img col col-5">
-                        <img class="img-fluid" src="@(Model.JWMe.Pic5.Media.PublicUrl.Substring(1)??"")" alt="">
+                        <img class="img-fluid" src="@(Model.JWMe.Pic5.HasValue ? Model.JWMe.Pic5.Media.PublicUrl.Substring(1):"")" alt="">
                     </div>
                 </div>
             </div>

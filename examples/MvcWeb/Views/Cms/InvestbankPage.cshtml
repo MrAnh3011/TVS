@@ -10,7 +10,7 @@
 
 <section id="page">
     <section id="page_bg" class="fw">
-        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <img class="img-fluid" src="@(Model.Banner.Image.HasValue ? Model.Banner.Image.Media.PublicUrl.Substring(1):"")" alt="">
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
@@ -39,7 +39,7 @@
                                     var item = Model.Directory[i];
                                     <div class="col-12 col-lg-4 member_div">
                                         <a data-toggle="modal" data-target="#member_modal@(i+1)">
-                                            <img class="img-fluid" src="@(item.SmallImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            <img class="img-fluid" src="@(item.SmallImage.HasValue ? item.SmallImage.Media.PublicUrl.Substring(1):"")" alt="">
                                             <h5>@item.Name</h5>
                                             <p>@item.Position</p>
                                         </a>
@@ -54,7 +54,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <img class="img-fluid" src="@(item.BigImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                                <img class="img-fluid" src="@(item.BigImage.HasValue ? item.BigImage.Media.PublicUrl.Substring(1):"")" alt="">
                                             </div>
                                             <div class="modal-body">
                                                 <h5 class="member_name">@item.Name</h5>
@@ -98,10 +98,10 @@
                                                 <td>@item.Year</td>
                                                 <td>@item.Value</td>
                                                 <td>
-                                                    <img class="img-fluid" src="@(item.Customer.Media.PublicUrl.Substring(1)??"")" alt="">
+                                                    <img class="img-fluid" src="@(item.Customer.HasValue ? item.Customer.Media.PublicUrl.Substring(1):"")" alt="">
                                                 </td>
                                                 <td>
-                                                    <img class="img-fluid" src="@(item.Investor.Media.PublicUrl.Substring(1)??"")" alt="">
+                                                    <img class="img-fluid" src="@(item.Investor.HasValue ? item.Investor.Media.PublicUrl.Substring(1):"")" alt="">
                                                 </td>
                                                 <td>@item.Description</td>
                                             </tr>
@@ -122,7 +122,7 @@
                                     var item = Model.lstPartner[i];
                                     <div class="col-12 @(i < 8 ? "col-lg-3": "col-lg-2") partner_div">
                                         <div @(i >= 8 ? "style=min-height:100px": "") class="partner_image">
-                                            <img class="img-fluid" src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            <img class="img-fluid" src="@(item.Image.HasValue ? item.Image.Media.PublicUrl.Substring(1):"")" alt="">
                                         </div>
                                         <p>@item.Title</p>
                                     </div>

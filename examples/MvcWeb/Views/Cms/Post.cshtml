@@ -63,7 +63,7 @@
                                         <a href="@item.Post.Permalink">
                                             @item.Post.Title
                                         </a>
-                                        <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
+                                        <p><i class="far fa-clock"></i>@(item.Post.Published.HasValue? item.Post.Published?.ToString("dd/MM/yyyy"):DateTime.Now.ToString("dd/MM/yyyy"))</p>
                                     </div>
                                 }
                             </div>
@@ -82,7 +82,7 @@
                     @foreach (var item in lstRelated)
                     {
                         <div class="col-12 col-lg-6 news_div">
-                            <img class="img-fluid" src="@(item.PrimaryImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                            <img class="img-fluid" src="@(item.PrimaryImage.HasValue ? item.PrimaryImage.Media.PublicUrl.Substring(1):"")" alt="">
                             <a class="news_title" href="@item.Permalink">@item.Title</a>
                             <p class="news_date"><i class="far fa-clock"></i>@item.Published</p>
                             <p class="news_excerpt">

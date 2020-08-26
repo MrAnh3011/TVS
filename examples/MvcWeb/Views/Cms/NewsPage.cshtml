@@ -41,11 +41,11 @@
                                         if (cookie != null)
                                         {
                                             <div class="col-12 col-lg-6 news_div">
-                                                <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                                <img class="img-fluid" src="@Url.Content(item.PrimaryImage.HasValue ? item.PrimaryImage.Media?.PublicUrl : "")" alt="">
                                                 <a class="news_title" href="@urlLang@item.Permalink">
                                                     @item.Title
                                                 </a>
-                                                <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
+                                                <p class="news_date"><i class="far fa-clock"></i>@(item.Published.HasValue ? item.Published.Value.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
                                                 <p class="news_excerpt">
                                                     @Html.Raw(item.Excerpt)
                                                 </p>
@@ -59,11 +59,11 @@
                                     else
                                     {
                                         <div class="col-12 col-lg-6 news_div">
-                                            <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                            <img class="img-fluid" src="@Url.Content(item.PrimaryImage.HasValue ? item.PrimaryImage.Media?.PublicUrl : "")" alt="">
                                             <a class="news_title" href="@urlLang@item.Permalink">
                                                 @item.Title
                                             </a>
-                                            <p class="news_date"><i class="far fa-clock"></i>@item.Published.Value.ToString("dd/MM/yyyy")</p>
+                                            <p class="news_date"><i class="far fa-clock"></i>@(item.Published.HasValue ? item.Published.Value.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
                                             <p class="news_excerpt">
                                                 @Html.Raw(item.Excerpt)
                                             </p>
@@ -142,7 +142,7 @@
                                 {
                                     <div class="col-lg-12 hot_news_div">
                                         <a href="@urlLang@item.Post.Permalink">@item.Post.Title</a>
-                                        <p><i class="far fa-clock"></i>@item.Post.Published?.ToString("dd/MM/yyyy")</p>
+                                        <p><i class="far fa-clock"></i>@(item.Post.Published.HasValue ? item.Post.Published?.ToString("dd/MM/yyyy"):DateTime.Now.ToString("dd/MM/yyyy"))</p>
                                     </div>
                                 }
                             </div>

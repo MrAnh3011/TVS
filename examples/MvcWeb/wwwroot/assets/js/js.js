@@ -709,13 +709,13 @@
     $("#search_pc").keyup(function (event) {
         if (event.which == 13) {
             var input = $("#search_pc").val();
-            window.location.href = "tim-kiem/" + input;
+            window.location.href = "/tim-kiem/" + input;
         }
     });
     $("#search_mb").keyup(function (event) {
         if (event.which == 13) {
             var input = $("#search_mb").val();
-            window.location.href = "tim-kiem/" + input;
+            window.location.href = "/tim-kiem/" + input;
         }
     });
 

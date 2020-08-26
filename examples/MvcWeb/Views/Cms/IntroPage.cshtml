@@ -10,7 +10,7 @@
 
 <section id="page">
     <section id="page_bg" class="fw">
-        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <img class="img-fluid" src="@(Model.Banner.Image.HasValue ? Model.Banner.Image.Media.PublicUrl.Substring(1):"")" alt="">
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
@@ -39,7 +39,7 @@
                                     var item = Model.Directory[i];
                                     <div class="col-12 col-lg-4 member_div">
                                         <a data-toggle="modal" data-target="#member_modal@(i+1)">
-                                            <img class="img-fluid" src="@(item.SmallImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                            <img class="img-fluid" src="@(item.SmallImage.HasValue ? item.SmallImage.Media.PublicUrl.Substring(1):"")" alt="">
                                             <h5>@item.Name</h5>
                                             <p>@item.Position</p>
                                         </a>
@@ -54,7 +54,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <img class="img-fluid" id="modalImg" src="@(item.BigImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                                <img class="img-fluid" id="modalImg" src="@(item.BigImage.HasValue ? item.BigImage.Media.PublicUrl.Substring(1):"")" alt="">
                                             </div>
                                             <div class="modal-body">
                                                 <h5 class="member_name">@item.Name</h5>
@@ -87,7 +87,7 @@
                             {
                                 <div class="row mar0 leader_div">
                                     <div class="col-12 col-lg-4">
-                                        <img class="img-fluid" src="@(item.SmallImage.Media.PublicUrl.Substring(1)??"")" alt="">
+                                        <img class="img-fluid" src="@(item.SmallImage.HasValue ? item.SmallImage.Media.PublicUrl.Substring(1): "")" alt="">
                                     </div>
                                     <div class="col-12 col-lg-8">
                                         <h5 class="text_bold">@item.Name</h5>

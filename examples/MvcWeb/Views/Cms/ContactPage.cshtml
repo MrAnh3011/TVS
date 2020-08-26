@@ -10,7 +10,7 @@
 
 <section id="page">
     <section id="page_bg" class="fw">
-        <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+        <img class="img-fluid" src="@(Model.Banner.Image.HasValue ? Model.Banner.Image.Media.PublicUrl.Substring(1): "")" alt="">
         <div class="page_breadcrumb">
             <h3>@Model.Banner.Title</h3>
             <div>
@@ -28,7 +28,7 @@
                         <div class="col col-lg-6 col-md-6 col-12">
                             <div class="address ">
                                 <div class="icon-dress">
-                                    <img src="@(item.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+                                    <img src="@(item.Image.HasValue ? item.Image.Media.PublicUrl.Substring(1) : "")" alt="">
                                 </div>
                                 <div class="title-address">
                                     <h5>@item.Title</h5>

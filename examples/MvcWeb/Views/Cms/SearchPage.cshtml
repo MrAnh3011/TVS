@@ -10,7 +10,7 @@
 
     <section id="page">
         <section id="page_bg" class="fw">
-            <img class="img-fluid" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1)??"")" alt="">
+            <img class="img-fluid" src="@(Model.Banner.Image.HasValue ? Model.Banner.Image.Media.PublicUrl.Substring(1):"")" alt="">
             <div class="page_breadcrumb">
                 <h3>@Model.Banner.Title</h3>
                 <div>
@@ -26,7 +26,7 @@
                             @foreach (var item in ViewBag.lstPosts)
                             {
                                 <div class="col-12 col-lg-4 news_div">
-                                    <img class="img-fluid" src="@Url.Content(item.PrimaryImage.Media?.PublicUrl)" alt="">
+                                    <img class="img-fluid" src="@Url.Content(item.PrimaryImage.HasValue ? item.PrimaryImage.Media?.PublicUrl : "")" alt="">
                                     <a class="news_title" href="@item.Permalink">
                                         @item.Title
                                     </a>
