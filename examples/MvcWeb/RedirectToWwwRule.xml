@@ -4,9 +4,9 @@
     <rule name="CanonicalHostNameRule">
       <match url="(.*)" />
       <conditions>
-        <add input="{HTTP_HOST}" pattern="^demo\.gosmac\.vn" negate="true" />
+        <add input="{HTTP_HOST}" pattern="^www\.tvs\.vn" negate="true" />
       </conditions>
-      <action type="Redirect" url="http://demo.gosmac.vn/{R:1}" />
+      <action type="Redirect" url="http://www.tvs.vn/{R:1}" />
     </rule>
   </rules>
 </rewrite>

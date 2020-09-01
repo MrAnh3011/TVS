@@ -968,6 +968,12 @@ a:hover {
   text-align: center;
 }
 
+#page_content .page_content .table_wrapper .bank_table thead th:nth-child(2),
+#page_content .page_content .table_wrapper .bank_table thead th:nth-child(3),
+#page_content .page_content .table_wrapper .bank_table thead th:nth-child(4) {
+    white-space:nowrap;
+}
+
 #page_content .page_content .table_wrapper .bank_table tbody tr:nth-of-type(odd) {
   background-color: #fff;
 }
@@ -980,11 +986,18 @@ a:hover {
   border-top: none;
 }
 
+#page_content .page_content .table_wrapper .bank_table tbody tr td:nth-child(2),
+#page_content .page_content .table_wrapper .bank_table tbody tr td:nth-child(3),
+#page_content .page_content .table_wrapper .bank_table tbody tr td:nth-child(4){
+    white-space:nowrap;
+    text-align: center;
+}
+
 #page_content .page_content .table_wrapper .bank_table tbody tr td img {
-  margin: 0 !important;
-  max-width: 60px !important;
-  min-width: 40px !important;
-  height: auto;
+    margin: 0 !important;
+    max-width: 60px !important;
+    min-width: 40px !important;
+    height: auto;
 }
 
 #page_content .page_content .partner .partner_div {
