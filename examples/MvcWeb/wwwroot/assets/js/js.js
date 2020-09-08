@@ -125,23 +125,10 @@
 
 
     // -------------------------------- AnhPT -----------------------------------
+
     var tablePublish = $("#tblPublish").DataTable({
         language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            }
+            "url": typeof languagetbl !== "undefined"? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -155,10 +142,10 @@
             { "width": "10%", "targets": [2] },
         ]
     });
-    $("#tblPublish thead").append("<tr><th>Tên tài liệu</th><th>Thời gian đăng</th><th>Tải về</th></tr >");
+    $("#tblPublish thead").append(typeof appendrow !== "undefined" ? appendrow : "");
     $("#tblPublish thead tr:eq(1) th").each(function (i) {
         let title = $(this).text();
-        let select = $('<select class="form-control"><option value="">Tất cả</option></select>');
+        let select = $('<select class="form-control"><option value="">All</option></select>');
 
         tablePublish.column(3).data().unique().sort(function (a, b) { return b - a }).each(function (d, j) {
             select.append('<option value="' + d + '">' + d + '</option>');
@@ -187,21 +174,7 @@
 
     var tableAdmin = $("#tblAdmin").DataTable({
         language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            }
+            "url": typeof languagetbl !== "undefined" ? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -215,10 +188,10 @@
             { "width": "10%", "targets": [2] },
         ]
     });
-    $("#tblAdmin thead").append("<tr><th>Tên tài liệu</th><th>Thời gian đăng</th><th>Tải về</th></tr >");
+    $("#tblAdmin thead").append(typeof appendrow !== "undefined" ? appendrow : "");
     $("#tblAdmin thead tr:eq(1) th").each(function (i) {
         let title = $(this).text();
-        let select = $('<select class="form-control"><option value="">Tất cả</option></select>');
+        let select = $('<select class="form-control"><option value="">All</option></select>');
 
         tableAdmin.column(3).data().unique().sort(function (a, b) { return b - a }).each(function (d, j) {
             select.append('<option value="' + d + '">' + d + '</option>');
@@ -247,21 +220,7 @@
 
     var tableFinance = $("#tblFinance").DataTable({
         language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            }
+            "url": typeof languagetbl !== "undefined" ? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -275,10 +234,10 @@
             { "width": "10%", "targets": [2] },
         ]
     });
-    $("#tblFinance thead").append("<tr><th>Tên tài liệu</th><th>Thời gian đăng</th><th>Tải về</th></tr >");
+    $("#tblFinance thead").append(typeof appendrow !== "undefined" ? appendrow : "");
     $("#tblFinance thead tr:eq(1) th").each(function (i) {
         let title = $(this).text();
-        let select = $('<select class="form-control"><option value="">Tất cả</option></select>');
+        let select = $('<select class="form-control"><option value="">All</option></select>');
 
         tableFinance.column(3).data().unique().sort(function (a, b) { return b - a }).each(function (d, j) {
             select.append('<option value="' + d + '">' + d + '</option>');
@@ -307,21 +266,7 @@
 
     var tableMidYear = $("#tblMidYear").DataTable({
         language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            }
+            "url": typeof languagetbl !== "undefined" ? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -335,10 +280,10 @@
             { "width": "10%", "targets": [2] },
         ]
     });
-    $("#tblMidYear thead").append("<tr><th>Tên tài liệu</th><th>Thời gian đăng</th><th>Tải về</th></tr >");
+    $("#tblMidYear thead").append(typeof appendrow !== "undefined" ? appendrow : "");
     $("#tblMidYear thead tr:eq(1) th").each(function (i) {
         let title = $(this).text();
-        let select = $('<select class="form-control"><option value="">Tất cả</option></select>');
+        let select = $('<select class="form-control"><option value="">All</option></select>');
 
         tableMidYear.column(3).data().unique().sort(function (a, b) { return b - a }).each(function (d, j) {
             select.append('<option value="' + d + '">' + d + '</option>');
@@ -367,21 +312,7 @@
 
     var tableYearly = $("#tblYearly").DataTable({
         language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            }
+            "url": typeof languagetbl !== "undefined" ? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -395,10 +326,10 @@
             { "width": "10%", "targets": [2] },
         ]
     });
-    $("#tblYearly thead").append("<tr><th>Tên tài liệu</th><th>Thời gian đăng</th><th>Tải về</th></tr >");
+    $("#tblYearly thead").append(typeof appendrow !== "undefined" ? appendrow : "");
     $("#tblYearly thead tr:eq(1) th").each(function (i) {
         let title = $(this).text();
-        let select = $('<select class="form-control"><option value="">Tất cả</option></select>');
+        let select = $('<select class="form-control"><option value="">All</option></select>');
 
         tableYearly.column(3).data().unique().sort(function (a, b) { return b - a }).each(function (d, j) {
             select.append('<option value="' + d + '">' + d + '</option>');
@@ -427,21 +358,7 @@
 
     var tableIndicator = $("#tblIndicator").DataTable({
         language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            }
+            "url": typeof languagetbl !== "undefined" ? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -455,10 +372,10 @@
             { "width": "10%", "targets": [2] },
         ]
     });
-    $("#tblIndicator thead").append("<tr><th>Tên tài liệu</th><th>Thời gian đăng</th><th>Tải về</th></tr >");
+    $("#tblIndicator thead").append(typeof appendrow !== "undefined" ? appendrow : "");
     $("#tblIndicator thead tr:eq(1) th").each(function (i) {
         let title = $(this).text();
-        let select = $('<select class="form-control"><option value="">Tất cả</option></select>');
+        let select = $('<select class="form-control"><option value="">All</option></select>');
 
         tableIndicator.column(3).data().unique().sort(function (a, b) { return b - a }).each(function (d, j) {
             select.append('<option value="' + d + '">' + d + '</option>');
@@ -874,6 +791,9 @@
         $('html, body').animate({
             scrollTop: $("#labelRecruit").offset().top
         }, 700);
+        let email = $("#btnRecruit").next().text();
+
+        $("#mailReceiver").text(email);
     });
 
     $(window).scroll(function () {

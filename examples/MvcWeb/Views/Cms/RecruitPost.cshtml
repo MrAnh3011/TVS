@@ -143,7 +143,6 @@
                                     <p><span>@(lang == "vi" ? "Mức lương" : "Salary"): </span><span>@Model.Recruit.Salary</span></p>
                                     <p><span>@(lang == "vi" ? "Hạn nộp hồ sơ" : "Deadline"): </span><span>@Model.Recruit.EndDate.Value?.ToString("dd/MM/yyyy") </span></p>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
@@ -163,7 +162,7 @@
                     string lnk = item.Permalink;                          //
                     for (int i = 0; i < lnk.Length; i++)                  //
                     {                                                     //
-                        if (lnk[i] == '/')                                 //
+                        if (lnk[i] == '/')                                //
                         {                                                 //
                             lnk = lnk.Substring(1);                       //  This block for fix error dupplicate "/" in permalink
                             i--;                                          //
@@ -198,6 +197,6 @@
         </div>
     </div>
 </section>
-<span style="display:none" id="mailReceiver">@ViewBag.MailReceiver</span>
+<span style="display:none" id="mailReceiver">@Model.Recruit.MailReceiver</span>
 <span style="display:none" id="mailSender">@ViewBag.MailSender</span>
 <span style="display:none" id="mailSenderPass">@ViewBag.MailSenderPass</span>

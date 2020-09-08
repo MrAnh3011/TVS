@@ -147,7 +147,6 @@ namespace MvcWeb.Controllers
                     lstMayCare.Add(tmp);
                 }
 
-                ViewBag.MailReceiver = newsModel.MailReceiver;
                 ViewBag.MailSender = newsModel.MailSender;
                 ViewBag.MailSenderPass = newsModel.MailSenderPass;
                 ViewBag.lstMayCare = lstMayCare;

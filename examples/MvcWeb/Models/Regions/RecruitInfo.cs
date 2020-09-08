@@ -32,5 +32,9 @@ namespace MvcWeb.Models.Regions
 
         [Field(Options = FieldOption.HalfWidth)]
         public DateField EndDate { get; set; }
+
+        [Field(Options = FieldOption.HalfWidth)]
+        [FieldDescription("This field is required")]
+        public StringField MailReceiver { get; set; }
     }
 }

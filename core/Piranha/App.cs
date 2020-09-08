@@ -179,6 +179,8 @@ namespace Piranha
 
             // Setup media types
             Instance._mediaTypes.Documents.Add(".pdf", "application/pdf");
+            Instance._mediaTypes.Documents.Add(".rar", "application/rar");
+            Instance._mediaTypes.Documents.Add(".zip", "application/zip");
             Instance._mediaTypes.Images.Add(".jpg", "image/jpeg");
             Instance._mediaTypes.Images.Add(".jpeg", "image/jpeg");
             Instance._mediaTypes.Images.Add(".png", "image/png");

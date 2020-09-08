@@ -81,6 +81,7 @@
                             <div class="col col-lg-2 col-md-2 col-12">
                                 <div class="btn-ungtuyen">
                                     <button id="btnRecruit"><a>@(lang == "vi" ? "Ứng tuyển ngay" : "Apply now")</a></button>
+                                    <span style="display:none" id="mailPostReceiver">@item.Regions.Recruit.MailReceiver</span>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +184,7 @@
                 </div>
             </div>
         </section>
-        <span style="display:none" id="mailReceiver">@Model.MailReceiver</span>
+        <span style="display:none" id="mailReceiver"></span>
         <span style="display:none" id="mailSender">@Model.MailSender</span>
         <span style="display:none" id="mailSenderPass">@Model.MailSenderPass</span>
     </section>

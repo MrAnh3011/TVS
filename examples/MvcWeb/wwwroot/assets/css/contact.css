@@ -432,12 +432,13 @@
   width: 171px;
 }
 
-.content-deital .container .row .content-left .ct-left .title-text {
-  padding-top: 30px;
+.content-deital .container .row .content-left .ct-left ul{
+    list-style-type: disc;
+    padding-left: 10px;
 }
 
-.content-deital .container .row .content-left .ct-left p {
-  color: #72757b;
+.content-deital .container .row .content-left .ct-left .title-text {
+  padding-top: 30px;
 }
 
 .content-deital .container .row .content-left .ct-left .pd-ut {
