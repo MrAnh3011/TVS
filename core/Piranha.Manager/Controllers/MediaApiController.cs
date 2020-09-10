@@ -190,6 +190,7 @@ namespace Piranha.Manager.Controllers
         /// <param name="model">The upload model</param>
         [Route("upload")]
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 1073741824)]
         [Consumes("multipart/form-data")]
         [Authorize(Policy = Permission.MediaAdd)]
         public async Task<IActionResult> Upload([FromForm] MediaUploadModel model)

@@ -181,6 +181,10 @@ namespace Piranha
             Instance._mediaTypes.Documents.Add(".pdf", "application/pdf");
             Instance._mediaTypes.Documents.Add(".rar", "application/rar");
             Instance._mediaTypes.Documents.Add(".zip", "application/zip");
+            Instance._mediaTypes.Documents.Add(".doc", "application/doc");
+            Instance._mediaTypes.Documents.Add(".docx", "application/docx");
+            Instance._mediaTypes.Documents.Add(".xls", "application/xls");
+            Instance._mediaTypes.Documents.Add(".xlsx", "application/xlsx");
             Instance._mediaTypes.Images.Add(".jpg", "image/jpeg");
             Instance._mediaTypes.Images.Add(".jpeg", "image/jpeg");
             Instance._mediaTypes.Images.Add(".png", "image/png");

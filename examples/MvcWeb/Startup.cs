@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using System;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace MvcWeb
 {
@@ -51,9 +52,15 @@ namespace MvcWeb
             services.AddPiranhaFileStorage();
             services.AddPiranhaImageSharp();
             services.AddPiranhaManager();
-            services.AddPiranhaSummernote();
-            //services.AddPiranhaTinyMCE();
+            //services.AddPiranhaSummernote();
+            services.AddPiranhaTinyMCE();
             services.AddPiranhaApi();
+
+            services.Configure<FormOptions>(x => {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue;
+                x.MultipartHeadersLengthLimit = int.MaxValue;
+            });
 
             services.AddPiranha(options =>
             {
@@ -152,7 +159,7 @@ namespace MvcWeb
             app.UsePiranhaIdentity();
             app.UsePiranhaManager();
             app.UsePiranhaSummernote();
-            //app.UsePiranhaTinyMCE();
+            app.UsePiranhaTinyMCE();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

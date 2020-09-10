@@ -66,30 +66,13 @@ namespace Piranha
             var slug = str.Trim().ToLower();
 
             // Convert culture specific characters
-            slug = slug
-                .Replace("å", "a")
-                .Replace("ä", "a")
-                .Replace("á", "a")
-                .Replace("à", "a")
-                .Replace("ö", "o")
-                .Replace("ó", "o")
-                .Replace("ò", "o")
-                .Replace("é", "e")
-                .Replace("è", "e")
-                .Replace("í", "i")
-                .Replace("ì", "i")
-                .Replace("ô", "o")
-                .Replace("ố", "o")
-                .Replace("ổ", "o")
-                .Replace("ơ", "o")
-                .Replace("ở", "o")
-                .Replace("ờ", "o")
-                .Replace("ă", "a")
-                .Replace("ấ", "a")
-                .Replace("ắ", "a")
-                .Replace("ặ", "a")
-                .Replace("ả", "a")
-                .Replace("â", "a");
+            slug = Regex.Replace(slug, "[à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ]", "a");
+            slug = Regex.Replace(slug, "[è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ]", "e");
+            slug = Regex.Replace(slug, "[ì|í|ị|ỉ|ĩ]", "i");
+            slug = Regex.Replace(slug, "[ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ]", "o");
+            slug = Regex.Replace(slug, "[ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ]", "u");
+            slug = Regex.Replace(slug, "[ỳ|ý|ỵ|ỷ|ỹ]", "y");
+            slug = Regex.Replace(slug, "[đ]", "d");
 
             // Remove special characters
             slug = Regex.Replace(slug, @"[^a-z0-9-/ ]", "").Replace("--", "-");
