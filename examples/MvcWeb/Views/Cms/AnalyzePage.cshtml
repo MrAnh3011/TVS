@@ -18,137 +18,114 @@
     };
 }
 
-    <section id="page">
-        <section id="page_content" class="fw">
-            <div class="container">
-                <div id="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"><a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a></li>
-                        <li class="breadcrumb-item"><a href="@BlogLink()">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
-                        <li class="breadcrumb-item"></li>
-                    </ol>
-                </div>
-                <div class="row mar0">
-                    <div class="col-12 col-lg-9 page_content">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-news-tvs" role="tabpanel"
-                                 aria-labelledby="nav-home-tab">
-                                <div class="row mar0 news_wrapper">
-                                    @foreach (var item in Model.Archive.Posts)
-                                    {
-                                        if (item.Regions.LoginOnly == "Yes")
-                                        {
-                                            if (cookie != null)
-                                            {
-                                                <div class="col-12 col-lg-6 news_div">
-                                                    <img class="img-fluid" src="@Url.Content(item.PrimaryImage.HasValue ? item.PrimaryImage.Media?.PublicUrl : "")" alt="">
-                                                    <a class="news_title" href="@urlLang@item.Permalink">
-                                                        @item.Title
-                                                    </a>
-                                                    <p class="news_date"><i class="far fa-clock"></i>@(item.Published.HasValue ? item.Published.Value.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
-                                                    <p class="news_excerpt">
-                                                        @Html.Raw(item.Excerpt)
-                                                    </p>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                continue;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <div class="col-12 col-lg-6 news_div">
-                                                <img class="img-fluid" src="@Url.Content(item.PrimaryImage.HasValue ? item.PrimaryImage.Media?.PublicUrl : "")" alt="">
-                                                <a class="news_title" href="@urlLang@item.Permalink">
-                                                    @item.Title
-                                                </a>
-                                                <p class="news_date"><i class="far fa-clock"></i>@(item.Published.HasValue ? item.Published.Value.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
-                                                <p class="news_excerpt">
-                                                    @Html.Raw(item.Excerpt)
-                                                </p>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        @if (Model.Archive.TotalPages > 1)
-                        {
-                            <div class="row">
-                                <div class="col">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item">
-                                                <a class="page-link" href="@BlogLink()/page/1">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="@BlogLink()/page/@Math.Max(1, Model.Archive.CurrentPage - 1)">
-                                                    <span aria-hidden="true">&lsaquo;</span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            @for (var n = 1; n <= Model.Archive.TotalPages; n++)
-                                            {
-                                                <li class="page-item @(Model.Archive.CurrentPage == n ? "active" : "")"><a class="page-link" href="@BlogLink()/page/@n">@n</a></li>
-                                            }
-                                            <li class="page-item">
-                                                <a class="page-link" href="@BlogLink()/page/@Math.Min(Model.Archive.TotalPages, Model.Archive.CurrentPage + 1)">
-                                                    <span aria-hidden="true">&rsaquo;</span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="@BlogLink()/page/@Model.Archive.TotalPages">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        }
-
-                    </div>
-                    <div class="col-12 col-lg-3 pad0">
-                        <div class="page_category">
-                            <div class="title_row">
-                                <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
-                                <p class="title_line"></p>
-                            </div>
-                            <div class="row_category">
-                                @foreach (var item in lstCategories)
+<section id="page">
+    <section id="page_content" class="fw">
+        <div class="container">
+            <div id="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/home">@(lang == "vi" ? "Trang chủ" : "Home")</a></li>
+                    <li class="breadcrumb-item"><a href="@BlogLink()">@(lang == "vi" ? "Phân tích" : "Analyze")</a></li>
+                    <li class="breadcrumb-item"></li>
+                </ol>
+            </div>
+            <div class="row mar0">
+                <div class="col-12 col-lg-9 page_content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-news-tvs" role="tabpanel"
+                             aria-labelledby="nav-home-tab">
+                            <div class="row mar0 news_wrapper">
+                                @foreach (var item in Model.Archive.Posts)
                                 {
-                                    <div class="row_category_div">
-                                        <a href="@urlLang/@Model.Slug/category/@item.Slug">@item.Title</a>
+                                    <div class="col-12 col-lg-6 news_div">
+                                        <img class="img-fluid" src="@Url.Content(item.PrimaryImage.HasValue ? item.PrimaryImage.Media?.PublicUrl : "")" alt="">
+                                        <a class="news_title" href="@urlLang@item.Permalink">
+                                            @item.Title
+                                        </a>
+                                        <p class="news_date"><i class="far fa-clock"></i>@(item.Published.HasValue ? item.Published.Value.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
+                                        <p class="news_excerpt">
+                                            @Html.Raw(item.Excerpt)
+                                        </p>
                                     </div>
                                 }
                             </div>
                         </div>
-                        @if (Model.lstHighlight.Count > 0)
-                        {
-                            <div class="page_category">
-                                <div class="title_row">
-                                    <h2 class="title">@(lang == "vi" ? "Tin nổi bật" : "Highlight")</h2>
-                                    <p class="title_line"></p>
-                                </div>
-                                <div class="hot_news">
-                                    @foreach (var item in Model.lstHighlight)
-                                    {
-                                        <div class="col-lg-12 hot_news_div">
-                                            <a href="@urlLang@item.Post.Permalink">@item.Post.Title</a>
-                                            <p><i class="far fa-clock"></i>@(item.Post.Published.HasValue ? item.Post.Published?.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        }
                     </div>
+                    @if (Model.Archive.TotalPages > 1)
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link" href="@BlogLink()/page/1">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="@BlogLink()/page/@Math.Max(1, Model.Archive.CurrentPage - 1)">
+                                                <span aria-hidden="true">&lsaquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        @for (var n = 1; n <= Model.Archive.TotalPages; n++)
+                                        {
+                                            <li class="page-item @(Model.Archive.CurrentPage == n ? "active" : "")"><a class="page-link" href="@BlogLink()/page/@n">@n</a></li>
+                                        }
+                                        <li class="page-item">
+                                            <a class="page-link" href="@BlogLink()/page/@Math.Min(Model.Archive.TotalPages, Model.Archive.CurrentPage + 1)">
+                                                <span aria-hidden="true">&rsaquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="@BlogLink()/page/@Model.Archive.TotalPages">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col-12 col-lg-3 pad0">
+                    <div class="page_category">
+                        <div class="title_row">
+                            <h2 class="title">@(lang == "vi" ? "Danh mục" : "Category")</h2>
+                            <p class="title_line"></p>
+                        </div>
+                        <div class="row_category">
+                            @foreach (var item in lstCategories)
+                            {
+                                <div class="row_category_div">
+                                    <a href="@urlLang/@Model.Slug/category/@item.Slug">@item.Title</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    @if (Model.lstHighlight.Count > 0)
+                    {
+                        <div class="page_category">
+                            <div class="title_row">
+                                <h2 class="title">@(lang == "vi" ? "Tin nổi bật" : "Highlight")</h2>
+                                <p class="title_line"></p>
+                            </div>
+                            <div class="hot_news">
+                                @foreach (var item in Model.lstHighlight)
+                                {
+                                    <div class="col-lg-12 hot_news_div">
+                                        <a href="@urlLang@item.Post.Permalink">@item.Post.Title</a>
+                                        <p><i class="far fa-clock"></i>@(item.Post.Published.HasValue ? item.Post.Published?.ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-        </section>
-    </section> 
+        </div>
+    </section>
+</section> 

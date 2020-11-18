@@ -24,8 +24,8 @@ namespace Piranha.Manager.Editor
         /// </summary>
         public static EditorConfig Current { get; set; } = new EditorConfig
         {
-            Plugins = "autoresize autolink code hr paste lists piranhalink piranhaimage",
-            Toolbar = "bold italic | bullist numlist hr | alignleft aligncenter alignright | formatselect | piranhalink piranhaimage",
+            Plugins = "autoresize autolink code hr paste lists piranhalink piranhaimage table code",
+            Toolbar = "bold italic | bullist numlist hr | alignleft aligncenter alignright | formatselect | piranhalink piranhaimage | table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | code",
             BlockFormats = "Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3;Header 4=h4;Code=pre;Quote=blockquote"
         };
 

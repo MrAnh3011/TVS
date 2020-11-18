@@ -77,6 +77,7 @@ namespace MvcWeb
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "PiranhaCMS API", Version = "v1" });
                 options.CustomSchemaIds(x => x.FullName);
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,6 +101,7 @@ namespace MvcWeb
 
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;
+
 
             // Build content types
             var pageTypeBuilder = new Piranha.AttributeBuilder.PageTypeBuilder(api)

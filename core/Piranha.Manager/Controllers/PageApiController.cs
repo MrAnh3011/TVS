@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -86,7 +87,16 @@ namespace Piranha.Manager.Controllers
         [Authorize(Policy = Permission.PagesEdit)]
         public async Task<PageEditModel> Get(Guid id)
         {
-            return await _service.GetById(id);
+
+            //anhpt-Reverse data from list item
+            var result = await _service.GetById(id);
+            foreach (var item in result.Regions)
+            {
+                item.Items = item.Items.Reverse().ToList();
+            }
+
+
+            return result;
         }
 
         /// <summary>

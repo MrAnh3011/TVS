@@ -16,43 +16,72 @@
         let date = new Date();
         let hour = 5;
         date.setTime(date.getTime() + (hour * 60 * 60 * 1000));
-        $.cookie("SessionUser", tokenKey, { expires: date });
+        $.cookie("SessionUser", tokenKey, { expires: date, path: '/' });
     };
     function getToken() {
         return $.cookie("SessionUser");
     }
     function removeToken() {
-        $.removeCookie("SessionUser");
+        $.removeCookie("SessionUser", { path: '/' });
     }
 
-    //$('#header_login .search_mb form').css('min-width', search_width);
+    var userLoginRes = getToken();
+    if (userLoginRes) {
+        $("#logintext").css({ "display": "none" });
+        let usName = userLoginRes;
+        $("#itemresultLog").css({ "display": "block" });
+        $("#usernameLog").text(usName);
+    }
+    $("#logOut").click(function () {
+        removeToken();
+        location.reload();
+    });
+
+    //getinfo stock
+    fetch("https://banggia.cafef.vn/stockhandler.ashx?index=true")
+        .then(rs => rs.json())
+        .then(rs => {
+            for (let i = 0; i < rs.length; i++) {
+                if (rs[i].name === "HNXINDEX") {
+                    $("#stock-hnx p:first-child").text(rs[i].index);
+                    $("#stock-hnx p:nth-child(2)").text(rs[i].change + " (" + rs[i].percent + "%)");
+                    if (parseFloat(rs[i].change) > 0) {
+                        $("#stock-hnx p:nth-child(2)").css({ "color": "lime" });
+                        $("#stock-hnx p:nth-child(2)").append(' <i class="fa fa-arrow-up"></i>')
+                    }
+                    else {
+                        $("#stock-hnx p:nth-child(2)").css({ "color": "red" });
+                        $("#stock-hnx p:nth-child(2)").append(' <i class="fa fa-arrow-down"></i>')
+                    }
+                }
+                if (rs[i].name === "VNINDEX") {
+                    $("#stock-hsx p:first-child").text(rs[i].index);
+                    $("#stock-hsx p:nth-child(2)").text(rs[i].change + " (" + rs[i].percent + "%)");
+                    if (parseFloat(rs[i].change) > 0) {
+                        $("#stock-hsx p:nth-child(2)").css({ "color": "lime" });
+                        $("#stock-hsx p:nth-child(2)").append('<i class="fa fa-arrow-up"></i>')
+                    }
+                    else {
+                        $("#stock-hsx p:nth-child(2)").css({ "color": "red" });
+                        $("#stock-hsx p:nth-child(2)").append(' <i class="fa fa-arrow-down"></i>')
+                    }
+                }
+                if (rs[i].name === "HNXUPCOMINDEX") {
+                    $("#stock-upcom p:first-child").text(rs[i].index);
+                    $("#stock-upcom p:nth-child(2)").text(rs[i].change + " (" + rs[i].percent + "%)");
+                    if (parseFloat(rs[i].change) > 0){
+                        $("#stock-upcom p:nth-child(2)").css({ "color": "lime" });
+                        $("#stock-upcom p:nth-child(2)").append(' <i class="fa fa-arrow-up"></i>')
+                    }
+                    else {
+                        $("#stock-upcom p:nth-child(2)").css({ "color": "red" });
+                        $("#stock-upcom p:nth-child(2)").append(' <i class="fa fa-arrow-down"></i>')
+                    }
+                }
+            }
+        });
 
 
-    // $('#slide').slick({
-    // 	slidesToShow: 1,
-    // 	slidesToScroll: 1,
-    // 	arrows: true,
-    // 	dots: false,
-    // 	fade: false,
-    // 	infinite: true,
-    // 	autoplay: true,
-    // 	draggable: true,
-    // 	cssEase: 'linear',
-    // 	prevArrow: '<button id="slick-prev" class="slick-prev slick-arrow" aria-label="Previous" type="button"><i class="fa fa-chevron-left"></i></button>',
-    // 	nextArrow: '<button id="slick-next" class="slick-next slick-arrow" aria-label="Next" type="button"><i class="fa fa-chevron-right"></i></button>',
-    // 	responsive: [{
-    // 		breakpoint: 320,
-    // 		settings: {
-    // 			fade: false,
-    // 			arrows: false,
-    // 			dots: true,
-    // 			autoplay: true,
-    // 			infinite: true,
-    // 			slidesToShow: 1,
-    // 			slidesToScroll: 1,
-    // 		}
-    // 	}]
-    // });
 
     $('.related_news_slide').slick({
         slidesToShow: 1,
@@ -111,24 +140,12 @@
         // $(this).addClass('mnvdg');
     });
 
-    // var abc = $('#need_contract').is(':checked');
-    // console.log({ abc });
-    // if (abc) {
-    // 	$('#abcd').addClass('mnv');
-    // }
-
-    // $('#search_icon').click(function(){
-    // 	$(this).next().toggleClass('search_show');
-    // })
-
-
-
 
     // -------------------------------- AnhPT -----------------------------------
 
     var tablePublish = $("#tblPublish").DataTable({
         language: {
-            "url": typeof languagetbl !== "undefined"? languagetbl : ""
+            "url": typeof languagetbl !== "undefined" ? languagetbl : ""
         }
         , sDom: 'lrtip'
         , "ordering": false
@@ -587,6 +604,12 @@
             return;
         }
 
+        let mail_regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (mail_regex.test(Email) == false) {
+            alert("Email không hợp lệ");
+            return;
+        }
+
         let cvupload = File.files;
         let data = new FormData();
 
@@ -659,7 +682,8 @@
                 if (response.status == "success") {
                     var username = response.data[0].userName;
                     saveToken(username);
-                    window.location.href = "/";
+                    //window.location.href = "/";
+                    window.history.back();
                 }
                 else {
                     alert(response.message);
@@ -673,19 +697,6 @@
             },
         });
     });
-
-    var userLoginRes = getToken();
-    if (userLoginRes) {
-        $("#logintext").css({ "display": "none" });
-        let usName = userLoginRes;
-        $("#itemresultLog").css({ "display": "block" });
-        $("#usernameLog").text(usName);
-    }
-    $("#logOut").click(function () {
-        removeToken();
-        location.reload();
-    });
-
 
     $("#tvsRegister").click(function () {
         let FullName = $("#regFullName").val();

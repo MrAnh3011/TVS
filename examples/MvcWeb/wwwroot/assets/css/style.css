@@ -838,6 +838,10 @@ a:hover {
   text-align: justify;
 }
 
+#page_content .page_content .detail_content .news_detail_content ul {
+    list-style-type : disc;
+    margin-left: 50px;
+}
 #page_content .page_content .detail_content .news_detail_content img {
   margin-bottom: 15px;
 }

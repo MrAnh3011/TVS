@@ -10,6 +10,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using MvcWeb.Models;
 using Piranha;
 using Piranha.AspNetCore.Services;
@@ -47,7 +48,6 @@ namespace MvcWeb.Controllers
             var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
             ViewBag.lstCategory = lstCategory;
 
-            ViewBag.cookie = Request.Cookies["SessionUser"];
             return View(model);
         }
 
@@ -65,7 +65,6 @@ namespace MvcWeb.Controllers
             var lstCategory = await _api.Posts.GetAllCategoriesAsync(id);
             ViewBag.lstCategory = lstCategory;
 
-            ViewBag.cookie = Request.Cookies["SessionUser"];
             return View(model);
         }
 
@@ -114,6 +113,11 @@ namespace MvcWeb.Controllers
 
             if (BlogModel == "NewsPage")
             {
+                if (model.LoginOnly.Value?.ToUpper() == "YES")
+                {
+                    if(Request.Cookies["SessionUser"] == null)
+                        return Redirect(urlLang == "/en" ? "/en/login": "/vi/dang-nhap");
+                }
                 var newsModel = await _api.Pages.GetByIdAsync<NewsPage>(model.BlogId);
                 var lstPostRelated = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
                 var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
@@ -156,6 +160,11 @@ namespace MvcWeb.Controllers
             }
             else if (BlogModel == "AnalyzePage")
             {
+                if (model.LoginOnly.Value?.ToUpper() == "YES")
+                {
+                    if (Request.Cookies["SessionUser"] == null)
+                        return Redirect(urlLang == "/en" ? "/en/login" : "/vi/dang-nhap");
+                }
                 var newsModel = await _api.Pages.GetByIdAsync<AnalyzePage>(model.BlogId);
                 var lstPostRelated = _db.Posts.Where(x => x.CategoryId == model.Category.Id).AsNoTracking();
                 var lstCategory = await _api.Posts.GetAllCategoriesAsync(model.BlogId);
@@ -166,6 +175,11 @@ namespace MvcWeb.Controllers
             }
             else
             {
+                if (model.LoginOnly.Value?.ToUpper() == "YES")
+                {
+                    if (Request.Cookies["SessionUser"] == null)
+                        return Redirect(urlLang == "/en" ? "/en/login" : "/vi/dang-nhap");
+                }
                 var servicesModel = await _api.Pages.GetByIdAsync<OtherServicesPage>(model.BlogId);
 
                 ViewBag.Page = servicesModel;

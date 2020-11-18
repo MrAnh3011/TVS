@@ -16,6 +16,10 @@
         <div v-if="model.meta.description != null">
             <div class="alert alert-info" v-html="model.meta.description"></div>
         </div>
+        <a href="#" class="block-add" v-on:click.prevent="addItem()">
+            <hr>
+            <i class="fas fa-plus-circle"></i>
+        </a>
         <div :id="model.meta.uid" class="accordion sortable" :class="model.items.length !== 0 ? 'mb-3' : ''">
             <div class="card" :key="item.uid" v-for="(item) in model.items">
                 <div class="card-header">
@@ -45,10 +49,7 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="block-add" v-on:click.prevent="addItem()">
-            <hr>
-            <i class="fas fa-plus-circle"></i>
-        </a>
+
         <div v-if="model.items.length === 0" class="empty-info unsortable">
             <p>{{ piranha.resources.texts.emptyAddAbove }}</p>
         </div>
@@ -68,7 +69,7 @@ export default {
             fetch(piranha.baseUrl + "manager/api/content/region/" + this.content + "/" + this.type + "/" + this.model.meta.id)
                 .then(function (response) { return response.json(); })
                 .then(function (result) {
-                    self.model.items.push(result);
+                    self.model.items.unshift(result);
                 })
                 .catch(function (error) { console.log("error:", error );
             });
