@@ -33,6 +33,14 @@ namespace MvcWeb.Controllers
         }
 
         [HttpPost]
+        [Route("getonllink")]
+        public JsonResult GetOnlineTradingLink()
+        {
+            var link = _db.Sites.FirstOrDefault(x => x.IsDefault).Description;
+            return Json(new { status = "success", message = "Get data success", data = link });
+        }
+
+        [HttpPost]
         [Route("upload")]
         public JsonResult UploadFile()
         {

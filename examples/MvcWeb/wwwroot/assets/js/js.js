@@ -37,6 +37,18 @@
         location.reload();
     });
 
+    $.ajax({
+        url: "/api/getonllink",
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json",
+        success: function (response) {
+            if (response.status == "success") {
+                $("#linktrading").prop("href", response.data);
+            }
+        }
+    });
+
     //getinfo stock
     fetch("https://banggia.cafef.vn/stockhandler.ashx?index=true")
         .then(rs => rs.json())
