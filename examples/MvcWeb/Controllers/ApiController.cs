@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MvcWeb.Models;
 using Piranha;
 using Piranha.AspNetCore.Services;
 using Piranha.Data;
@@ -30,6 +31,15 @@ namespace MvcWeb.Controllers
             _api = api;
             _db = db;
             _loader = loader;
+        }
+
+        [HttpPost]
+        [Route("getContactInfo")]
+        public async Task<JsonResult> GetContactInfo()
+        {
+            var contact = await _loader.GetPageAsync<ContactPage>(new Guid("432ffa8b-1827-4812-a176-b04756d0278d"), HttpContext.User, false);
+
+            return Json(new { status = "success", message="Get data success", data = contact });
         }
 
         [HttpPost]

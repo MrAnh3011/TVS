@@ -49,6 +49,24 @@
         }
     });
 
+    $.ajax({
+        url: "/api/getContactInfo",
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json",
+        success: function (response) {
+            if (response.status == "success") {
+                $("#phoneHN").html("<i class='fas fa-phone-alt'></i> " + response.data.lstContact[0].phone.value);
+                $("#fxNumHN").html("<i class='fas fa-fax></i>' " + response.data.lstContact[0].fax.value);
+                $("#addressHN").html("<i class='fas fa-map-marker'></i> " + response.data.lstContact[0].address.value);
+
+                $("#phoneHCM").html("<i class='fas fa-phone-alt'></i> " + response.data.lstContact[1].phone.value);
+                $("#fxNumHCM").html("<i class='fas fa-fax></i>' " + response.data.lstContact[1].fax.value);
+                $("#addressHCM").html("<i class='fas fa-map-marker'></i> " + response.data.lstContact[1].address.value);
+            }
+        }
+    });
+
     //getinfo stock
     fetch("https://banggia.cafef.vn/stockhandler.ashx?index=true")
         .then(rs => rs.json())
